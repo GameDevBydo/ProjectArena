@@ -353,6 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 558482654}
   - component: {fileID: 558482653}
+  - component: {fileID: 558482655}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -373,7 +374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatLog: {fileID: 1239244192}
-  enemy: {fileID: 421303986768206655, guid: 9649b3af0b99a6f40b8153511da5e5bc, type: 3}
 --- !u!4 &558482654
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +389,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558482655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558482652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b881d94fbbbad44c9fa5ced07d59ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 421303986768206655, guid: 9649b3af0b99a6f40b8153511da5e5bc, type: 3}
+  - {fileID: 421303986768206655, guid: 309e14386f539174a9744ac9822b9213, type: 3}
+  - {fileID: 421303986768206655, guid: 386be9a4fc4c6614fa5fe83d5e3a0dc6, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

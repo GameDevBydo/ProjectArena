@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Enemy : MonoBehaviour
@@ -9,7 +10,13 @@ public class Enemy : MonoBehaviour
     bool hit;
     CharacterController controller;
     public float speed;
+
+    public float maxHitPoints, hitPoints;
     
+    void Awake()
+    {
+        hitPoints = maxHitPoints;
+    }
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -49,9 +56,35 @@ public class Enemy : MonoBehaviour
             {
                 //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
                 hit = true;
-                Destroy(gameObject);
+                StartCoroutine(StopInvulnerability());
+                TakeDamage(20);
             }
         }
+    }
+
+    IEnumerator StopInvulnerability()
+    {
+        yield return new WaitForSeconds(0.3f);
+        hit = false;
+    }
+
+    public Image lifeBar;
+
+    void UpdateLifeBar()
+    {
+        lifeBar.fillAmount = hitPoints/maxHitPoints;
+    }
+
+    void TakeDamage(float damage)
+    {
+        hitPoints -= damage;
+        UpdateLifeBar();
+        if(hitPoints <=0) Death();
+    }
+
+    void Death()
+    {
+        Destroy(gameObject);
     }
 
     bool inRange = false, readyAttack = false, isAttacking = false;

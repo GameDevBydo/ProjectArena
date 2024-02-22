@@ -7,6 +7,7 @@ using TMPro;
 
 public class TwitchConnect : MonoBehaviour
 {
+    private Controller main;
     TcpClient twitchClient;
     StreamReader reader;
     StreamWriter writer;
@@ -36,6 +37,7 @@ public class TwitchConnect : MonoBehaviour
     private void Awake()
     {
         ConnectToTwitch();
+        main = Controller.instance;
     }
 
     void Update()
@@ -59,7 +61,11 @@ public class TwitchConnect : MonoBehaviour
                 string chatMessage = message.Substring(splitPoint+1);
 
                 PrintChatMessage(chatName, chatMessage);
-                if(chatMessage == "spawn") SpawnEnemy(chatName);
+                if(chatMessage.Length > 5 && chatMessage.Substring(0,5).ToLower() == "spawn")
+                {
+                    string monsterName = chatMessage.Replace(" ", "").Substring(5).ToLower();
+                    main.SpawnEnemy(chatName, monsterName);
+                }
             }
         }
     }
@@ -71,17 +77,4 @@ public class TwitchConnect : MonoBehaviour
     {
         chatLog.text += "\n" + user +": " + msg;
     }
-
-    public GameObject enemy;
-    void SpawnEnemy(string user)
-    {
-        Vector2 randomPos= Random.insideUnitCircle.normalized * 20;
-        Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
-        GameObject e = Instantiate(enemy, spawnPos, Quaternion.identity).gameObject;
-        e.name = user + "'s " + e.name;
-        e.GetComponent<Enemy>().SetEnemyName(user);
-    }
-
-
-
 }
