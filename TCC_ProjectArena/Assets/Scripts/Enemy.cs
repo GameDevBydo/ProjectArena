@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class Enemy : MonoBehaviour
         if(!inRange) Movement();
         //Attack();
     }
+
+    public void SetEnemyName(string username)
+    {
+        transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = username;
+    }
+
+
 
     void Rotation()
     {
@@ -49,7 +57,7 @@ public class Enemy : MonoBehaviour
     bool inRange = false, readyAttack = false, isAttacking = false;
     void CheckPlayerDistance()
     {
-        inRange = Vector3.Distance(player.position, transform.position) <= 5;
+        inRange = Vector3.Distance(player.position, transform.position) <= 3;
         //if(inRange && !readyAttack)
         //{
         //    readyAttack = true;
@@ -64,7 +72,7 @@ public class Enemy : MonoBehaviour
     //{
     //    if(readyAttack && !isAttacking) StartCoroutine(AttackRoutine());
     //}
-    
+
     //IEnumerator AttackRoutine()
     //{
     //    isAttacking = true;

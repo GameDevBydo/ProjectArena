@@ -59,7 +59,7 @@ public class TwitchConnect : MonoBehaviour
                 string chatMessage = message.Substring(splitPoint+1);
 
                 PrintChatMessage(chatName, chatMessage);
-                SpawnBall(chatName, int.Parse(chatMessage));
+                if(chatMessage == "spawn") SpawnEnemy(chatName);
             }
         }
     }
@@ -72,13 +72,14 @@ public class TwitchConnect : MonoBehaviour
         chatLog.text += "\n" + user +": " + msg;
     }
 
-    public GameObject ball;
-    void SpawnBall(string user, int msg)
+    public GameObject enemy;
+    void SpawnEnemy(string user)
     {
-        GameObject a = Instantiate(ball, transform.position, transform.rotation).gameObject;
-        a.transform.localScale *= msg;
-        a.name = user + "'s ball";
-        a.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = user;
+        Vector2 randomPos= Random.insideUnitCircle.normalized * 20;
+        Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
+        GameObject e = Instantiate(enemy, spawnPos, Quaternion.identity).gameObject;
+        e.name = user + "'s " + e.name;
+        e.GetComponent<Enemy>().SetEnemyName(user);
     }
 
 
