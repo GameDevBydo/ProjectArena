@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
         Rotation();
         CheckPlayerDistance();
         if(!inRange) Movement();
-        //Attack();
     }
 
     public void SetEnemyName(string username)
