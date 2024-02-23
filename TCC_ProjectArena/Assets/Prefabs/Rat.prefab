@@ -255,9 +255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 807cda0ed8b173a4ea760ae4a8eac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyTypeID: 2
   speed: 5
   maxHitPoints: 50
   hitPoints: 0
+  waveStart: 0
   lifeBar: {fileID: 1267523063381822525}
 --- !u!1 &1011101060527582694
 GameObject:
@@ -435,7 +437,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 10, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5467936564447402129
 CanvasRenderer:

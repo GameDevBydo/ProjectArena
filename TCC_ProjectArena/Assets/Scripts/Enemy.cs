@@ -6,6 +6,8 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+
+    public int enemyTypeID;
     Transform player;
     bool hit;
     CharacterController controller;
@@ -13,8 +15,13 @@ public class Enemy : MonoBehaviour
 
     public float maxHitPoints, hitPoints;
     
+    public bool waveStart = false;
+
+    Controller main;
+
     void Awake()
     {
+        main = Controller.instance;
         hitPoints = maxHitPoints;
     }
     void Start()
@@ -25,8 +32,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Rotation();
-        CheckPlayerDistance();
-        if(!inRange) Movement();
+        if(waveStart)
+        {
+            CheckPlayerDistance();
+            if(!inRange) Movement();
+        }
     }
 
     public void SetEnemyName(string username)
@@ -49,14 +59,17 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag == "Blade")
+        if(waveStart)
         {
-            if(!hit)
+            if(collider.tag == "Blade")
             {
-                //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
-                hit = true;
-                StartCoroutine(StopInvulnerability());
-                TakeDamage(20);
+                if(!hit)
+                {
+                    //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
+                    hit = true;
+                    StartCoroutine(StopInvulnerability());
+                    TakeDamage(20);
+                }
             }
         }
     }
@@ -83,6 +96,7 @@ public class Enemy : MonoBehaviour
 
     void Death()
     {
+        main.EnemyKilled();
         Destroy(gameObject);
     }
 

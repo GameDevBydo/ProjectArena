@@ -87,10 +87,15 @@ public class TwitchConnect : MonoBehaviour
                 splitPoint = message.IndexOf(":", 1);
                 string chatMessage = message.Substring(splitPoint+1);
 
+                if(chatMessage == "iniciar")
+                {
+                    main.OpenSlotsInWave();
+                }
+
                 if(chatMessage.Length > 5 && chatMessage.Substring(0,5).ToLower() == "spawn")
                 {
                     string monsterName = chatMessage.Replace(" ", "").Substring(5).ToLower();
-                    main.SpawnEnemy(chatName, monsterName);
+                    main.FillSlotInWave(chatName, monsterName);
                 }
             }
         }
