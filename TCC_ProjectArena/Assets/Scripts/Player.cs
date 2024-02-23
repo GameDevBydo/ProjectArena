@@ -82,12 +82,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        //if(!isGrappled) 
-        //{
-        //    playerVelocity.y += gravityValue * Time.deltaTime;
-        //    Mathf.Clamp(playerVelocity.y, -9.81f, 1000);
-        //    controller.Move(playerVelocity * Time.deltaTime);
-        //}
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        Mathf.Clamp(playerVelocity.y, -9.81f, 1000);
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     // Simple Third-person camera with empty pivot on head. Can change sense.

@@ -7,6 +7,7 @@ using TMPro;
 
 public class TwitchConnect : MonoBehaviour
 {
+    [HideInInspector] public bool connectionStarted = false;
     private Controller main;
     TcpClient twitchClient;
     StreamReader reader;
@@ -15,9 +16,9 @@ public class TwitchConnect : MonoBehaviour
     const string URL = "irc.chat.twitch.tv";
     const int PORT = 6667;
 
-    string user = "thebydo";
-    string OAuth = "oauth:kb9trff316jzd1gas936aakuze56pp";
-    string channelName = "thebydo";
+    [HideInInspector] public string user = "";
+    [HideInInspector] public string OAuth = "";
+    [HideInInspector] public string channelName = "";
 
     private void ConnectToTwitch()
     {
@@ -31,20 +32,46 @@ public class TwitchConnect : MonoBehaviour
         writer.WriteLine("JOIN #" + channelName.ToLower());
         writer.Flush();
 
-        Debug.Log("Connected to Twitch.");
+
+        if(twitchClient.Connected)
+        {
+            connectionStarted = true;
+            Debug.Log("Connected to Twitch.");
+        }
+        else
+        {
+            Debug.Log("Failed to connect to Twitch.");
+        }
+
     }
 
     private void Awake()
     {
-        ConnectToTwitch();
+        //ConnectToTwitch();
         main = Controller.instance;
+    }
+
+    public TextMeshProUGUI connectionFeedback;
+    public void ConnectTwitchBT()
+    {
+        ConnectToTwitch();
+        if(connectionStarted)
+        {
+            connectionFeedback.text = "Conectado.";
+        }
+        else
+        {
+            connectionFeedback.text = "Falha na conexão.";
+        }
     }
 
     void Update()
     {
-        if(!twitchClient.Connected || twitchClient == null) ConnectToTwitch();
-
-        ReadChat();
+        if(connectionStarted)
+        {
+            if(!twitchClient.Connected || twitchClient == null) ConnectToTwitch();
+            ReadChat();
+        }
     }
 
     void ReadChat()
@@ -60,7 +87,6 @@ public class TwitchConnect : MonoBehaviour
                 splitPoint = message.IndexOf(":", 1);
                 string chatMessage = message.Substring(splitPoint+1);
 
-                PrintChatMessage(chatName, chatMessage);
                 if(chatMessage.Length > 5 && chatMessage.Substring(0,5).ToLower() == "spawn")
                 {
                     string monsterName = chatMessage.Replace(" ", "").Substring(5).ToLower();
@@ -70,11 +96,26 @@ public class TwitchConnect : MonoBehaviour
         }
     }
 
-    public TextMeshProUGUI chatLog;
-
-
-    void PrintChatMessage(string user, string msg)
+    public void SetUserIF(string userIF)
     {
-        chatLog.text += "\n" + user +": " + msg;
+        user = userIF;
+    }
+
+    public void SetOAuthIF(string oauthIF)
+    {
+        OAuth = oauthIF;
+    }
+
+    public void SetChannelNameIF(string channelIF)
+    {
+        channelName = channelIF;
+    }
+
+    public void AutoTestConnectBT()
+    {
+        user = "thebydo";
+        OAuth = "oauth:kb9trff316jzd1gas936aakuze56pp";
+        channelName = "thebydo";
+        ConnectToTwitch();
     }
 }

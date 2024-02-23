@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -10,9 +11,30 @@ public class Controller : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null) instance = this;
+        if(instance == null) 
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         else Destroy(this.gameObject);
     }
+
+
+    public TextMeshProUGUI alertsText;
+    public void PrintSpawnAlert(string user, string enemyName)
+    {   
+        alertsText.gameObject.SetActive(true);
+        alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
+        StartCoroutine(HideAlerts());
+    }
+
+    IEnumerator HideAlerts()
+    {
+        yield return new WaitForSeconds(5);
+        alertsText.gameObject.SetActive(false);
+    }
+
+
 
     public GameObject[] enemyList;
     public void SpawnEnemy(string user, string enemyType)
@@ -45,7 +67,7 @@ public class Controller : MonoBehaviour
             GameObject e = Instantiate(enemyList[enemyId], spawnPos, Quaternion.identity).gameObject;
             e.name = user + "'s " + e.name;
             e.GetComponent<Enemy>().SetEnemyName(user);
-            Debug.Log(user + " selecionou " + enemyList[enemyId].name + " para a batalha.");
+            PrintSpawnAlert(user, enemyList[enemyId].name);
         }
         else 
         {
@@ -53,5 +75,14 @@ public class Controller : MonoBehaviour
         }
     }
 
+    public void OpenURL(string url)
+    {
+        Application.OpenURL(url);
+    }
+
+    public void LoadScene(int id)
+    {
+        SceneManager.LoadScene(id);
+    }
 
 }
