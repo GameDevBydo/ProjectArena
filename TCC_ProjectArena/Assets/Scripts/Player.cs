@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
-        canAttack = false;
+        canAttack = false; 
         sword.SetActive(true);
         swordObj.SetActive(false);
         sword.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Play();
