@@ -2,38 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
 
     public static Player instance;
 
     private CharacterController controller;
 
+    Controller main;
+
     void Start()
     {
         instance = this;
         controller = gameObject.GetComponent<CharacterController>();
-        //rope = gameObject.GetComponent<LineRenderer>();
-        //rope.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        ActivateSword();
+        main = Controller.instance;
     }
 
     void Update()
     {
-        Movement();
-        CamMovement();
-        //if(Input.GetKeyDown(KeyCode.E)) CollectItens();
-        if(hasSword && Input.GetKeyDown(KeyCode.Mouse0)) Attack();
-        //if(hasGrapple)
-        //{
-        //    if(Input.GetKeyDown(KeyCode.Mouse1)) CreateGrapple();
-        //    CheckGrappleIntegrity();
-        //    PullGrapple(grapplingTimer);
-        //    GrappleCooldown();
-        //    UpdateRope();
-        //}
+        if(main.runStarted)
+        {
+            Movement();
+            CamMovement();
+            if(Input.GetKeyDown(KeyCode.Mouse0)) Attack();
+        }
     }
 
 
@@ -62,13 +56,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            //if(isGrappled)
-            //{
-            //    CancelGrapple();
-            //    playerVelocity.y = jumpStrength;
-            //    jumpPS.Play();
-            //    extraJumps--;
-            //}
             if(isGrounded)
             {
                 playerVelocity.y = jumpStrength;
@@ -103,194 +90,109 @@ public class Player : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    public void ResetPosition()
+    public void SetPosition(Vector3 pos)
     {
-        Debug.Log("Resetou");
+        Debug.Log("Setou a posição");
         controller.enabled = false;
-        transform.position = new Vector3(-1.34697711f,8.71000004f,-13.4981785f);
+        transform.position = pos;
         controller.enabled = true;
     }
 
+
+    #region Classes and Characters
+
+    public enum characterID
+    {
+        GREATSWORD,
+        BOXER,
+        RUSTROBOT,
+        EMPTY
+    }
+
+    [HideInInspector]
+    public characterID playerChar = characterID.EMPTY;
+    
+    public GameObject[] characterModels;
+    public void SetCharacter(int charID)
+    {
+        if(charID<characterModels.Length)
+        {
+            for(int i = 0; i<3; i++)
+            {
+                if(charID==i) characterModels[i].SetActive(true);
+                else characterModels[i].SetActive(false);
+            }
+            switch(charID)
+            {
+                case 0:
+                    playerChar = characterID.GREATSWORD;
+                    break;
+                case 1:
+                    playerChar = characterID.BOXER;
+                    break;
+                case 2:
+                    playerChar = characterID.RUSTROBOT;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("Não existe personagem com esse valor.");
+        }
+    }
+
+    #endregion
+
+
     #region Combat
     [Header("Combat")]
-    public Animation attackAnim;
+    public Animation swordAttackAnim, leftPunch;
     public GameObject sword, swordObj;
-    bool hasSword = false, canAttack = true;
+    bool canAttack = true;
 
-    public void ActivateSword()
-    {
-        swordObj.SetActive(true);
-        hasSword = true;
-    }
     public void Attack()
     {
-        if(canAttack) StartCoroutine(AttackRoutine());
+        if(canAttack) 
+        {
+            switch((int)playerChar)
+            {
+                case 0:
+                    StartCoroutine(SwordGuyAttackRoutine());
+                    break;
+                case 1:
+                    StartCoroutine(LeftPunch());
+                    break;
+            }
+        }
     }
 
-    IEnumerator AttackRoutine()
+    IEnumerator SwordGuyAttackRoutine()
     {
         canAttack = false; 
         sword.SetActive(true);
         swordObj.SetActive(false);
         sword.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Play();
-        attackAnim.Play();
-        yield return new WaitForSeconds(attackAnim.clip.length);
+        swordAttackAnim.Play();
+        yield return new WaitForSeconds(swordAttackAnim.clip.length);
         canAttack = true;
         sword.SetActive(false);
         swordObj.SetActive(true);
         sword.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop();
     }
 
-    //public void SlayEnemy(int loot)
-    //{
-    //    coins += loot;
-    //    ControllerUI.instance.UpdateCoins(coins);
-    //    kills++;
-    //    ControllerUI.instance.UpdateKills(kills);
-    //}
-
-    void OnTriggerEnter(Collider col)
+    IEnumerator LeftPunch()
     {
-        if(col.tag == "EnemyBlade")
-        {
-            
-        }
+        canAttack = false;
+        leftPunch.Play();
+        yield return new WaitForSeconds(leftPunch.clip.length);
+        canAttack = true;
     }
+
+
+
+
+
+
     #endregion
-
-    /*[HideInInspector]
-    public int coins = 0;
-    [HideInInspector]
-    public int kills = 0;
-    [Header("Interactions")]
-    public LayerMask chestLayer, itemLayer;
-    [TextArea(1,3)]
-    public string[] tooltips;
-    void CollectItens()
-    {
-        Collider[] items = Physics.OverlapSphere(transform.position, 5, itemLayer);
-        foreach(Collider item in items)
-        {
-            switch(item.name)
-            {
-                case "SwordItem":
-                    ActivateSword();
-                    Destroy(item.gameObject);
-                    ControllerUI.instance.StartWriting(tooltips[0]);
-                break;
-                case "GrappleItem":
-                    ActivateGrapple();
-                    Destroy(item.gameObject);
-                    ControllerUI.instance.StartWriting(tooltips[1]);
-                break;
-            }
-        }
-        Collider[] chests = Physics.OverlapSphere(transform.position, 5, chestLayer);
-        foreach(Collider chest in chests)
-        {
-            if(!chest.GetComponent<Chest>().open)
-            {
-                coins+= chest.GetComponent<Chest>().loot;
-                chest.GetComponent<Chest>().OpenChest();
-            }
-        }
-        ControllerUI.instance.UpdateCoins(coins);
-    }
-
-    #region Grapple
-    [Header("Grapple")]
-
-    public Transform grapplePos;
-    public float grappleMaxDis = 20;
-    public LayerMask grappable;
-
-    RaycastHit hit;
-    Vector3 grappledPoint, initialPos;
-    float grapplingTimer, grapplingDuration = 2, grapplingCD = 0;
-    bool isGrappled, hasGrapple=false;
-
-    LineRenderer rope;
-    public GameObject grappleObj;
-
-    public void ActivateGrapple()
-    {
-        hasGrapple = true;
-        grappleObj.SetActive(true);
-    }
-    void CreateGrapple()
-    {
-        if(grapplingCD <= 0)
-        {
-            isGrappled = Physics.SphereCast(grapplePos.position, 5, Camera.main.transform.forward,out hit, grappleMaxDis, grappable);
-            if(isGrappled)
-            {
-                grappledPoint = hit.transform.GetChild(0).transform.position;
-                initialPos = transform.position;
-                grapplingTimer = 0;
-                DrawRope(grapplePos.position, grappledPoint);
-            }
-        }
-    }
-
-    void CheckGrappleIntegrity()
-    {
-        if(grappledPoint != null && isGrappled)
-        {
-            //if(Input.GetKeyUp(KeyCode.Mouse1))
-            //{
-            //    CancelGrapple();
-            //}
-            if(grapplingTimer>=1)
-            {
-                CancelGrapple();
-            }
-            else
-            {
-                grapplingTimer+= Time.deltaTime/grapplingDuration;
-            }
-        }
-    }
-
-    
-    void CancelGrapple()
-    {
-        grappledPoint = grapplePos.position;
-        isGrappled = false;
-        grapplingCD = 1;
-        DeleteRope();
-        playerVelocity.y = jumpStrength*(grapplingTimer/2);
-    }
-
-    void PullGrapple(float time)
-    {
-        if(isGrappled)
-        {
-            transform.position = Vector3.Lerp(initialPos, grappledPoint, Mathf.Sqrt(time));
-        }
-    }
-
-    void GrappleCooldown()
-    {
-        if(grapplingCD>0) grapplingCD-=Time.deltaTime*0.6f;
-    }
-    
-    void DrawRope(Vector3 a, Vector3 b)
-    {
-        rope.enabled = true;
-        rope.SetPosition(0, a);
-        rope.SetPosition(1, b);
-    }
-
-    void UpdateRope()
-    {
-        if(isGrappled) rope.SetPosition(0, grapplePos.position);
-    }
-
-    void DeleteRope()
-    {
-        rope.enabled = false;
-    }
-
-    #endregion */
 
 }

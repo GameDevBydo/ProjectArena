@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class Controller : MonoBehaviour
 {
     public static Controller instance;
+
+    public bool runStarted = false;
 
     void Awake()
     {
@@ -41,6 +44,33 @@ public class Controller : MonoBehaviour
     public SO_WavesInfos wavesInfos; // Inimigos recomendados para serem spawnados, separados por wave.
 
     bool canFillWaveSlots = false;
+
+    public void StartRun()
+    {
+        runStarted = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        OpenSlotsInWave();
+    }
+
+    public void StartServer()
+    {
+        NetworkManager.Singleton.StartServer();
+    }
+
+    public void PlayAsHost()
+    {
+        NetworkManager.Singleton.StartHost();
+    }
+
+    public void PlayAsClient()
+    {
+        NetworkManager.Singleton.StartClient();
+    }
+
+
+
+
+
     public void OpenSlotsInWave() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
         WriteOnHeader("PEDIDOS ABERTOS!", 8f);
@@ -216,6 +246,11 @@ public class Controller : MonoBehaviour
     public void LoadScene(int id)
     {
         SceneManager.LoadScene(id);
+    }
+
+    public void SelectCharacter(int charID)
+    {
+        Player.instance.SetCharacter(charID);
     }
 
 }

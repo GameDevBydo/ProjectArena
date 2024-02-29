@@ -89,7 +89,7 @@ public class TwitchConnect : MonoBehaviour
 
                 if(chatMessage == "iniciar")
                 {
-                    main.OpenSlotsInWave();
+                    main.StartRun();
                 }
 
                 if(chatMessage.Length > 5 && chatMessage.Substring(0,5).ToLower() == "spawn")

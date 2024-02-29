@@ -68,6 +68,16 @@ public class Enemy : MonoBehaviour
                     //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
                     hit = true;
                     StartCoroutine(StopInvulnerability());
+                    TakeDamage(30);
+                }
+            }
+            if(collider.tag == "LeftGlove")
+            {
+                if(!hit)
+                {
+                    //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
+                    hit = true;
+                    StartCoroutine(StopInvulnerability());
                     TakeDamage(20);
                 }
             }
