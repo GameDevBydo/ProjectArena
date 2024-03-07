@@ -67,6 +67,17 @@ public class Controller : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
+    string ipAddress;
+    public void SetIPAddressIF(string s)
+    {
+        ipAddress = s;
+    }
+
+    void TryConnectClient()
+    {
+       
+    }
+
 
 
 
@@ -235,6 +246,8 @@ public class Controller : MonoBehaviour
         e.name = user + "'s " + e.name;
         e.GetComponent<Enemy>().SetEnemyName(user);
         if(user !=  "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
+        NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
+        eNetworkObject.Spawn();
         return e.GetComponent<Enemy>();
     }
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
-public class Enemy : MonoBehaviour
+public class Enemy : NetworkBehaviour
 {
 
     public int enemyTypeID;
@@ -27,15 +28,33 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        player = GameObject.Find("Player").transform;
     }
+
+    void LocateNearestPlayer()
+    {
+        float closestDistance = 1000;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject p in players)
+        {
+            if(Vector3.Distance(transform.position, p.transform.position) < closestDistance)
+            {
+                closestDistance = Vector3.Distance(transform.position, p.transform.position);
+                player = p.transform;
+            }
+        }
+    }
+
     void Update()
     {
-        Rotation();
-        if(waveStart)
+        if(IsOwner)
         {
-            CheckPlayerDistance();
-            if(!inRange) Movement();
+            LocateNearestPlayer();
+            Rotation();
+            if(waveStart)
+            {
+                CheckPlayerDistance();
+                if(!inRange) Movement();
+            }
         }
     }
 

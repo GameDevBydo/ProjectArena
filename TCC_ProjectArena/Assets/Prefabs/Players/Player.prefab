@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8420116331549481209}
-  - component: {fileID: 8475099416648590590}
   - component: {fileID: 1409814333859563313}
   m_Layer: 0
   m_Name: Sword
@@ -58,29 +57,13 @@ Transform:
   m_GameObject: {fileID: 427204379123777601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4894125875230940504}
   m_Father: {fileID: 7746712305423214264}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 128.86118}
---- !u!111 &8475099416648590590
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427204379123777601}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 7f24686b7c9f2f848a9e2f3103b514ef, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 7f24686b7c9f2f848a9e2f3103b514ef, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 124.66}
 --- !u!65 &1409814333859563313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -326,10 +309,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2386244372060874010}
-  - component: {fileID: 1982409574766556006}
+  - component: {fileID: -8691438740257781820}
   - component: {fileID: 2884410474875206482}
   - component: {fileID: 2391203768840219746}
   - component: {fileID: 594259804172785370}
+  - component: {fileID: 8333358957219806732}
+  - component: {fileID: 7322261762677545452}
+  - component: {fileID: 1589044221839880199}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -355,8 +341,8 @@ Transform:
   - {fileID: 1208797243746553076}
   - {fileID: 2091276174875956109}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1982409574766556006
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -135}
+--- !u!114 &-8691438740257781820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3091996859
+  GlobalObjectIdHash: 2804575534
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -389,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f3b3f4abde0aa49a4fb5e5845cbf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerOwnCamera: {fileID: 8696160367842143988}
   isGrounded: 0
   movSpeed: 10
   jumpStrength: 8
@@ -402,10 +389,11 @@ MonoBehaviour:
   - {fileID: 834360905279899570}
   - {fileID: 1499456400990417998}
   - {fileID: 899484062670775575}
-  swordAttackAnim: {fileID: 8475099416648590590}
-  leftPunch: {fileID: 3710633186250104185}
+  animator: {fileID: 7322261762677545452}
   sword: {fileID: 427204379123777601}
   swordObj: {fileID: 940452098798999847}
+  canAttack: 1
+  attacking: 0
 --- !u!143 &2391203768840219746
 CharacterController:
   m_ObjectHideFlags: 0
@@ -545,6 +533,72 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8333358957219806732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a561ddc3ac4edc4dbffd375ddc4a2e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!95 &7322261762677545452
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4d283fbd83d63345a191099456df92d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1589044221839880199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 7322261762677545452}
 --- !u!1 &834360905279899570
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,7 +987,6 @@ GameObject:
   - component: {fileID: 5628472123695453257}
   - component: {fileID: 5367545549499286390}
   - component: {fileID: 963301997675145198}
-  - component: {fileID: 3710633186250104185}
   m_Layer: 0
   m_Name: Left
   m_TagString: LeftGlove
@@ -1027,22 +1080,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!111 &3710633186250104185
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2478471376412463496}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: c31f059f56d6a8949afe45e6b4610bf6, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: c31f059f56d6a8949afe45e6b4610bf6, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &2827756967511155517
 GameObject:
   m_ObjectHideFlags: 0
@@ -21939,6 +21976,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordItem
       objectReference: {fileID: 0}
+    - target: {fileID: 8494310693949067554, guid: b2e80181062ef434fae33f871962541b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8494310693949067555, guid: b2e80181062ef434fae33f871962541b,
         type: 3}
       propertyPath: m_RootOrder
@@ -22300,7 +22342,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -209.367
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6346555131224530616, guid: b2e80181062ef434fae33f871962541b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

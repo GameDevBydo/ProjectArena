@@ -13,21 +13,29 @@ public class Player : NetworkBehaviour
 
     Controller main;
 
+    [SerializeField]private Camera playerOwnCamera;
+
     void Start()
     {
         instance = this;
         controller = gameObject.GetComponent<CharacterController>();
         main = Controller.instance;
+        DontDestroyOnLoad(this.gameObject);
+        playerOwnCamera.depth +=2;
     }
 
     void Update()
     {
-        if(main.runStarted)
-        {
-            Movement();
-            CamMovement();
-            if(Input.GetKeyDown(KeyCode.Mouse0)) Attack();
-        }
+        //if(IsOwner)
+        //{
+            if(main.runStarted)
+            {
+                if(!attacking) Movement();
+                CamMovement();
+                if(Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
+                if(Input.GetKeyDown(KeyCode.Mouse1)) HeavyAttack();
+            }
+        //}
     }
 
 
@@ -146,47 +154,79 @@ public class Player : NetworkBehaviour
 
     #region Combat
     [Header("Combat")]
-    public Animation swordAttackAnim, leftPunch;
-    public GameObject sword, swordObj;
-    bool canAttack = true;
+    public Animator animator;
 
-    public void Attack()
+    public GameObject sword, swordObj;
+    public bool canAttack = true, attacking = false;
+
+    public void LightAttack()
     {
         if(canAttack) 
         {
+            string attackName = null;
             switch((int)playerChar)
             {
                 case 0:
-                    StartCoroutine(SwordGuyAttackRoutine());
+                    attackName = "swordL1";
                     break;
                 case 1:
-                    StartCoroutine(LeftPunch());
+                    attackName = "boxerL1";
                     break;
             }
+            CallAnimation(attackName);
         }
     }
 
-    IEnumerator SwordGuyAttackRoutine()
+    public void HeavyAttack()
     {
-        canAttack = false; 
-        sword.SetActive(true);
-        swordObj.SetActive(false);
-        sword.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Play();
-        swordAttackAnim.Play();
-        yield return new WaitForSeconds(swordAttackAnim.clip.length);
-        canAttack = true;
-        sword.SetActive(false);
-        swordObj.SetActive(true);
-        sword.transform.GetChild(0).GetChild(1).GetComponent<ParticleSystem>().Stop();
+        if(canAttack) 
+        {
+            string attackName = null;
+            switch((int)playerChar)
+            {
+                case 0:
+                    attackName = "swordH1";
+                    break;
+                case 1:
+                    
+                    break;
+            }
+            CallAnimation(attackName);
+        }
     }
-
-    IEnumerator LeftPunch()
+        
+    public void CallAnimation(string stateName)
     {
         canAttack = false;
-        leftPunch.Play();
-        yield return new WaitForSeconds(leftPunch.clip.length);
-        canAttack = true;
+        attacking = true;
+        animator.Play(stateName);
     }
+
+    public void StopAttacking()
+    {
+        attacking = false;
+        canAttack = true; 
+    }
+
+    //IEnumerator SwordGuyAttackRoutine()
+    //{
+    //    //canAttack = false; 
+    //    //animator.Play(attackName);
+    //    //attacking = true;
+    //    //yield return new WaitForSeconds(swordAnim.clip.length);
+    //    //canAttack = true;
+    //    //attacking = false;
+    //}
+
+    //IEnumerator LeftPunch()
+    //{
+    //    //canAttack = false;
+    //    //attacking = true;
+    //    //boxerAnim.Play();
+    //    //yield return new WaitForSeconds(boxerAnim.clip.length);
+    //    //attacking = false;
+    //    //canAttack = true;
+    //}
 
 
 
