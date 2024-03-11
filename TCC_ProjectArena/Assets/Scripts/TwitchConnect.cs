@@ -82,19 +82,14 @@ public class TwitchConnect : MonoBehaviour
             if(message.Contains("PRIVMSG"))
             {
                 int splitPoint = message.IndexOf("!", 1);
-                string chatName = message.Substring(1, splitPoint-1);
+                string chatName = message[1..splitPoint];
 
                 splitPoint = message.IndexOf(":", 1);
-                string chatMessage = message.Substring(splitPoint+1);
+                string chatMessage = message[(splitPoint + 1)..];
 
-                if(chatMessage == "iniciar")
+                if(chatMessage.Length > 5 && chatMessage[..5].ToLower() == "spawn")
                 {
-                    main.StartRun();
-                }
-
-                if(chatMessage.Length > 5 && chatMessage.Substring(0,5).ToLower() == "spawn")
-                {
-                    string monsterName = chatMessage.Replace(" ", "").Substring(5).ToLower();
+                    string monsterName = chatMessage.Replace(" ", "")[5..].ToLower();
                     main.FillSlotInWave(chatName, monsterName);
                 }
             }
@@ -122,5 +117,7 @@ public class TwitchConnect : MonoBehaviour
         OAuth = "oauth:kb9trff316jzd1gas936aakuze56pp";
         channelName = "thebydo";
         ConnectToTwitch();
+        main.ipAddress = "26.180.39.220";
+        main.ChangeIPAdress();
     }
 }

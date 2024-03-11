@@ -4,17 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
+using System;
 
 public class Enemy : NetworkBehaviour
 {
 
     public int enemyTypeID;
     Transform player;
-    bool hit;
+    NetworkVariable<bool> hitN = new();
     CharacterController controller;
     public float speed;
 
-    public float maxHitPoints, hitPoints;
+    public float maxHitPoints;
+
+    public NetworkVariable<float> hitPointsN = new ();
+    public float hitPoints;
     
     public bool waveStart = false;
 
@@ -23,24 +27,46 @@ public class Enemy : NetworkBehaviour
     void Awake()
     {
         main = Controller.instance;
-        hitPoints = maxHitPoints;
+        hitPointsN.OnValueChanged += OnLifeChanged;
     }
+
+    private void OnLifeChanged(float previousValue, float newValue)
+    {
+        UpdateLifeBar();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if(IsOwner) hitPointsN.Value = maxHitPoints;
+    }
+
+    
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
     }
 
+    NetworkVariable<float> locateTimer = new(0);
     void LocateNearestPlayer()
     {
-        float closestDistance = 1000;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject p in players)
+        if(locateTimer.Value<=0.0f)
         {
-            if(Vector3.Distance(transform.position, p.transform.position) < closestDistance)
+            float closestDistance = 1000;
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach(GameObject p in players)
             {
-                closestDistance = Vector3.Distance(transform.position, p.transform.position);
-                player = p.transform;
+                if(Vector3.Distance(transform.position, p.transform.position) < closestDistance)
+                {
+                    closestDistance = Vector3.Distance(transform.position, p.transform.position);
+                    player = p.transform;
+                    Debug.Log(player.name);
+                }
             }
+            locateTimer.Value = 5;
+        }
+        else
+        {
+            locateTimer.Value-=Time.deltaTime;
         }
     }
 
@@ -58,11 +84,11 @@ public class Enemy : NetworkBehaviour
         }
     }
 
-    public void SetEnemyName(string username)
+    [Rpc(SendTo.Everyone)]
+    public void SetEnemyNameRpc(string username)
     {
         transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = username;
     }
-
 
 
     void Rotation()
@@ -78,26 +104,18 @@ public class Enemy : NetworkBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(waveStart)
+        if(IsHost)
         {
-            if(collider.tag == "Blade")
+            if(waveStart)
             {
-                if(!hit)
+                if(collider.CompareTag("Blade") || collider.CompareTag("LeftGlove"))
                 {
-                    //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
-                    hit = true;
-                    StartCoroutine(StopInvulnerability());
-                    TakeDamage(30);
-                }
-            }
-            if(collider.tag == "LeftGlove")
-            {
-                if(!hit)
-                {
-                    //Instantiate(bloodPS, transform.position, bloodPS.transform.rotation);
-                    hit = true;
-                    StartCoroutine(StopInvulnerability());
-                    TakeDamage(20);
+                    if(!hitN.Value)
+                    {
+                        hitN.Value = true;
+                        StartCoroutine(StopInvulnerability());
+                        TakeDamage(30);
+                    }
                 }
             }
         }
@@ -106,27 +124,26 @@ public class Enemy : NetworkBehaviour
     IEnumerator StopInvulnerability()
     {
         yield return new WaitForSeconds(0.3f);
-        hit = false;
+        hitN.Value = false;
     }
 
     public Image lifeBar;
-
     void UpdateLifeBar()
     {
-        lifeBar.fillAmount = hitPoints/maxHitPoints;
+        lifeBar.fillAmount = hitPointsN.Value/maxHitPoints;
     }
 
     void TakeDamage(float damage)
     {
-        hitPoints -= damage;
-        UpdateLifeBar();
-        if(hitPoints <=0) Death();
+        hitPointsN.Value -= damage;
+        if(hitPointsN.Value <=0) Death();
     }
 
     void Death()
     {
         main.EnemyKilled();
-        Destroy(gameObject);
+        if(main.online) NetworkObject.Despawn();
+        else Destroy(this.gameObject);
     }
 
     bool inRange = false, readyAttack = false, isAttacking = false;

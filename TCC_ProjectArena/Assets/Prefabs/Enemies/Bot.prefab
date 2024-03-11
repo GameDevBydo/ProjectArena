@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1036661913160154838}
   - component: {fileID: 5037352045883420978}
   - component: {fileID: 4483603421212298321}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Head
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 817536255
+  GlobalObjectIdHash: 1176680779
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -206,6 +206,8 @@ MonoBehaviour:
   enemyTypeID: 0
   speed: 3
   maxHitPoints: 100
+  hitPointsNetwork:
+    m_InternalValue: 0
   hitPoints: 0
   waveStart: 0
   lifeBar: {fileID: 8316451032802685652}
@@ -639,9 +641,9 @@ GameObject:
   - component: {fileID: 4729163487125622504}
   - component: {fileID: 4855083595941887934}
   - component: {fileID: 7598186714008061127}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -821,7 +823,7 @@ GameObject:
   - component: {fileID: 7167618753600032910}
   - component: {fileID: 4683388755169317380}
   - component: {fileID: 8669389810693371390}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: JumpPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5719,9 +5721,9 @@ GameObject:
   - component: {fileID: 5887299574841227051}
   - component: {fileID: 4659959616482004303}
   - component: {fileID: 2805802229298384089}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Eyes
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5859,7 +5861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3220912922087554897}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

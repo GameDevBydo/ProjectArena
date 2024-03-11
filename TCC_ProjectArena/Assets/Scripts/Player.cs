@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+using System;
 
 public class Player : NetworkBehaviour
 {
@@ -15,27 +16,48 @@ public class Player : NetworkBehaviour
 
     [SerializeField]private Camera playerOwnCamera;
 
+    public string playerName;
+
+    void Awake()
+    {
+        playerChar.OnValueChanged += LoadNewModel;
+    }
+
+    private void LoadNewModel(characterID previousValue, characterID newValue)
+    {
+        SetCharacter((int)playerChar.Value);
+    }
+
     void Start()
     {
-        instance = this;
         controller = gameObject.GetComponent<CharacterController>();
         main = Controller.instance;
+        if(!main.online) instance = this;
         DontDestroyOnLoad(this.gameObject);
-        playerOwnCamera.depth +=2;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if(IsOwner) 
+        {
+            playerOwnCamera.depth +=2;
+            instance = this;
+        }
+        else SetCharacter((int)playerChar.Value);
     }
 
     void Update()
     {
-        //if(IsOwner)
-        //{
-            if(main.runStarted)
+        if(IsOwner)
+        {
+            if(main.runStartedN.Value)
             {
                 if(!attacking) Movement();
                 CamMovement();
                 if(Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
                 if(Input.GetKeyDown(KeyCode.Mouse1)) HeavyAttack();
             }
-        //}
+        }
     }
 
 
@@ -111,36 +133,26 @@ public class Player : NetworkBehaviour
 
     public enum characterID
     {
-        GREATSWORD,
-        BOXER,
-        RUSTROBOT,
-        EMPTY
+        Greatsword,
+        Boxer,
+        RustRobot,
+        Empty
     }
 
     [HideInInspector]
-    public characterID playerChar = characterID.EMPTY;
+    public NetworkVariable<characterID> playerChar = new(characterID.Empty, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     
     public GameObject[] characterModels;
-    public void SetCharacter(int charID)
+
+
+    public void SetCharacter(int modelID)
     {
-        if(charID<characterModels.Length)
+        if(modelID<characterModels.Length)
         {
             for(int i = 0; i<3; i++)
             {
-                if(charID==i) characterModels[i].SetActive(true);
+                if(modelID==i) characterModels[i].SetActive(true);
                 else characterModels[i].SetActive(false);
-            }
-            switch(charID)
-            {
-                case 0:
-                    playerChar = characterID.GREATSWORD;
-                    break;
-                case 1:
-                    playerChar = characterID.BOXER;
-                    break;
-                case 2:
-                    playerChar = characterID.RUSTROBOT;
-                    break;
             }
         }
         else
@@ -163,16 +175,13 @@ public class Player : NetworkBehaviour
     {
         if(canAttack) 
         {
-            string attackName = null;
-            switch((int)playerChar)
+            string attackName = playerChar.Value switch
             {
-                case 0:
-                    attackName = "swordL1";
-                    break;
-                case 1:
-                    attackName = "boxerL1";
-                    break;
-            }
+                characterID.Greatsword => "swordL1",
+                characterID.Boxer => "boxerL1",
+                _ => null
+            };
+
             CallAnimation(attackName);
         }
     }
@@ -182,13 +191,10 @@ public class Player : NetworkBehaviour
         if(canAttack) 
         {
             string attackName = null;
-            switch((int)playerChar)
+            switch(playerChar.Value)
             {
-                case 0:
-                    attackName = "swordH1";
-                    break;
-                case 1:
-                    
+                case characterID.Greatsword:
+                    attackName = "swordL1";
                     break;
             }
             CallAnimation(attackName);

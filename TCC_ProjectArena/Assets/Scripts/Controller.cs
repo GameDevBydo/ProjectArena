@@ -5,12 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 
-public class Controller : MonoBehaviour
+
+public class Controller : NetworkBehaviour
 {
     public static Controller instance;
 
-    public bool runStarted = false;
+    public NetworkVariable<bool> runStartedN = new ();
+
+    [HideInInspector]
+    public bool online = false;
 
     void Awake()
     {
@@ -22,12 +27,24 @@ public class Controller : MonoBehaviour
         else Destroy(this.gameObject);
     }
 
+    public void IsOnline(bool b)
+    {
+        online = b;
+    }
+
 
     public TextMeshProUGUI alertsText;
     public void PrintSpawnAlert(string user, string enemyName)
     {   
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
+        StartCoroutine(HideAlerts());
+    }
+
+    public void PrintLoginAlert(string user)
+    {
+        alertsText.gameObject.SetActive(true);
+        alertsText.text += "\n" + user + " se juntou a sua equipe!";
         StartCoroutine(HideAlerts());
     }
 
@@ -45,11 +62,15 @@ public class Controller : MonoBehaviour
 
     bool canFillWaveSlots = false;
 
-    public void StartRun()
+    [Rpc(SendTo.Everyone)]
+    public void StartRunRpc()
     {
-        runStarted = true;
+        if(IsHost)
+        {
+            runStartedN.Value = true;
+            OpenSlotsInWaveRpc();
+        }
         Cursor.lockState = CursorLockMode.Locked;
-        OpenSlotsInWave();
     }
 
     public void StartServer()
@@ -67,22 +88,25 @@ public class Controller : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    string ipAddress;
+    [HideInInspector]
+    public string ipAddress;
     public void SetIPAddressIF(string s)
     {
         ipAddress = s;
     }
 
-    void TryConnectClient()
+    public void ChangeIPAdress()
     {
-       
+        if (ipAddress == null || ipAddress.Length == 0)
+        {
+            ipAddress = "127.0.0.1";
+        }
+        UnityTransport transport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
+        transport.ConnectionData.Address = ipAddress;
     }
 
-
-
-
-
-    public void OpenSlotsInWave() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
+    [Rpc(SendTo.Everyone)]
+    public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
         WriteOnHeader("PEDIDOS ABERTOS!", 8f);
         Debug.Log("Slots abertos.");
@@ -107,7 +131,7 @@ public class Controller : MonoBehaviour
         canFillWaveSlots = true;
 
         StartCoroutine(UpdateWaveFillTimer());
-        Invoke("CloseSlotsInWave", 10f); 
+        Invoke(nameof(CloseSlotsInWave), 10f); 
     }
 
     public TextMeshProUGUI header;
@@ -167,43 +191,33 @@ public class Controller : MonoBehaviour
     int CheckEnemyRequest(string enemyType) // Confere se o inimigo requisitado existe.
     {
         enemyType = enemyType.ToLower();
-        int enemyId;
-        switch(enemyType)
+        var enemyId = enemyType switch
         {
-            case "bot":
-                enemyId = 0;
-                break;
-
-            case "bigbot":
-                enemyId = 1;
-                break;
-
-            case "rat":
-                enemyId = 2;
-                break;
-
-            default:
-                enemyId = -1;
-                break;
-        }
-
+            "bot" => 0,
+            "bigbot" => 1,
+            "rat" => 2,
+            _ => -1,
+        };
         return enemyId;
     }
 
     void CloseSlotsInWave() // Fecha os slots da wave, e prepara para iniciar os inimigos.
     {
-        if(canFillWaveSlots)
+        if(IsHost)
         {
-            canFillWaveSlots = false;
-            if(slotsFilled<enemiesInWave.Length-1)
+            if(canFillWaveSlots)
             {
-                for(int i = slotsFilled; i< enemiesInWave.Length; i++)
+                canFillWaveSlots = false;
+                if(slotsFilled<enemiesInWave.Length-1)
                 {
-                    enemiesInWave[i] = SpawnEnemy("AutoFill", enemiesInWave[i].enemyTypeID);
+                    for(int i = slotsFilled; i< enemiesInWave.Length; i++)
+                    {
+                        enemiesInWave[i] = SpawnEnemy("AutoFill", enemiesInWave[i].enemyTypeID);
+                    }
                 }
+                Invoke(nameof(StartCurrentWave), 5);
+            WriteOnHeader("PEDIDOS FECHADOS!");
             }
-            Invoke("StartCurrentWave", 5);
-           WriteOnHeader("PEDIDOS FECHADOS!");
         }
     }
 
@@ -231,7 +245,7 @@ public class Controller : MonoBehaviour
     {
         WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5);
         waveNumber++;
-        Invoke("OpenSlotsInWave", 10);
+        Invoke(nameof(OpenSlotsInWaveRpc), 10);
     }
 
     #endregion
@@ -244,10 +258,10 @@ public class Controller : MonoBehaviour
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         e.name = user + "'s " + e.name;
-        e.GetComponent<Enemy>().SetEnemyName(user);
-        if(user !=  "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
+        e.GetComponent<Enemy>().SetEnemyNameRpc(user);
+        if(user !=  "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
         return e.GetComponent<Enemy>();
     }
 
@@ -263,7 +277,7 @@ public class Controller : MonoBehaviour
 
     public void SelectCharacter(int charID)
     {
-        Player.instance.SetCharacter(charID);
+        Player.instance.playerChar.Value = (Player.characterID)charID;
     }
 
 }
