@@ -254,7 +254,7 @@ public class Controller : NetworkBehaviour
     public GameObject[] enemyPrefabList;
     public Enemy SpawnEnemy(string user, int enemyId)
     {  
-        Vector2 randomPos= Random.insideUnitCircle.normalized * 20;
+        Vector2 randomPos= Random.insideUnitCircle.normalized * 30;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         e.name = user + "'s " + e.name;

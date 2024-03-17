@@ -117,7 +117,7 @@ public class TwitchConnect : MonoBehaviour
         OAuth = "oauth:kb9trff316jzd1gas936aakuze56pp";
         channelName = "thebydo";
         ConnectToTwitch();
-        main.ipAddress = "26.180.39.220";
-        main.ChangeIPAdress();
+        //main.ipAddress = "26.180.39.220";
+        //main.ChangeIPAdress();
     }
 }

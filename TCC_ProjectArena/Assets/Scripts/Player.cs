@@ -190,13 +190,12 @@ public class Player : NetworkBehaviour
     {
         if(canAttack) 
         {
-            string attackName = null;
-            switch(playerChar.Value)
+            string attackName = playerChar.Value switch
             {
-                case characterID.Greatsword:
-                    attackName = "swordL1";
-                    break;
-            }
+                characterID.Greatsword => "swordH1",
+                characterID.Boxer => "boxerH1",
+                _ => null
+            };
             CallAnimation(attackName);
         }
     }
