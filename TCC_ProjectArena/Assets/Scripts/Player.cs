@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using System;
+using UnityEngine.Rendering.Universal;
+
 
 public class Player : NetworkBehaviour
 {
@@ -14,13 +16,15 @@ public class Player : NetworkBehaviour
 
     Controller main;
 
-    [SerializeField]private Camera playerOwnCamera;
+    [SerializeField] private Camera playerOwnCamera;
 
     public string playerName;
+
 
     void Awake()
     {
         playerChar.OnValueChanged += LoadNewModel;
+        life.OnValueChanged = OnLifeChanged;
     }
 
     private void LoadNewModel(characterID previousValue, characterID newValue)
@@ -32,15 +36,15 @@ public class Player : NetworkBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         main = Controller.instance;
-        if(!main.online) instance = this;
+        if (!main.online) instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
     public override void OnNetworkSpawn()
     {
-        if(IsOwner) 
+        if (IsOwner)
         {
-            playerOwnCamera.depth +=2;
+            playerOwnCamera.depth += 2;
             instance = this;
         }
         else SetCharacter((int)playerChar.Value);
@@ -48,14 +52,15 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        if(IsOwner)
+
+        if (IsOwner)
         {
-            if(main.runStartedN.Value)
+            if (main.runStartedN.Value)
             {
-                if(!attacking) Movement();
+                if (!attacking) Movement();
                 CamMovement();
-                if(Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
-                if(Input.GetKeyDown(KeyCode.Mouse1)) HeavyAttack();
+                if (Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
+                if (Input.GetKeyDown(KeyCode.Mouse1)) HeavyAttack();
             }
         }
     }
@@ -71,11 +76,11 @@ public class Player : NetworkBehaviour
     void Movement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController
     {
         isGrounded = Physics.Raycast(transform.GetChild(0).GetChild(0).transform.position, Vector3.down, 0.2f);
-        if(isGrounded)
+        if (isGrounded)
         {
             extraJumps = 5;
-            playerVelocity.y -=1*Time.deltaTime;
-        } 
+            playerVelocity.y -= 1 * Time.deltaTime;
+        }
 
         float xDir = Input.GetAxis("Horizontal");
         float zDir = Input.GetAxis("Vertical");
@@ -86,12 +91,12 @@ public class Player : NetworkBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if(isGrounded)
+            if (isGrounded)
             {
                 playerVelocity.y = jumpStrength;
                 jumpPS.Play();
             }
-            else if(extraJumps>0)
+            else if (extraJumps > 0)
             {
                 playerVelocity.y = jumpStrength;
                 jumpPS.Play();
@@ -141,17 +146,17 @@ public class Player : NetworkBehaviour
 
     [HideInInspector]
     public NetworkVariable<characterID> playerChar = new(characterID.Empty, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    
+
     public GameObject[] characterModels;
 
 
     public void SetCharacter(int modelID)
     {
-        if(modelID<characterModels.Length)
+        if (modelID < characterModels.Length)
         {
-            for(int i = 0; i<3; i++)
+            for (int i = 0; i < 3; i++)
             {
-                if(modelID==i) characterModels[i].SetActive(true);
+                if (modelID == i) characterModels[i].SetActive(true);
                 else characterModels[i].SetActive(false);
             }
         }
@@ -173,7 +178,7 @@ public class Player : NetworkBehaviour
 
     public void LightAttack()
     {
-        if(canAttack) 
+        if (canAttack)
         {
             string attackName = playerChar.Value switch
             {
@@ -188,7 +193,7 @@ public class Player : NetworkBehaviour
 
     public void HeavyAttack()
     {
-        if(canAttack) 
+        if (canAttack)
         {
             string attackName = playerChar.Value switch
             {
@@ -199,7 +204,7 @@ public class Player : NetworkBehaviour
             CallAnimation(attackName);
         }
     }
-        
+
     public void CallAnimation(string stateName)
     {
         canAttack = false;
@@ -210,8 +215,29 @@ public class Player : NetworkBehaviour
     public void StopAttacking()
     {
         attacking = false;
-        canAttack = true; 
+        canAttack = true;
     }
+    [Header("Life")]
+    [SerializeField] NetworkVariable<float> life = new();
+    [SerializeField] float maxlife;
+
+    public void RemoveLife(float val)
+    {
+        if (life.Value > 0) life.Value -= val;
+        Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
+    }
+    private void OnLifeChanged(float previousValue, float newValue)
+    {
+        Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
+    }
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            RemoveLife(10);
+        }
+    }
+
 
     //IEnumerator SwordGuyAttackRoutine()
     //{

@@ -13,8 +13,9 @@ public class Controller : NetworkBehaviour
     public static Controller instance;
 
     public NetworkVariable<bool> runStartedN = new ();
+    public HudPlayer hudPlayer;
 
-    [HideInInspector]
+    [HideInInspector] 
     public bool online = false;
 
     void Awake()

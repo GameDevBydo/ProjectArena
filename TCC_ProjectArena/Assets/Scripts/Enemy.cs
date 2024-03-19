@@ -17,9 +17,9 @@ public class Enemy : NetworkBehaviour
 
     public float maxHitPoints;
 
-    public NetworkVariable<float> hitPointsN = new ();
+    public NetworkVariable<float> hitPointsN = new();
     public float hitPoints;
-    
+
     public bool waveStart = false;
 
     Controller main;
@@ -37,10 +37,10 @@ public class Enemy : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if(IsOwner) hitPointsN.Value = maxHitPoints;
+        if (IsOwner) hitPointsN.Value = maxHitPoints;
     }
 
-    
+
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -49,13 +49,13 @@ public class Enemy : NetworkBehaviour
     NetworkVariable<float> locateTimer = new(0);
     void LocateNearestPlayer()
     {
-        if(locateTimer.Value<=0.0f)
+        if (locateTimer.Value <= 0.0f)
         {
             float closestDistance = 1000;
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach(GameObject p in players)
+            foreach (GameObject p in players)
             {
-                if(Vector3.Distance(transform.position, p.transform.position) < closestDistance)
+                if (Vector3.Distance(transform.position, p.transform.position) < closestDistance)
                 {
                     closestDistance = Vector3.Distance(transform.position, p.transform.position);
                     player = p.transform;
@@ -66,20 +66,24 @@ public class Enemy : NetworkBehaviour
         }
         else
         {
-            locateTimer.Value-=Time.deltaTime;
+            locateTimer.Value -= Time.deltaTime;
         }
     }
 
     void Update()
     {
-        if(IsOwner)
+        if (IsOwner)
         {
             LocateNearestPlayer();
             Rotation();
-            if(waveStart)
+            if (waveStart)
             {
                 CheckPlayerDistance();
-                if(!inRange) Movement();
+                if (!inRange) Movement();
+            }
+            if (readyAttack)
+            {
+                LightAttack();
             }
         }
     }
@@ -104,13 +108,13 @@ public class Enemy : NetworkBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(IsHost)
+        if (IsHost)
         {
-            if(waveStart)
+            if (waveStart)
             {
-                if(collider.CompareTag("Blade") || collider.CompareTag("LeftGlove"))
+                if (collider.CompareTag("Blade") || collider.CompareTag("LeftGlove"))
                 {
-                    if(!hitN.Value)
+                    if (!hitN.Value)
                     {
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
@@ -130,19 +134,19 @@ public class Enemy : NetworkBehaviour
     public Image lifeBar;
     void UpdateLifeBar()
     {
-        lifeBar.fillAmount = hitPointsN.Value/maxHitPoints;
+        lifeBar.fillAmount = hitPointsN.Value / maxHitPoints;
     }
 
     void TakeDamage(float damage)
     {
         hitPointsN.Value -= damage;
-        if(hitPointsN.Value <=0) Death();
+        if (hitPointsN.Value <= 0) Death();
     }
 
     void Death()
     {
         main.EnemyKilled();
-        if(main.online) NetworkObject.Despawn();
+        if (main.online) NetworkObject.Despawn();
         else Destroy(this.gameObject);
     }
 
@@ -150,16 +154,42 @@ public class Enemy : NetworkBehaviour
     void CheckPlayerDistance()
     {
         inRange = Vector3.Distance(player.position, transform.position) <= 3;
-        //if(inRange && !readyAttack)
-        //{
-        //    readyAttack = true;
-        //}
-        //else if(!inRange)
-        //{
-        //    readyAttack = false;
-        //}
+        if (inRange && !readyAttack)
+        {
+            readyAttack = true;
+        }
+        else if (!inRange)
+        {
+            readyAttack = false;
+        }
     }
+    [Header("Combat")]
+    public Animator animator;
+    public bool canAttack = true, attacking = false;
+    public void LightAttack()
+    {
+        if (canAttack)
+        {
+            CallAnimation("hitEnemy");
+        }
 
+
+    }
+    public void CallAnimation(string stateName)
+    {
+        canAttack = false;
+        attacking = true;
+        animator.Play(stateName);
+        Debug.Log("PlayAttack");
+
+    }
+    public void StopAttacking()
+    {
+        attacking = false;
+        canAttack = true;
+        
+
+    }
     //void Attack()
     //{
     //    if(readyAttack && !isAttacking) StartCoroutine(AttackRoutine());

@@ -363,6 +363,9 @@ MonoBehaviour:
   swordObj: {fileID: 940452098798999847}
   canAttack: 1
   attacking: 0
+  life:
+    m_InternalValue: 100
+  maxlife: 100
 --- !u!143 &2391203768840219746
 CharacterController:
   m_ObjectHideFlags: 0
@@ -16363,7 +16366,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -16683,7 +16686,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
