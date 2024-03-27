@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
     public float movSpeed, jumpStrength, gravityValue = -9.81f;
     public int extraJumps;
     public ParticleSystem jumpPS;
-    void Movement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController
+    void Movement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController PULO NÃO TA FUNCIONANDO PQ O FEET TÁ ASSINALADO ERRADO
     {
         isGrounded = Physics.Raycast(transform.GetChild(0).GetChild(0).transform.position, Vector3.down, 0.2f);
         if (isGrounded)
