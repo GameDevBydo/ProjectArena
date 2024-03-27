@@ -184,6 +184,7 @@ public class Player : NetworkBehaviour
             {
                 characterID.Greatsword => "swordL1",
                 characterID.Boxer => "boxerL1",
+                characterID.RustRobot => "robotL1",
                 _ => null
             };
 
@@ -217,6 +218,17 @@ public class Player : NetworkBehaviour
         attacking = false;
         canAttack = true;
     }
+
+    public Transform projectileSpawn;
+    public void SpawnProjectile(GameObject projectile)
+    {
+        GameObject e = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation).gameObject;
+        NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
+        eNetworkObject.Spawn();
+        e.GetComponent<Rigidbody>().AddForce(e.transform.forward * 10, ForceMode.Impulse);
+    }
+
+
     [Header("Life")]
     [SerializeField] NetworkVariable<float> life = new();
     [SerializeField] float maxlife;

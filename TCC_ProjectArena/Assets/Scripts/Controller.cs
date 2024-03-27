@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using System.Data;
 
 
 public class Controller : NetworkBehaviour
@@ -34,22 +35,22 @@ public class Controller : NetworkBehaviour
     }
 
 
-    public TextMeshProUGUI alertsText;
-    public void PrintSpawnAlert(string user, string enemyName)
+    public TextMeshProUGUI alertsText; //VAI PRO UI CONTROLLER
+    public void PrintSpawnAlert(string user, string enemyName) // VAI PRO UI CONTROLLER
     {   
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
         StartCoroutine(HideAlerts());
     }
 
-    public void PrintLoginAlert(string user)
+    public void PrintLoginAlert(string user) // VAI PRO UI CONTROLLER
     {
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " se juntou a sua equipe!";
         StartCoroutine(HideAlerts());
     }
 
-    IEnumerator HideAlerts()
+    IEnumerator HideAlerts() // VAI PRO UI CONTROLLER
     {
         yield return new WaitForSeconds(5);
         alertsText.gameObject.SetActive(false);
@@ -109,7 +110,7 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
-        WriteOnHeader("PEDIDOS ABERTOS!", 8f);
+        WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
         Debug.Log("Slots abertos.");
         enemiesInWave = new Enemy[(waveNumber-1)*3 + 10];
         for(int i = 0; i< enemiesInWave.Length; i++)
@@ -131,13 +132,13 @@ public class Controller : NetworkBehaviour
         }
         canFillWaveSlots = true;
 
-        StartCoroutine(UpdateWaveFillTimer());
+        StartCoroutine(UpdateWaveFillTimer()); // MUDAR PRO UI CONTROLLER
         Invoke(nameof(CloseSlotsInWave), 10f); 
     }
 
-    public TextMeshProUGUI header;
+    public TextMeshProUGUI header; //vai pro ui controller
 
-    void WriteOnHeader(string message, Color color, float duration = 3.0f)
+    void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
     {
         header.gameObject.SetActive(true);
         header.text = message;
@@ -145,19 +146,19 @@ public class Controller : NetworkBehaviour
         StartCoroutine(CloseHeader(duration));
     }
 
-    void WriteOnHeader(string message, float duration = 3.0f)
+    void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
     {
         WriteOnHeader(message, Color.white, duration);
     }
-    IEnumerator CloseHeader(float timer)
+    IEnumerator CloseHeader(float timer) // vai pro ui controller
     {
         yield return new WaitForSeconds(timer);
         header.gameObject.SetActive(false);
     }
 
 
-    public Image waveFillTimer;
-    IEnumerator UpdateWaveFillTimer()
+    public Image waveFillTimer; // vai pro ui controller
+    IEnumerator UpdateWaveFillTimer() // vai pro ui controller
     {
         float timer = 10f;
         while(timer>0)
@@ -217,7 +218,7 @@ public class Controller : NetworkBehaviour
                     }
                 }
                 Invoke(nameof(StartCurrentWave), 5);
-            WriteOnHeader("PEDIDOS FECHADOS!");
+            WriteOnHeader("PEDIDOS FECHADOS!"); // referenciar ui controller
             }
         }
     }
@@ -225,7 +226,7 @@ public class Controller : NetworkBehaviour
     int enemiesAlive = 0;
     void StartCurrentWave() // Ativa os inimigos 1 a 1, e contabiliza quantos tem.
     {
-        WriteOnHeader("ONDA COMEÇOU!", Color.red, 5);
+        WriteOnHeader("ONDA COMEÇOU!", Color.red, 5); // referenciar ui controller
         enemiesAlive = 0;
         foreach(Enemy e in enemiesInWave)
         {
@@ -242,9 +243,9 @@ public class Controller : NetworkBehaviour
         if(enemiesAlive<=0) WaveCleared();
     }
 
-    void WaveCleared() // Finaliza a wave e inicia a abertura de slots da próxima.
+    void WaveCleared() // Finaliza a wave e inicia a abertura de slots da próxima. 
     {
-        WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5);
+        WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
         waveNumber++;
         Invoke(nameof(OpenSlotsInWaveRpc), 10);
     }
@@ -265,6 +266,15 @@ public class Controller : NetworkBehaviour
         if(user !=  "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
         return e.GetComponent<Enemy>();
     }
+
+    public void OpenVoting()
+    {
+        
+    }
+
+
+
+
 
     public void OpenURL(string url)
     {

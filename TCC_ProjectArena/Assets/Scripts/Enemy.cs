@@ -112,7 +112,7 @@ public class Enemy : NetworkBehaviour
         {
             if (waveStart)
             {
-                if (collider.CompareTag("Blade") || collider.CompareTag("LeftGlove"))
+                if (collider.CompareTag("Blade") || collider.CompareTag("LeftGlove") || collider.CompareTag("RustScrap"))
                 {
                     if (!hitN.Value)
                     {
@@ -150,15 +150,15 @@ public class Enemy : NetworkBehaviour
         else Destroy(this.gameObject);
     }
 
-    bool inRange = false, readyAttack = false, isAttacking = false;
+    bool inRange = false, readyAttack = false;
     void CheckPlayerDistance()
     {
         inRange = Vector3.Distance(player.position, transform.position) <= 3;
-        if (inRange && !readyAttack)
+        if (inRange)
         {
             readyAttack = true;
         }
-        else if (!inRange)
+        else
         {
             readyAttack = false;
         }
@@ -172,8 +172,6 @@ public class Enemy : NetworkBehaviour
         {
             CallAnimation("hitEnemy");
         }
-
-
     }
     public void CallAnimation(string stateName)
     {
@@ -181,32 +179,11 @@ public class Enemy : NetworkBehaviour
         attacking = true;
         animator.Play(stateName);
         Debug.Log("PlayAttack");
-
     }
     public void StopAttacking()
     {
         attacking = false;
         canAttack = true;
-        
-
+        Debug.Log("Parei de atacar");
     }
-    //void Attack()
-    //{
-    //    if(readyAttack && !isAttacking) StartCoroutine(AttackRoutine());
-    //}
-
-    //IEnumerator AttackRoutine()
-    //{
-    //    isAttacking = true;
-    //    blade.SetActive(true);
-    //    blade.transform.GetChild(2).GetChild(0).GetComponent<ParticleSystem>().Play();
-    //    attackAnim.Play();
-    //    yield return new WaitForSeconds(attackAnim.clip.length);
-    //    blade.SetActive(false);
-    //    blade.transform.GetChild(2).GetChild(0).GetComponent<ParticleSystem>().Stop();
-    //    yield return new WaitForSeconds(2);
-    //    isAttacking = false;
-    //}
-
-
 }

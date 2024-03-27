@@ -92,6 +92,11 @@ public class TwitchConnect : MonoBehaviour
                     string monsterName = chatMessage.Replace(" ", "")[5..].ToLower();
                     main.FillSlotInWave(chatName, monsterName);
                 }
+
+                if(chatMessage.Length > 4 && chatMessage[..4].ToLower() == "vote")
+                {
+                    // register 1 or 2 and name, to not overfill
+                }
             }
         }
     }
