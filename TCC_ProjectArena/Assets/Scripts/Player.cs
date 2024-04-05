@@ -55,7 +55,7 @@ public class Player : NetworkBehaviour
 
         if (IsOwner)
         {
-            if (main.runStartedN.Value)
+            if (main.runStartedN.Value && life.Value>0.0f)
             {
                 if (!attacking) Movement();
                 CamMovement();
@@ -233,9 +233,14 @@ public class Player : NetworkBehaviour
     [SerializeField] NetworkVariable<float> life = new();
     [SerializeField] float maxlife;
 
+    public void PlayerDead()
+    {
+        main.OpenDeathScreen();
+    }
     public void RemoveLife(float val)
     {
         if (life.Value > 0) life.Value -= val;
+        else PlayerDead();
         Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
     }
     private void OnLifeChanged(float previousValue, float newValue)
@@ -246,7 +251,7 @@ public class Player : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            RemoveLife(10);
+            RemoveLife(5);
         }
     }
 

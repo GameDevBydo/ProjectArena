@@ -272,7 +272,11 @@ public class Controller : NetworkBehaviour
         
     }
 
-
+    public GameObject deathScreen;
+    public void OpenDeathScreen()
+    {
+        deathScreen.SetActive(true);
+    }
 
 
 
