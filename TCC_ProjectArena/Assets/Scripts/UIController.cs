@@ -7,9 +7,12 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [HideInInspector]
-    public UIController instance;
+    public static UIController instance;
 
     public TextMeshProUGUI notifText;
+    private void Start() {
+        Debug.Log("ENTOU NESSE CONDIÇÃO DO UI CONTROLLER");
+    }
 
     void Awake()
     {
@@ -60,9 +63,28 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(timer);
         alertsText.gameObject.SetActive(false);
     }
+    public void PrintSpawnAlert(string user, string enemyName) // VAI PRO UI CONTROLLER
+    {
+        alertsText.gameObject.SetActive(true);
+        alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
+        StartCoroutine(HideAlerts());
+    }
+
+    public void PrintLoginAlert(string user) // VAI PRO UI CONTROLLER
+    {
+        alertsText.gameObject.SetActive(true);
+        alertsText.text += "\n" + user + " se juntou a sua equipe!";
+        StartCoroutine(HideAlerts());
+    }
+
+    IEnumerator HideAlerts() // VAI PRO UI CONTROLLER
+    {
+        yield return new WaitForSeconds(5);
+        alertsText.gameObject.SetActive(false);
+    }
 
     public Image waveFillTimer;
-    IEnumerator UpdateWaveFillTimer(float duration)
+   public IEnumerator UpdateWaveFillTimer(float duration)
     {
         float timer = duration;
         while(timer>0)
@@ -72,4 +94,25 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+    
+     public TextMeshProUGUI header; //vai pro ui controller
+
+   public void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
+    {
+        header.gameObject.SetActive(true);
+        header.text = message;
+        header.color = color;
+        StartCoroutine(CloseHeader(duration));
+    }
+
+   public void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
+    {
+        WriteOnHeader(message, Color.white, duration);
+    }
+    IEnumerator CloseHeader(float timer) // vai pro ui controller
+    {
+        yield return new WaitForSeconds(timer);
+        header.gameObject.SetActive(false);
+    }
+
 }

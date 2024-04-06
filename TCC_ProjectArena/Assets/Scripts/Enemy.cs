@@ -21,6 +21,7 @@ public class Enemy : NetworkBehaviour
     public float hitPoints;
 
     public bool waveStart = false;
+    public bool activegGavity = true;
 
     Controller main;
 
@@ -79,6 +80,7 @@ public class Enemy : NetworkBehaviour
             if (waveStart)
             {
                 CheckPlayerDistance();
+              if(activegGavity) Gravity();
                 if (!inRange) Movement();
             }
             if (readyAttack)
@@ -104,6 +106,19 @@ public class Enemy : NetworkBehaviour
     void Movement()
     {
         controller.Move(transform.forward * speed * Time.deltaTime);
+    }
+    float gravity = 9.81f;
+    private bool isGrounded;
+    void Gravity()
+    {
+        isGrounded = controller.isGrounded;
+        if (!isGrounded)
+        {
+            // Aplica a gravidade
+            Vector3 gravityVector = Vector3.down * gravity;
+            controller.Move(gravityVector * Time.deltaTime);
+        }
+
     }
 
     void OnTriggerEnter(Collider collider)

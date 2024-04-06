@@ -13,15 +13,15 @@ public class Controller : NetworkBehaviour
 {
     public static Controller instance;
 
-    public NetworkVariable<bool> runStartedN = new ();
+    public NetworkVariable<bool> runStartedN = new();
     public HudPlayer hudPlayer;
 
-    [HideInInspector] 
+    [HideInInspector]
     public bool online = false;
 
     void Awake()
     {
-        if(instance == null) 
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -35,28 +35,28 @@ public class Controller : NetworkBehaviour
     }
 
 
-    public TextMeshProUGUI alertsText; //VAI PRO UI CONTROLLER
-    public void PrintSpawnAlert(string user, string enemyName) // VAI PRO UI CONTROLLER
-    {   
-        alertsText.gameObject.SetActive(true);
-        alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
-        StartCoroutine(HideAlerts());
-    }
+    // public TextMeshProUGUI alertsText; //VAI PRO UI CONTROLLER
+    /* public void PrintSpawnAlert(string user, string enemyName) // VAI PRO UI CONTROLLER
+     {
+         alertsText.gameObject.SetActive(true);
+         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
+         StartCoroutine(HideAlerts());
+     }
 
-    public void PrintLoginAlert(string user) // VAI PRO UI CONTROLLER
-    {
-        alertsText.gameObject.SetActive(true);
-        alertsText.text += "\n" + user + " se juntou a sua equipe!";
-        StartCoroutine(HideAlerts());
-    }
+     public void PrintLoginAlert(string user) // VAI PRO UI CONTROLLER
+     {
+         alertsText.gameObject.SetActive(true);
+         alertsText.text += "\n" + user + " se juntou a sua equipe!";
+         StartCoroutine(HideAlerts());
+     }
 
-    IEnumerator HideAlerts() // VAI PRO UI CONTROLLER
-    {
-        yield return new WaitForSeconds(5);
-        alertsText.gameObject.SetActive(false);
-    }
+     IEnumerator HideAlerts() // VAI PRO UI CONTROLLER
+     {
+         yield return new WaitForSeconds(5);
+         alertsText.gameObject.SetActive(false);
+     }
 
-
+ */
     #region Waves
     [HideInInspector] public int waveNumber = 1; // Número da wave atual (começa em 1, pois ia dar muita treta chamar a 1ª de 0).
     [HideInInspector] public Enemy[] enemiesInWave; //Inimigos presentes na wave atual para serem spawnados.
@@ -67,7 +67,7 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void StartRunRpc()
     {
-        if(IsHost)
+        if (IsHost)
         {
             runStartedN.Value = true;
             OpenSlotsInWaveRpc();
@@ -110,14 +110,15 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
-        WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
+        // WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
+        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 8f);
         Debug.Log("Slots abertos.");
-        enemiesInWave = new Enemy[(waveNumber-1)*3 + 10];
-        for(int i = 0; i< enemiesInWave.Length; i++)
+        enemiesInWave = new Enemy[(waveNumber - 1) * 3 + 10];
+        for (int i = 0; i < enemiesInWave.Length; i++)
         {
-            if(wavesInfos.waveBaseEnemy.Length >= waveNumber-1)
+            if (wavesInfos.waveBaseEnemy.Length >= waveNumber - 1)
             {
-                if  (wavesInfos.waveBaseEnemy[waveNumber-1] != null) enemiesInWave[i] = wavesInfos.waveBaseEnemy[waveNumber-1];
+                if (wavesInfos.waveBaseEnemy[waveNumber - 1] != null) enemiesInWave[i] = wavesInfos.waveBaseEnemy[waveNumber - 1];
                 else
                 {
                     enemiesInWave[i] = wavesInfos.waveBaseEnemy[^1];
@@ -132,58 +133,60 @@ public class Controller : NetworkBehaviour
         }
         canFillWaveSlots = true;
 
-        StartCoroutine(UpdateWaveFillTimer()); // MUDAR PRO UI CONTROLLER
-        Invoke(nameof(CloseSlotsInWave), 10f); 
+        /// StartCoroutine(UpdateWaveFillTimer()); // MUDAR PRO UI CONTROLLER
+        StartCoroutine(UIController.instance.UpdateWaveFillTimer(10));
+        Invoke(nameof(CloseSlotsInWave), 10f);
+
     }
 
-    public TextMeshProUGUI header; //vai pro ui controller
+    // public TextMeshProUGUI header; //vai pro ui controller
 
-    void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
-    {
-        header.gameObject.SetActive(true);
-        header.text = message;
-        header.color = color;
-        StartCoroutine(CloseHeader(duration));
-    }
+    /* void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
+     {
+         header.gameObject.SetActive(true);
+         header.text = message;
+         header.color = color;
+         StartCoroutine(CloseHeader(duration));
+     }
+     */
+    /* void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
+     {
+         WriteOnHeader(message, Color.white, duration);
+     }
+     IEnumerator CloseHeader(float timer) // vai pro ui controller
+     {
+         yield return new WaitForSeconds(timer);
+         header.gameObject.SetActive(false);
+     }
 
-    void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
-    {
-        WriteOnHeader(message, Color.white, duration);
-    }
-    IEnumerator CloseHeader(float timer) // vai pro ui controller
-    {
-        yield return new WaitForSeconds(timer);
-        header.gameObject.SetActive(false);
-    }
 
-
-    public Image waveFillTimer; // vai pro ui controller
-    IEnumerator UpdateWaveFillTimer() // vai pro ui controller
-    {
-        float timer = 10f;
-        while(timer>0)
-        {
-            timer-=0.1f;
-            waveFillTimer.fillAmount = timer/10f;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
+     public Image waveFillTimer; // vai pro ui controller
+     IEnumerator UpdateWaveFillTimer() // vai pro ui controller
+     {
+         float timer = 10f;
+         while(timer>0)
+         {
+             timer-=0.1f;
+             waveFillTimer.fillAmount = timer/10f;
+             yield return new WaitForSeconds(0.1f);
+         }
+    }*/
 
     int slotsFilled = 0; // Slots preenchidos por viewers.
     public void FillSlotInWave(string user, string enemyType)
     {
         // Função a ser chamada pelo TwitchConnect, recebe o nome de usuário e a mensagem. Se passar na checagem, adiciona a wave.
         // Ao lotar a wave, fecha ela e prepara para começar.
-        if(canFillWaveSlots)
+        if (canFillWaveSlots)
         {
             int enemyRequested = CheckEnemyRequest(enemyType);
-            if(enemyRequested>=0)
+            if (enemyRequested >= 0)
             {
                 enemiesInWave[slotsFilled] = SpawnEnemy(user, enemyRequested);
                 slotsFilled++;
-                if(slotsFilled>enemiesInWave.Length-1) CloseSlotsInWave();
+                if (slotsFilled > enemiesInWave.Length - 1) CloseSlotsInWave();
             }
-            else 
+            else
             {
                 Debug.Log("Inimigo selecionado não identificado.");
             }
@@ -205,20 +208,21 @@ public class Controller : NetworkBehaviour
 
     void CloseSlotsInWave() // Fecha os slots da wave, e prepara para iniciar os inimigos.
     {
-        if(IsHost)
+        if (IsHost)
         {
-            if(canFillWaveSlots)
+            if (canFillWaveSlots)
             {
                 canFillWaveSlots = false;
-                if(slotsFilled<enemiesInWave.Length-1)
+                if (slotsFilled < enemiesInWave.Length - 1)
                 {
-                    for(int i = slotsFilled; i< enemiesInWave.Length; i++)
+                    for (int i = slotsFilled; i < enemiesInWave.Length; i++)
                     {
                         enemiesInWave[i] = SpawnEnemy("AutoFill", enemiesInWave[i].enemyTypeID);
                     }
                 }
                 Invoke(nameof(StartCurrentWave), 5);
-            WriteOnHeader("PEDIDOS FECHADOS!"); // referenciar ui controller
+                // WriteOnHeader("PEDIDOS FECHADOS!"); // referenciar ui controller
+                UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
             }
         }
     }
@@ -226,9 +230,10 @@ public class Controller : NetworkBehaviour
     int enemiesAlive = 0;
     void StartCurrentWave() // Ativa os inimigos 1 a 1, e contabiliza quantos tem.
     {
-        WriteOnHeader("ONDA COMEÇOU!", Color.red, 5); // referenciar ui controller
+        // WriteOnHeader("ONDA COMEÇOU!", Color.red, 5); // referenciar ui controller
+        UIController.instance.WriteOnHeader("ONDA COMEÇOU!", Color.red, 5);
         enemiesAlive = 0;
-        foreach(Enemy e in enemiesInWave)
+        foreach (Enemy e in enemiesInWave)
         {
             e.waveStart = true;
             enemiesAlive++;
@@ -240,12 +245,13 @@ public class Controller : NetworkBehaviour
     {
         enemiesAlive--;
         Debug.Log("Inimigos vivos: " + enemiesAlive);
-        if(enemiesAlive<=0) WaveCleared();
+        if (enemiesAlive <= 0) WaveCleared();
     }
 
     void WaveCleared() // Finaliza a wave e inicia a abertura de slots da próxima. 
     {
-        WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
+        // WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
+        UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
         waveNumber++;
         Invoke(nameof(OpenSlotsInWaveRpc), 10);
     }
@@ -255,21 +261,22 @@ public class Controller : NetworkBehaviour
 
     public GameObject[] enemyPrefabList;
     public Enemy SpawnEnemy(string user, int enemyId)
-    {  
-        Vector2 randomPos= Random.insideUnitCircle.normalized * 30;
+    {
+        Vector2 randomPos = Random.insideUnitCircle.normalized * 30;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         e.name = user + "'s " + e.name;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
         e.GetComponent<Enemy>().SetEnemyNameRpc(user);
-        if(user !=  "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
+        // if (user != "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
+        if (user != "AutoFill") UIController.instance.PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
         return e.GetComponent<Enemy>();
     }
 
     public void OpenVoting()
     {
-        
+
     }
 
     public GameObject deathScreen;
