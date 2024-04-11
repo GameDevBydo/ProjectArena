@@ -29,6 +29,11 @@ public class Controller : NetworkBehaviour
         else Destroy(this.gameObject);
     }
 
+    void Start()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
+    }
+
     public void IsOnline(bool b)
     {
         online = b;
@@ -88,6 +93,18 @@ public class Controller : NetworkBehaviour
     public void PlayAsClient()
     {
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        if(NetworkManager.Singleton.ConnectedClients.Count>= 3)
+        {
+            response.Approved = false;
+        }
+        else
+        {
+            response.Approved = true;
+        }
     }
 
     [HideInInspector]

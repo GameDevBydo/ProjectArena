@@ -9,11 +9,37 @@ public class UIController : MonoBehaviour
     [HideInInspector]
     public static UIController instance;
 
-    public TextMeshProUGUI notifText;
-    private void Start() {
-        Debug.Log("ENTOU NESSE CONDIÇÃO DO UI CONTROLLER");
+    public GameObject[] uiAreas;
+
+    public void ChangeUIArea(int id)
+    {
+        if(uiAreas.Length >= id)
+        {
+            for(int i = 0; i < uiAreas.Length; i++)
+            {
+                if(i==id) uiAreas[i].SetActive(true);
+                else uiAreas[i].SetActive(false);
+            }
+        }
     }
 
+    public GameObject player2LifeBar, player3LifeBar;
+
+    public void ActivatePlayer2LifeBar()
+    {
+        player2LifeBar.SetActive(true);
+    }
+
+    public void ActivatePlayer3LifeBar()
+    {
+        player3LifeBar.SetActive(true);
+    }
+
+    public TextMeshProUGUI notifText;
+
+
+
+    
     void Awake()
     {
         if(instance == null) instance = this;
@@ -63,21 +89,21 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(timer);
         alertsText.gameObject.SetActive(false);
     }
-    public void PrintSpawnAlert(string user, string enemyName) // VAI PRO UI CONTROLLER
+    public void PrintSpawnAlert(string user, string enemyName)
     {
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
         StartCoroutine(HideAlerts());
     }
 
-    public void PrintLoginAlert(string user) // VAI PRO UI CONTROLLER
+    public void PrintLoginAlert(string user)
     {
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " se juntou a sua equipe!";
         StartCoroutine(HideAlerts());
     }
 
-    IEnumerator HideAlerts() // VAI PRO UI CONTROLLER
+    IEnumerator HideAlerts()
     {
         yield return new WaitForSeconds(5);
         alertsText.gameObject.SetActive(false);
@@ -95,9 +121,9 @@ public class UIController : MonoBehaviour
         }
     }
     
-     public TextMeshProUGUI header; //vai pro ui controller
+     public TextMeshProUGUI header;
 
-   public void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
+   public void WriteOnHeader(string message, Color color, float duration = 3.0f)
     {
         header.gameObject.SetActive(true);
         header.text = message;
@@ -105,11 +131,11 @@ public class UIController : MonoBehaviour
         StartCoroutine(CloseHeader(duration));
     }
 
-   public void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
+   public void WriteOnHeader(string message, float duration = 3.0f)
     {
         WriteOnHeader(message, Color.white, duration);
     }
-    IEnumerator CloseHeader(float timer) // vai pro ui controller
+    IEnumerator CloseHeader(float timer) 
     {
         yield return new WaitForSeconds(timer);
         header.gameObject.SetActive(false);
