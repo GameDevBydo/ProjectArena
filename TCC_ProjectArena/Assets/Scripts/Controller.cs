@@ -104,6 +104,7 @@ public class Controller : NetworkBehaviour
         else
         {
             response.Approved = true;
+            response.CreatePlayerObject = true;
         }
     }
 
@@ -127,10 +128,11 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
+        slotsFilled = 0;
         // WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
         UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 8f);
         Debug.Log("Slots abertos.");
-        enemiesInWave = new Enemy[(waveNumber - 1) * 3 + 10];
+        enemiesInWave = new Enemy[(waveNumber - 1) * 5 + 10];
         for (int i = 0; i < enemiesInWave.Length; i++)
         {
             if (wavesInfos.waveBaseEnemy.Length >= waveNumber - 1)
