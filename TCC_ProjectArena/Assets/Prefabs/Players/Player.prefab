@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4204593045
+  GlobalObjectIdHash: 2804575534
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -364,7 +364,12 @@ MonoBehaviour:
   swordObj: {fileID: 940452098798999847}
   canAttack: 1
   attacking: 0
-  projectileSpawn: {fileID: 1421897558869592996}
+  projectileSpawn:
+  - {fileID: 1421897558869592996}
+  bombSpawn: {fileID: 9107763405008020755}
+  projectile: {fileID: 6541130734943485662, guid: 1137e705023cfb546a46594a8844487c,
+    type: 3}
+  bomb: {fileID: 6541130734943485662, guid: b8c8d765298038f4abfeda0cf61c8f38, type: 3}
   life:
     m_InternalValue: 100
   maxlife: 100
@@ -812,6 +817,37 @@ Transform:
   - {fileID: 3865046883313027561}
   m_Father: {fileID: 2386244372060874010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2271012635235827320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9107763405008020755}
+  m_Layer: 7
+  m_Name: BombSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9107763405008020755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2271012635235827320}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.25881913, y: -0, z: -0, w: 0.9659259}
+  m_LocalPosition: {x: 0, y: 0.97, z: 0.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963110492947368587}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!1 &2312626535657180410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421897558869592996}
   m_Layer: 7
-  m_Name: ProjectileSpawn
+  m_Name: ProjectileSpawnRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16575,6 +16611,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 908712808243041664}
+  - {fileID: 9107763405008020755}
   m_Father: {fileID: 2091276174875956109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5514648249311347743

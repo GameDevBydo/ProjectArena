@@ -13,5 +13,9 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(col.tag == "Ground")
+        {
+            //transform.GetComponent<Collider>().enabled = false;
+        }
     }
 }

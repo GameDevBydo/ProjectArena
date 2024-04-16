@@ -57,10 +57,15 @@ public class Player : NetworkBehaviour
         {
             if (main.runStartedN.Value && life.Value>0.0f)
             {
-                if (!attacking) Movement();
+                /*if (!attacking) */GroundedMovement();
+                VerticalMovement();
                 CamMovement();
                 if (Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
                 if (Input.GetKeyDown(KeyCode.Mouse1)) HeavyAttack();
+
+
+                //Cheats
+                if(Input.GetKeyDown(KeyCode.F1)) RemoveLife(-100);
             }
         }
     }
@@ -73,21 +78,25 @@ public class Player : NetworkBehaviour
     public float movSpeed, jumpStrength, gravityValue = -9.81f;
     public int extraJumps;
     public ParticleSystem jumpPS;
-    void Movement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController PULO NÃO TA FUNCIONANDO PQ O FEET TÁ ASSINALADO ERRADO
+    void GroundedMovement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController PULO NÃO TA FUNCIONANDO PQ O FEET TÁ ASSINALADO ERRADO
     {
-        isGrounded = Physics.Raycast(transform.GetChild(0).transform.position, Vector3.down, 0.2f);
-        if (isGrounded)
-        {
-            extraJumps = 5;
-            playerVelocity.y -= 1 * Time.deltaTime;
-        }
-
         float xDir = Input.GetAxis("Horizontal");
         float zDir = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * xDir + transform.forward * zDir;
 
         controller.Move(move * Time.deltaTime * movSpeed);
+    }
+
+    void VerticalMovement()
+    {
+        isGrounded = Physics.Raycast(transform.GetChild(0).transform.position, Vector3.down, 0.2f);
+        if (isGrounded)
+        {
+            extraJumps = 0;
+            playerVelocity.y -= 1 * Time.deltaTime;
+        }
+
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -200,6 +209,7 @@ public class Player : NetworkBehaviour
             {
                 characterID.Greatsword => "swordH1",
                 characterID.Boxer => "boxerH1",
+                characterID.RustRobot => "robotH1",
                 _ => null
             };
             CallAnimation(attackName);
@@ -219,10 +229,20 @@ public class Player : NetworkBehaviour
         canAttack = true;
     }
 
-    public Transform projectileSpawn;
-    public void SpawnProjectile(GameObject projectile)
+    public Transform[] projectileSpawn;
+    public Transform bombSpawn;
+    public GameObject projectile, bomb;
+    public void SpawnRegularProjectile(int spawnID)
     {
-        GameObject e = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation).gameObject;
+        GameObject e = Instantiate(projectile, projectileSpawn[spawnID].position, projectileSpawn[spawnID].rotation).gameObject;
+        NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
+        eNetworkObject.Spawn();
+        e.GetComponent<Rigidbody>().AddForce(e.transform.forward * 10, ForceMode.Impulse);
+    }
+
+    public void SpawnBombProjectile()
+    {
+        GameObject e = Instantiate(bomb, bombSpawn.position, bombSpawn.rotation).gameObject;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
         e.GetComponent<Rigidbody>().AddForce(e.transform.forward * 10, ForceMode.Impulse);
@@ -239,8 +259,9 @@ public class Player : NetworkBehaviour
     }
     public void RemoveLife(float val)
     {
-        if (life.Value > 0) life.Value -= val;
-        else PlayerDead();
+        life.Value -= val;
+        Math.Clamp(life.Value, 0, maxlife);
+        if (life.Value <= 0) PlayerDead();
         Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
     }
     private void OnLifeChanged(float previousValue, float newValue)
