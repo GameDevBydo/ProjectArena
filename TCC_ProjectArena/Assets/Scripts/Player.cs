@@ -238,7 +238,6 @@ public class Player : NetworkBehaviour
         GameObject e = Instantiate(projectile, projectileSpawn[spawnID].position, projectileSpawn[spawnID].rotation).gameObject;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
-        e.GetComponent<Rigidbody>().AddForce(e.transform.forward * 10, ForceMode.Impulse);
     }
 
     public void SpawnBombProjectile()
@@ -246,7 +245,6 @@ public class Player : NetworkBehaviour
         GameObject e = Instantiate(bomb, bombSpawn.position, bombSpawn.rotation).gameObject;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
-        e.GetComponent<Rigidbody>().AddForce(e.transform.forward * 10, ForceMode.Impulse);
     }
 
 
