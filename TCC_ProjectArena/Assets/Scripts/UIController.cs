@@ -141,4 +141,31 @@ public class UIController : MonoBehaviour
         header.gameObject.SetActive(false);
     }
 
+
+
+    #region User Names and Icons
+
+    public Sprite[] classSprites;
+    public Image classIcon;
+    public TextMeshProUGUI playerNick;
+    
+
+    public void ChangeClassIcon(int id)
+    {
+        classIcon.sprite = classSprites[id];
+    }
+
+    public void SetPlayerName(string nick)
+    {
+        Player.instance.playerName = nick;
+        ChangeNameText();
+    }
+
+    public void ChangeNameText()
+    {
+        playerNick.text = Player.instance.playerName;
+    }
+
+    #endregion
+
 }

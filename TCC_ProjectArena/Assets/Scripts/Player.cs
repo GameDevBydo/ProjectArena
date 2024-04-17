@@ -173,6 +173,7 @@ public class Player : NetworkBehaviour
         {
             Debug.Log("Não existe personagem com esse valor.");
         }
+        UIController.instance.ChangeClassIcon(modelID);
     }
 
     #endregion
