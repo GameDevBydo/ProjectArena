@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4204593045
+  GlobalObjectIdHash: 3877628172
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -371,8 +371,8 @@ MonoBehaviour:
     type: 3}
   bomb: {fileID: 6541130734943485662, guid: b8c8d765298038f4abfeda0cf61c8f38, type: 3}
   life:
-    m_InternalValue: 100
-  maxlife: 100
+    m_InternalValue: 200
+  maxlife: 200
 --- !u!143 &2391203768840219746
 CharacterController:
   m_ObjectHideFlags: 0

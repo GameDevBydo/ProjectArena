@@ -168,7 +168,7 @@ public class Enemy : NetworkBehaviour
     bool inRange = false, readyAttack = false;
     void CheckPlayerDistance()
     {
-        inRange = Vector3.Distance(player.position, transform.position) <= 3;
+        inRange = Vector3.Distance(player.position, transform.position) <= 1.5f;
         if (inRange)
         {
             readyAttack = true;
