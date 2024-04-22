@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 8732365769370679252}
   - component: {fileID: -881744000081732904}
   - component: {fileID: 2206471201314828818}
+  - component: {fileID: 9160560042742896362}
   m_Layer: 0
   m_Name: BigBot
   m_TagString: Enemy
@@ -213,6 +214,7 @@ MonoBehaviour:
     m_InternalValue: 0
   hitPoints: 0
   waveStart: 0
+  activegGavity: 1
   lifeBar: {fileID: 653080386265959741}
   animator: {fileID: -881744000081732904}
   canAttack: 1
@@ -283,6 +285,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: -881744000081732904}
+--- !u!114 &9160560042742896362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421303986768206655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef5599810a67ab4f8d92d2c7a5e3cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackStrength: 10
+  knockbackDuration: 0.5
+  jumpSize: 0.5
 --- !u!1 &638644510128042755
 GameObject:
   m_ObjectHideFlags: 0

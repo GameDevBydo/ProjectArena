@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 4662941268795833526}
   - component: {fileID: 4603715733841774685}
   - component: {fileID: -7346983349326242971}
+  - component: {fileID: -1943217943169666226}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Enemy
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1176680779
+  GlobalObjectIdHash: 817536255
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -284,6 +285,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 4603715733841774685}
+--- !u!114 &-1943217943169666226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421303986768206655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef5599810a67ab4f8d92d2c7a5e3cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackStrength: 10
+  knockbackDuration: 0.5
+  jumpSize: 0.5
 --- !u!1 &1324545210933508379
 GameObject:
   m_ObjectHideFlags: 0

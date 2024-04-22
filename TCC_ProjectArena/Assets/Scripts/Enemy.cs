@@ -13,6 +13,7 @@ public class Enemy : NetworkBehaviour
     Transform player;
     NetworkVariable<bool> hitN = new();
     CharacterController controller;
+    Knockback knockback;
     public float speed;
 
     public float maxHitPoints;
@@ -45,6 +46,7 @@ public class Enemy : NetworkBehaviour
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        knockback = gameObject.GetComponent<Knockback>();
     }
 
     NetworkVariable<float> locateTimer = new(0);
@@ -134,6 +136,7 @@ public class Enemy : NetworkBehaviour
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
                         TakeDamage(30);
+                        knockback.SetKnockback(collider.transform.root.forward);
                     }
                 }
             }

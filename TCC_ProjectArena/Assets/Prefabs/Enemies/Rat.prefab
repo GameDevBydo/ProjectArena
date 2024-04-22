@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8820344562755365171}
   - component: {fileID: 6178169333952576197}
   - component: {fileID: 7752295117167501273}
+  - component: {fileID: 4409018693353747283}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Enemy
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2627316238
+  GlobalObjectIdHash: 1105633159
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -359,6 +360,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 6178169333952576197}
+--- !u!114 &4409018693353747283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421303986768206655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef5599810a67ab4f8d92d2c7a5e3cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackStrength: 10
+  knockbackDuration: 0.5
+  jumpSize: 0.5
 --- !u!1 &1011101060527582694
 GameObject:
   m_ObjectHideFlags: 0
