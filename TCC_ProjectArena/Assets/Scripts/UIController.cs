@@ -23,17 +23,17 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public GameObject player2LifeBar, player3LifeBar;
+    //public GameObject player2LifeBar, player3LifeBar;
 
-    public void ActivatePlayer2LifeBar()
-    {
-        player2LifeBar.SetActive(true);
-    }
-
-    public void ActivatePlayer3LifeBar()
-    {
-        player3LifeBar.SetActive(true);
-    }
+    //public void ActivatePlayer2LifeBar()
+    //{
+    //    player2LifeBar.SetActive(true);
+    //}
+//
+    //public void ActivatePlayer3LifeBar()
+    //{
+    //    player3LifeBar.SetActive(true);
+    //}
 
     public TextMeshProUGUI notifText;
 
@@ -145,14 +145,15 @@ public class UIController : MonoBehaviour
 
     #region User Names and Icons
 
-    public Sprite[] classSprites;
-    public Image classIcon;
+    public Sprite[] classSprites, classUltIconSprites;
+    public Image classIcon, classUltIcon, classUltLoad;
     public TextMeshProUGUI playerNick;
     
 
-    public void ChangeClassIcon(int id)
+    public void ChangeClassIcons(int id)
     {
         classIcon.sprite = classSprites[id];
+        classUltIcon.sprite = classUltIconSprites[id];
     }
 
     public void SetPlayerName(string nick)
@@ -164,6 +165,23 @@ public class UIController : MonoBehaviour
     public void ChangeNameText()
     {
         playerNick.text = Player.instance.playerName;
+    }
+
+    Color loadColor = new Vector4(0.6f, 0.6f, 0.6f, 0.5f);
+
+    public void ChangeUltLoad(int value)
+    {
+        classUltLoad.fillAmount = value/100.0f;
+        if(value == 100)
+        {
+            classUltIcon.gameObject.SetActive(true);
+            classUltLoad.color = Color.white;
+        }
+        else
+        {
+            classUltIcon.gameObject.SetActive(false);
+            classUltLoad.color = loadColor;
+        }
     }
 
     #endregion

@@ -77,6 +77,7 @@ public class Controller : NetworkBehaviour
             runStartedN.Value = true;
             OpenSlotsInWaveRpc();
         }
+        UIController.instance.ChangeUIArea(2);
         Cursor.lockState = CursorLockMode.Locked;
     }
 

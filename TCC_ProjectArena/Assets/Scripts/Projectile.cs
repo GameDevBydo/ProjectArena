@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour
 {
     public bool isBomb = false;
 
+    public string ownerName;
+
     void Start()
     {
         float power;

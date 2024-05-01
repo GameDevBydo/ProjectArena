@@ -66,6 +66,7 @@ public class Player : NetworkBehaviour
 
                 //Cheats
                 if(Input.GetKeyDown(KeyCode.F1)) RemoveLife(-100);
+                if(Input.GetKeyDown(KeyCode.F2)) ChangeUltLoad(10);
             }
         }
     }
@@ -94,9 +95,12 @@ public class Player : NetworkBehaviour
         if (isGrounded)
         {
             extraJumps = 0;
-            playerVelocity.y -= 1 * Time.deltaTime;
+            playerVelocity.y = 0;
         }
-
+        else
+        {
+            playerVelocity.y += gravityValue * Time.deltaTime;
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -113,7 +117,6 @@ public class Player : NetworkBehaviour
             }
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
         Mathf.Clamp(playerVelocity.y, -9.81f, 1000);
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -173,7 +176,7 @@ public class Player : NetworkBehaviour
         {
             Debug.Log("Não existe personagem com esse valor.");
         }
-        UIController.instance.ChangeClassIcon(modelID);
+        UIController.instance.ChangeClassIcons(modelID);
     }
 
     #endregion
@@ -185,6 +188,8 @@ public class Player : NetworkBehaviour
 
     public GameObject sword, swordObj;
     public bool canAttack = true, attacking = false;
+
+    public int ultLoad = 0;
 
     public void LightAttack()
     {
@@ -246,6 +251,13 @@ public class Player : NetworkBehaviour
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
     }
+
+    public void ChangeUltLoad(int value)
+    {
+        ultLoad = Math.Clamp(ultLoad+value, 0, 100);
+        UIController.instance.ChangeUltLoad(ultLoad);
+    }
+
 
 
     [Header("Life")]

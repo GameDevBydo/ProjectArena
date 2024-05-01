@@ -364,6 +364,7 @@ MonoBehaviour:
   swordObj: {fileID: 940452098798999847}
   canAttack: 1
   attacking: 0
+  ultLoad: 0
   projectileSpawn:
   - {fileID: 1421897558869592996}
   bombSpawn: {fileID: 9107763405008020755}
@@ -810,7 +811,7 @@ Transform:
   m_GameObject: {fileID: 2189541420428773370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.637, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -875,13 +876,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2312626535657180410}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09011114, y: 0, z: 0, w: 0.99593174}
-  m_LocalPosition: {x: 0, y: 1.77, z: -5.14}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9021661567807171736}
-  m_LocalEulerAnglesHint: {x: 10.34, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8696160367842143988
 Camera:
   m_ObjectHideFlags: 0
