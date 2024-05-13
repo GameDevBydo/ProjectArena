@@ -78,7 +78,8 @@ public class Controller : NetworkBehaviour
             OpenSlotsInWaveRpc();
         }
         UIController.instance.ChangeUIArea(2);
-        Cursor.lockState = CursorLockMode.Locked;
+        if (deathScreen.activeSelf== false) Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     public void StartServer()
@@ -303,6 +304,7 @@ public class Controller : NetworkBehaviour
     public void OpenDeathScreen()
     {
         deathScreen.SetActive(true);
+
     }
 
 

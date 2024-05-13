@@ -284,12 +284,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypeID: 2
   speed: 5
+  masxSpeed: 5
   maxHitPoints: 50
   hitPointsN:
     m_InternalValue: 0
   hitPoints: 0
   waveStart: 0
   activegGavity: 1
+  currentSpeed: 0
   lifeBar: {fileID: 1267523063381822525}
   animator: {fileID: 6178169333952576197}
   canAttack: 1

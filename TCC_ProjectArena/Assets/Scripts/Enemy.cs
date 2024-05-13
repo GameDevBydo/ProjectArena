@@ -15,6 +15,7 @@ public class Enemy : NetworkBehaviour
     CharacterController controller;
     Knockback knockback;
     public float speed;
+    public float masxSpeed;
 
     public float maxHitPoints;
 
@@ -23,6 +24,7 @@ public class Enemy : NetworkBehaviour
 
     public bool waveStart = false;
     public bool activegGavity = true;
+    public bool currentSpeed = true;
 
     Controller main;
 
@@ -90,6 +92,7 @@ public class Enemy : NetworkBehaviour
                 LightAttack();
             }
         }
+        if(currentSpeed) AddSpeedCurrent();
     }
 
     [Rpc(SendTo.Everyone)]
@@ -133,10 +136,14 @@ public class Enemy : NetworkBehaviour
                 {
                     if (!hitN.Value)
                     {
+                        SetSpeed(0);
+                        StartCoroutine(ActiveSpeedCurrent(false,0));
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
                         TakeDamage(30);
                         knockback.SetKnockback(collider.transform.root.forward);
+                        StartCoroutine(ActiveSpeedCurrent(true, 1));
+
                     }
                 }
             }
@@ -203,5 +210,18 @@ public class Enemy : NetworkBehaviour
         attacking = false;
         canAttack = true;
         Debug.Log("Parei de atacar");
+    }
+    public void SetSpeed(float val)
+    {
+        speed= val;
+    }
+    public void AddSpeedCurrent()
+    {
+        if (speed < masxSpeed) speed += Time.deltaTime;
+    }
+    public IEnumerator ActiveSpeedCurrent(bool active,float time)
+    {
+        yield return new WaitForSeconds(time);
+        currentSpeed = active;
     }
 }
