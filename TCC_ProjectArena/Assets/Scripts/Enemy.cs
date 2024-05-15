@@ -5,17 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
 using System;
+using Unity.VisualScripting;
 
 public class Enemy : NetworkBehaviour
 {
 
-    public int enemyTypeID;
+    public int enemyTypeID; // Bot = 0, Bigbot = 1, Rat = 2, KamiCart = 3
     Transform player;
     NetworkVariable<bool> hitN = new();
     CharacterController controller;
     Knockback knockback;
     public float speed;
-    public float masxSpeed;
+    public float maxSpeed;
 
     public float maxHitPoints;
 
@@ -24,7 +25,7 @@ public class Enemy : NetworkBehaviour
 
     public bool waveStart = false;
     public bool activegGavity = true;
-    public bool currentSpeed = true;
+    public bool regainSpeed = true;
 
     Controller main;
 
@@ -84,21 +85,35 @@ public class Enemy : NetworkBehaviour
             if (waveStart)
             {
                 CheckPlayerDistance();
-              if(activegGavity) Gravity();
+                if(activegGavity) Gravity();
                 if (!inRange) Movement();
+                if(regainSpeed) RegainSpeed();
             }
             if (readyAttack)
             {
-                LightAttack();
+                switch(enemyTypeID)
+                {
+                    case 0:
+                    case 1:
+                    case 2: 
+                        LightAttack();
+                    break;
+                    case 3:
+                        ExplosionAttack();
+                    break;
+                    default:
+                        Debug.Log("Sem animação de combate.");
+                    break;
+                }
             }
         }
-        if(currentSpeed) AddSpeedCurrent();
     }
 
+    public TextMeshProUGUI enemyNameText; // BERNARDO BOTA ESSA VARIAVEL DO NOME PRA CADA UM DOS INIMIGOS PREFABS
     [Rpc(SendTo.Everyone)]
     public void SetEnemyNameRpc(string username)
     {
-        transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = username;
+        enemyNameText.text = username;
     }
 
 
@@ -132,18 +147,16 @@ public class Enemy : NetworkBehaviour
         {
             if (waveStart)
             {
-                if (collider.CompareTag("Blade") || collider.CompareTag("LeftGlove") || collider.CompareTag("RustScrap"))
+                if(collider.CompareTag("PlayerHitbox"))
                 {
-                    if (!hitN.Value)
+                    if(!hitN.Value)
                     {
-                        SetSpeed(0);
-                        StartCoroutine(ActiveSpeedCurrent(false,0));
+                        speed = 0;
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
                         TakeDamage(30);
-                        knockback.SetKnockback(collider.transform.root.forward);
-                        StartCoroutine(ActiveSpeedCurrent(true, 1));
-
+                        knockback.SetKnockback(-transform.forward);
+                        regainSpeed = true;
                     }
                 }
             }
@@ -198,6 +211,20 @@ public class Enemy : NetworkBehaviour
             CallAnimation("hitEnemy");
         }
     }
+    public void ExplosionAttack()
+    {
+        if (canAttack)
+        {
+            CallAnimation("explodeSelf");
+        }
+    }
+
+    public GameObject explosion;
+    public void a_SpawnExplosion()
+    {
+        Instantiate(explosion, transform.position, explosion.transform.rotation);
+        TakeDamage(999);
+    }
     public void CallAnimation(string stateName)
     {
         canAttack = false;
@@ -211,17 +238,13 @@ public class Enemy : NetworkBehaviour
         canAttack = true;
         Debug.Log("Parei de atacar");
     }
-    public void SetSpeed(float val)
+    public void RegainSpeed()
     {
-        speed= val;
-    }
-    public void AddSpeedCurrent()
-    {
-        if (speed < masxSpeed) speed += Time.deltaTime;
-    }
-    public IEnumerator ActiveSpeedCurrent(bool active,float time)
-    {
-        yield return new WaitForSeconds(time);
-        currentSpeed = active;
+        if(speed<maxSpeed) 
+        {
+            speed = Mathf.Clamp(speed+Time.deltaTime*2, 0, maxSpeed);
+            Debug.Log(speed);
+        }
+        else regainSpeed = false;
     }
 }

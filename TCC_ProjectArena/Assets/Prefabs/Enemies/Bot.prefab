@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 817536255
+  GlobalObjectIdHash: 1176680779
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -208,19 +208,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypeID: 0
-  speed: 3
-  masxSpeed: 3
+  speed: 4
+  maxSpeed: 4
   maxHitPoints: 100
   hitPointsN:
     m_InternalValue: 0
   hitPoints: 0
   waveStart: 0
   activegGavity: 1
-  currentSpeed: 0
+  regainSpeed: 1
+  enemyNameText: {fileID: 5484971731705505866}
   lifeBar: {fileID: 8316451032802685652}
   animator: {fileID: 4603715733841774685}
   canAttack: 1
   attacking: 0
+  explosion: {fileID: 0}
 --- !u!114 &4662941268795833526
 MonoBehaviour:
   m_ObjectHideFlags: 0

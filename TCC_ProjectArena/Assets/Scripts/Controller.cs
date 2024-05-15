@@ -222,6 +222,7 @@ public class Controller : NetworkBehaviour
             "bot" => 0,
             "bigbot" => 1,
             "rat" => 2,
+            "cart" => 3,
             _ => -1,
         };
         return enemyId;
@@ -283,7 +284,7 @@ public class Controller : NetworkBehaviour
     public GameObject[] enemyPrefabList;
     public Enemy SpawnEnemy(string user, int enemyId)
     {
-        Vector2 randomPos = Random.insideUnitCircle.normalized * 30;
+        Vector2 randomPos = Random.insideUnitCircle.normalized * 48;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         e.name = user + "'s " + e.name;
@@ -295,9 +296,54 @@ public class Controller : NetworkBehaviour
         return e.GetComponent<Enemy>();
     }
 
+    public List<string> votingName, votingValue;
+    bool canVote;
+    int votingWinner = 0;
     public void OpenVoting()
     {
+        votingName = new List<string>();
+        votingValue = new List<string>();
+        canVote = true;
+    }
 
+    public void ChatterVote(string name, string vote)
+    {
+        if(canVote)
+        {
+            if(!votingName.Contains(name))
+            {
+                votingName.Add(name);
+                votingValue.Add(vote);
+            }
+        }
+    }
+
+    void CloseVoting()
+    {
+        canVote = false;
+        Invoke("CountVotes", 0);
+    }
+
+    void CountVotes()
+    {
+        votingWinner = 0;
+        int vote1 = 0, vote2 = 0;
+        foreach(string v in votingValue)
+        {
+            if(v == "1")
+            {
+                vote1++;
+            }
+            else if(v == "2")
+            {
+                vote2++;
+            }
+        }
+        if(vote1!=vote2)
+        {
+            if(vote1>vote2) votingWinner = 1;
+            else if(vote2>vote1) votingWinner = 2;
+        }
     }
 
     public GameObject deathScreen;

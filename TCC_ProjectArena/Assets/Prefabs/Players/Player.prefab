@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1409814333859563313}
   m_Layer: 7
   m_Name: Sword
-  m_TagString: Blade
+  m_TagString: PlayerHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 6484954092227665165}
   m_Layer: 7
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: PlayerHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 963301997675145198}
   m_Layer: 7
   m_Name: Left
-  m_TagString: LeftGlove
+  m_TagString: PlayerHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

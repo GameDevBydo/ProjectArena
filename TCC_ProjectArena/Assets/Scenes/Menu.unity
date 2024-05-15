@@ -1767,6 +1767,16 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Avisos:'
       objectReference: {fileID: 0}
+    - target: {fileID: 731967158498253649, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemyPrefabList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: enemyPrefabList.Array.data[1]
@@ -1778,6 +1788,12 @@ PrefabInstance:
       propertyPath: enemyPrefabList.Array.data[2]
       value: 
       objectReference: {fileID: 421303986768206655, guid: 386be9a4fc4c6614fa5fe83d5e3a0dc6,
+        type: 3}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemyPrefabList.Array.data[3]
+      value: 
+      objectReference: {fileID: 421303986768206655, guid: abf704ac1e8fc924da33ecf87c484724,
         type: 3}
     - target: {fileID: 907384796538104643, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}

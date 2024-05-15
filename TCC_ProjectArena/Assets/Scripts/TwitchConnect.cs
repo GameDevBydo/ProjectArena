@@ -95,7 +95,8 @@ public class TwitchConnect : MonoBehaviour
 
                 if(chatMessage.Length > 4 && chatMessage[..4].ToLower() == "vote")
                 {
-                    // register 1 or 2 and name, to not overfill
+                    string votingValue = chatMessage.Replace(" ", "")[4..].ToLower();
+                    if(votingValue == "1" || votingValue == "2") main.ChatterVote(chatName, votingValue);
                 }
             }
         }

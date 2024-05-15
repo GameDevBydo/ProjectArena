@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7781787129132575883}
   m_Layer: 0
   m_Name: MetalScrap
-  m_TagString: RustScrap
+  m_TagString: PlayerHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2270570693
+  GlobalObjectIdHash: 1747319131
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -235,3 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626772e8fa4be89429f975b28b5c2857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBomb: 0
+  ownerName: 
+  explosionEmpty: {fileID: 0}
