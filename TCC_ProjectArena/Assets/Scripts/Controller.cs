@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using System.Data;
 
 
@@ -19,6 +27,9 @@ public class Controller : NetworkBehaviour
     [HideInInspector]
     public bool online = false;
 
+    [HideInInspector]
+    public string playerTempName;
+
     void Awake()
     {
         if (instance == null)
@@ -29,9 +40,26 @@ public class Controller : NetworkBehaviour
         else Destroy(this.gameObject);
     }
 
-    void Start()
+    private async void Start()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
+        instance = this;
+
+        await UnityServices.InitializeAsync();
+
+        AuthenticationService.Instance.SignedIn += () =>
+        {
+            Debug.Log("Conectado como: " + AuthenticationService.Instance.PlayerId);
+        };
+
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        string nomePlayer = "Fulaninho" + Random.Range(1, 100);
+    }
+
+    void Update()
+    {
+        ManterLobbyAtivo();
     }
 
     public void IsOnline(bool b)
@@ -126,6 +154,183 @@ public class Controller : NetworkBehaviour
         UnityTransport transport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
         transport.ConnectionData.Address = ipAddress;
     }
+
+    #region Connection and Lobby
+    private Lobby hostLobby;
+    private Lobby joinedLobby;
+    private float temporizadorAtivacaoLobby;
+
+    private async void ManterLobbyAtivo()
+    {
+        if(hostLobby != null)
+        {
+            temporizadorAtivacaoLobby -= Time.deltaTime;
+
+            if(temporizadorAtivacaoLobby < 0f)
+            {
+                temporizadorAtivacaoLobby = 15f;
+
+                await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+            }
+        }
+    }
+
+    public async void CriaLobby(string lobbyName, bool isPrivate)
+    {
+        try
+        {
+            string playerName = playerTempName;
+
+            CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
+            {
+                IsPrivate = isPrivate,
+                Player = new Unity.Services.Lobbies.Models.Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName)},
+                    }
+                },
+                Data = new Dictionary<string, DataObject>
+                {
+                   {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "default",
+                   DataObject.IndexOptions.S1)},
+                }
+            };
+
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 3, createLobbyOptions);
+     
+            hostLobby = lobby;
+
+            Lobby newLobby = await LobbyService.Instance.UpdateLobbyAsync(
+                lobby.Id,
+                new UpdateLobbyOptions
+                {
+                    Data = new Dictionary<string, DataObject>
+                    {
+                        {"LobbyCode", new DataObject(DataObject.VisibilityOptions.Public, lobby.LobbyCode)}
+                    }
+                });
+                    
+            Debug.Log($"O lobby {lobby.Name} foi criado por {playerName}\t" +
+                $"Número de players: {lobby.Players.Count + "/" + lobby.MaxPlayers}\tID: {lobby.Id}\tToken: {lobby.LobbyCode}\tPrivate? {lobby.IsPrivate}");
+        
+        }catch(LobbyServiceException e)
+        {
+            Debug.Log(e.Message);
+        }
+
+    }
+
+    public async void JoinLobbyByCode(string lobbyCode)
+    {
+        try
+        {
+            string playerName = playerTempName;
+            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
+            {
+                Player = new Unity.Services.Lobbies.Models.Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName)}
+                    }
+                }
+            };
+
+            Debug.Log($"Entrando no lobby {lobbyCode}");
+            Lobby joinedLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
+
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e.Message);
+        }
+    }
+
+    public async void QuickJoinLobby()
+    {
+        try
+        {
+            string playerName = playerTempName;
+            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
+            {
+                Player = new Unity.Services.Lobbies.Models.Player
+                {
+                    Data = new Dictionary<string, PlayerDataObject>
+                    {
+                        {"PlayerName", 
+                            new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName)}
+                    }
+                }
+            };
+
+            Lobby joinedLobby = await Lobbies.Instance.QuickJoinLobbyAsync();
+
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e.Message);
+        }
+    }
+
+    private async void CriaRelay(int numberOfConnections)
+    {
+        try
+        {
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(numberOfConnections);
+            string joinCodeRelay = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+
+            Debug.Log($"Criei uma nova alocaço de relay com o código: {joinCodeRelay}");
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    private async void JoinRelay(string joinCodeRelay)
+    {
+        try
+        {
+            Debug.Log($"Entrando na alocação de relay com o código: {joinCodeRelay}");
+            await RelayService.Instance.JoinAllocationAsync(joinCodeRelay);
+
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    public async Task<string> StartHostWithRelay(int maxConnections = 5)
+    {
+        await UnityServices.InitializeAsync();
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
+        var joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+        return NetworkManager.Singleton.StartHost() ? joinCode : null;
+    }
+
+    public async Task<bool> StartClientWithRelay(string joinCode)
+    {
+        await UnityServices.InitializeAsync();
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+
+        var joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode: joinCode);
+        // Tipo da Conexão: DTLS --> Conexão Segura
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
+        return !string.IsNullOrEmpty(joinCode) && NetworkManager.Singleton.StartClient();
+    }
+
+    #endregion
 
     [Rpc(SendTo.Everyone)]
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.

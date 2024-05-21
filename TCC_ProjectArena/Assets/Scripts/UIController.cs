@@ -158,13 +158,13 @@ public class UIController : MonoBehaviour
 
     public void SetPlayerName(string nick)
     {
-        Player.instance.playerName = nick;
+        Controller.instance.playerTempName = nick;
         ChangeNameText();
     }
 
     public void ChangeNameText()
     {
-        playerNick.text = Player.instance.playerName;
+        playerNick.text = Controller.instance.playerTempName;
     }
 
     Color loadColor = new Vector4(0.6f, 0.6f, 0.6f, 0.5f);
@@ -183,6 +183,35 @@ public class UIController : MonoBehaviour
             classUltLoad.color = loadColor;
         }
     }
+
+    #endregion
+
+    #region Connections and Lobby
+
+    [Header("Lobby")]
+    public TMP_InputField lobbyCreateNameInput, lobbyJoinCodeInput;
+    public Toggle lobbyCreateIsPrivateToggle;
+
+    public void CreateLobbyButton()
+    {
+        string lobbyName = lobbyCreateNameInput.text;
+        bool isPrivate = lobbyCreateIsPrivateToggle.isOn;
+
+        Controller.instance.CriaLobby(lobbyName, isPrivate);
+    }
+
+    public void JoinLobbyByCodeButton()
+    {
+        string lobbyCode = lobbyJoinCodeInput.text;
+        TesteConexao.instance.JoinLobbyByCode(lobbyCode);
+    }
+
+    public void QuickJoinLobbyButton()
+    {
+        TesteConexao.instance.QuickJoinLobby();
+    }
+
+
 
     #endregion
 
