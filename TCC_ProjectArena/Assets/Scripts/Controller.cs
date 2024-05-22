@@ -115,9 +115,16 @@ public class Controller : NetworkBehaviour
         NetworkManager.Singleton.StartServer();
     }
 
-    public void PlayAsHost()
-    {
-        NetworkManager.Singleton.StartHost();
+    string relayNumber;
+    public async void PlayAsHost()
+    {   
+        CriaLobby(false); // Botando que não é private , MUDA DEPOIS
+        await StartHostWithRelay();
+        if(relayNumber != null)
+        {
+            UIController.instance.SetLobbyCode(relayNumber);
+            LoadScene(1);
+        }
     }
 
     public void PlayAsClient()
@@ -175,7 +182,7 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    public async void CriaLobby(string lobbyName, bool isPrivate)
+    public async void CriaLobby(bool isPrivate)
     {
         try
         {
@@ -198,7 +205,7 @@ public class Controller : NetworkBehaviour
                 }
             };
 
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 3, createLobbyOptions);
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync("Batata", 3, createLobbyOptions);
      
             hostLobby = lobby;
 
@@ -274,7 +281,7 @@ public class Controller : NetworkBehaviour
         }
     }
 
-    private async void CriaRelay(int numberOfConnections)
+    private async Task<string> CriaRelay(int numberOfConnections)
     {
         try
         {
@@ -282,10 +289,12 @@ public class Controller : NetworkBehaviour
             string joinCodeRelay = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             Debug.Log($"Criei uma nova alocaço de relay com o código: {joinCodeRelay}");
+            return joinCodeRelay;
         }
         catch (RelayServiceException e)
         {
             Debug.Log(e);
+            return null;
         }
     }
 
@@ -313,6 +322,7 @@ public class Controller : NetworkBehaviour
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
         var joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+        relayNumber = joinCode;
         return NetworkManager.Singleton.StartHost() ? joinCode : null;
     }
 

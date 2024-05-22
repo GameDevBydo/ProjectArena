@@ -189,15 +189,16 @@ public class UIController : MonoBehaviour
     #region Connections and Lobby
 
     [Header("Lobby")]
-    public TMP_InputField lobbyCreateNameInput, lobbyJoinCodeInput;
     public Toggle lobbyCreateIsPrivateToggle;
+    public TMP_InputField lobbyCreateNameInput, lobbyJoinCodeInput;
+    public TextMeshProUGUI lobbyCodeText;
 
     public void CreateLobbyButton()
     {
         string lobbyName = lobbyCreateNameInput.text;
         bool isPrivate = lobbyCreateIsPrivateToggle.isOn;
 
-        Controller.instance.CriaLobby(lobbyName, isPrivate);
+        //Controller.instance.CriaLobby(lobbyName, isPrivate);
     }
 
     public void JoinLobbyByCodeButton()
@@ -209,6 +210,11 @@ public class UIController : MonoBehaviour
     public void QuickJoinLobbyButton()
     {
         TesteConexao.instance.QuickJoinLobby();
+    }
+
+    public void SetLobbyCode(string lobbyCode)
+    {
+        lobbyCodeText.text = "Código do lobby: \n"+lobbyCode;
     }
 
 
