@@ -119,17 +119,19 @@ public class Controller : NetworkBehaviour
     public async void PlayAsHost()
     {   
         CriaLobby(false); // Botando que não é private , MUDA DEPOIS
+        LoadScene(1);
         await StartHostWithRelay();
         if(relayNumber != null)
         {
             UIController.instance.SetLobbyCode(relayNumber);
-            LoadScene(1);
         }
     }
-
-    public void PlayAsClient()
+    [HideInInspector]
+    public string lobbyCodeInput;
+    public async void PlayAsClient()
     {
-        NetworkManager.Singleton.StartClient();
+        LoadScene(1);
+        await StartClientWithRelay(lobbyCodeInput);
     }
 
     private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)

@@ -217,6 +217,11 @@ public class UIController : MonoBehaviour
         lobbyCodeText.text = "Código do lobby: \n"+lobbyCode;
     }
 
+    public void InputLobbyCode(string s)
+    {
+        Controller.instance.lobbyCodeInput = s;
+    }
+
 
 
     #endregion
