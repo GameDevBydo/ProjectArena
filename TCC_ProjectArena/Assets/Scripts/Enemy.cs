@@ -27,8 +27,6 @@ public class Enemy : NetworkBehaviour
     public bool activegGavity = true;
     public bool regainSpeed = true;
 
-    public SO_AttackProperty attackProperty;
-
     Controller main;
 
     void Awake()
@@ -153,6 +151,7 @@ public class Enemy : NetworkBehaviour
                 {
                     if(!hitN.Value)
                     {
+                   
                         speed = 0;
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());

@@ -19,8 +19,6 @@ public class Player : NetworkBehaviour
     [SerializeField] private Camera playerOwnCamera;
 
     public string playerName;
-
-    public SO_AttackProperty attackProperty;
     void Awake()
     {
         playerChar.OnValueChanged += LoadNewModel;
@@ -283,6 +281,7 @@ public class Player : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             RemoveLife(5);
         }
     }
