@@ -20,7 +20,7 @@ public class Player : NetworkBehaviour
 
     public string playerName;
 
-
+    public SO_AttackProperty attackProperty;
     void Awake()
     {
         playerChar.OnValueChanged += LoadNewModel;
