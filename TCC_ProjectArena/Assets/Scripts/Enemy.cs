@@ -151,12 +151,12 @@ public class Enemy : NetworkBehaviour
                 {
                     if(!hitN.Value)
                     {
-                   
+                        Player hitPlayer = collider.GetComponentInParent<Player>();
                         speed = 0;
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
-                        TakeDamage(30);
-                        knockback.SetKnockback(-transform.forward);
+                        TakeDamage(hitPlayer.attackDamage);
+                        knockback.SetKnockback(-transform.forward, hitPlayer.attackPushback);
                         regainSpeed = true;
                     }
                 }

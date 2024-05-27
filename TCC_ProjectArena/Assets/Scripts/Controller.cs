@@ -115,7 +115,7 @@ public class Controller : NetworkBehaviour
         NetworkManager.Singleton.StartServer();
     }
 
-    string relayNumber;
+    public string relayNumber;
     public async void PlayAsHost()
     {   
         CriaLobby(false); // Botando que não é private , MUDA DEPOIS
@@ -580,11 +580,6 @@ public class Controller : NetworkBehaviour
     public void LoadScene(int id)
     {
         SceneManager.LoadScene(id);
-    }
-
-    public void SelectCharacter(int charID)
-    {
-        Player.instance.playerChar.Value = (Player.characterID)charID;
     }
 
 }

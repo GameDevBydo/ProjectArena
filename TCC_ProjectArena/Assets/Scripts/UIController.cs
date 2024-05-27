@@ -222,7 +222,15 @@ public class UIController : MonoBehaviour
         Controller.instance.lobbyCodeInput = s;
     }
 
+    public void CopyLobbyCode()
+    {
+        GUIUtility.systemCopyBuffer = Controller.instance.relayNumber;
+    }
 
+    public void SelectCharacter(int charID)
+    {
+        Player.instance.playerChar.Value = (Player.characterID)charID;
+    }
 
     #endregion
 

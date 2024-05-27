@@ -21,13 +21,26 @@ public class Player : NetworkBehaviour
     public string playerName;
     void Awake()
     {
+        playerName = Controller.instance.playerTempName;
         playerChar.OnValueChanged += LoadNewModel;
         life.OnValueChanged = OnLifeChanged;
     }
 
     private void LoadNewModel(characterID previousValue, characterID newValue)
     {
-        SetCharacter((int)playerChar.Value);
+        if ((int)newValue < characterModels.Length)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if ((int)newValue == i) characterModels[i].SetActive(true);
+                else characterModels[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("Não existe personagem com esse valor.");
+        }
+        if(IsOwner)UIController.instance.ChangeClassIcons((int)newValue);
     }
 
     void Start()
@@ -45,7 +58,7 @@ public class Player : NetworkBehaviour
             playerOwnCamera.depth += 2;
             instance = this;
         }
-        else SetCharacter((int)playerChar.Value);
+        else LoadNewModel(playerChar.Value, playerChar.Value);
     }
 
     void Update()
@@ -159,24 +172,6 @@ public class Player : NetworkBehaviour
 
     public GameObject[] characterModels;
 
-
-    public void SetCharacter(int modelID)
-    {
-        if (modelID < characterModels.Length)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                if (modelID == i) characterModels[i].SetActive(true);
-                else characterModels[i].SetActive(false);
-            }
-        }
-        else
-        {
-            Debug.Log("Não existe personagem com esse valor.");
-        }
-        UIController.instance.ChangeClassIcons(modelID);
-    }
-
     #endregion
 
 
@@ -188,6 +183,9 @@ public class Player : NetworkBehaviour
     public bool canAttack = true, attacking = false;
 
     public int ultLoad = 0;
+
+    [HideInInspector]
+    public int attackDamage = 20, attackPushback = 20;
 
     public void LightAttack()
     {
@@ -268,14 +266,18 @@ public class Player : NetworkBehaviour
     }
     public void RemoveLife(float val)
     {
-        life.Value -= val;
-        Math.Clamp(life.Value, 0, maxlife);
-        if (life.Value <= 0) PlayerDead();
-        Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
+        life.Value = Math.Clamp(life.Value-val, 0, maxlife);
+        if (life.Value <= 0) 
+        {
+            if(IsOwner)
+            {
+                PlayerDead();
+            }
+        }
     }
     private void OnLifeChanged(float previousValue, float newValue)
     {
-        Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
+        if(IsOwner)Controller.instance.hudPlayer.SetValBarLife(life.Value, maxlife);
     }
     private void OnTriggerEnter(Collider other) 
     {

@@ -15,10 +15,11 @@ public class Knockback : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
     }
-    public void SetKnockback(Vector3 direction)
+    public void SetKnockback(Vector3 direction, float knockbackPower)
     {
         knockbackDirection = direction.normalized;
         knockbackDirection.y = jumpSize;
+        knockbackStrength = knockbackPower;
         knockbackTimer = knockbackDuration;
     }
     void Update()
