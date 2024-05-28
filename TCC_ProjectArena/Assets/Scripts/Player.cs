@@ -184,8 +184,11 @@ public class Player : NetworkBehaviour
 
     public int ultLoad = 0;
 
-    [HideInInspector]
+ 
     public int attackDamage = 20, attackPushback = 20;
+    public List<SO_AttackProperty> swordAttack;
+    public List<SO_AttackProperty> boxerAttack;
+    public List<SO_AttackProperty> robotAttack;
 
     public void LightAttack()
     {
@@ -200,6 +203,7 @@ public class Player : NetworkBehaviour
             };
 
             CallAnimation(attackName);
+            CallAttack(attackName);
         }
     }
 
@@ -215,6 +219,37 @@ public class Player : NetworkBehaviour
                 _ => null
             };
             CallAnimation(attackName);
+            CallAttack(attackName);
+        }
+    }
+    public void CallAttack(string stateName)
+    {
+        switch(stateName)
+        {
+            case "swordL1": 
+                attackDamage = swordAttack[0].GetAttavk();
+                attackPushback = swordAttack[0].GetKnockback();
+                 break;
+            case "boxerL1":
+                attackDamage = boxerAttack[0].GetAttavk();
+                attackPushback = boxerAttack[0].GetKnockback();
+                break;
+            case "robotL1":
+                attackDamage = robotAttack[0].GetAttavk();
+                attackPushback = robotAttack[0].GetKnockback();
+                 break;
+            case "swordH1":
+                attackDamage = swordAttack[1].GetAttavk();
+                attackPushback = swordAttack[1].GetKnockback();
+                break;
+            case "boxerH1":
+                attackDamage = boxerAttack[1].GetAttavk();
+                attackPushback = boxerAttack[1].GetKnockback();
+                break;
+            case "robotH1":
+                attackDamage = robotAttack[1].GetAttavk();
+                attackPushback = robotAttack[1].GetKnockback();
+                break;
         }
     }
 

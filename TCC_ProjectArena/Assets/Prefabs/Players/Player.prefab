@@ -365,6 +365,17 @@ MonoBehaviour:
   canAttack: 1
   attacking: 0
   ultLoad: 0
+  attackDamage: 20
+  attackPushback: 20
+  swordAttack:
+  - {fileID: 11400000, guid: 1bfd77f75627d6744bd79df90d9d9261, type: 2}
+  - {fileID: 11400000, guid: da657b54c53ebd24ca9f5970c649586d, type: 2}
+  boxerAttack:
+  - {fileID: 11400000, guid: 4a80f24201c2c164a9ec7bfba71c9a8e, type: 2}
+  - {fileID: 11400000, guid: 6f307108600bb814fb9f8f02e534eabf, type: 2}
+  robotAttack:
+  - {fileID: 11400000, guid: 3abc40d6fb4b90a41a8dc196bfd89867, type: 2}
+  - {fileID: 11400000, guid: fa6d72851581bdd4ca9d891be6e26631, type: 2}
   projectileSpawn:
   - {fileID: 1421897558869592996}
   bombSpawn: {fileID: 9107763405008020755}
