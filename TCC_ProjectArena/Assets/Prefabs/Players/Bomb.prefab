@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 854605985965684666}
   m_Layer: 0
   m_Name: Explosion
-  m_TagString: PlayerHitbox
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5205,7 +5205,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626772e8fa4be89429f975b28b5c2857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBomb: 1
+  pType: 2
+  damage: 0
+  pushback: 0
+  projectileProperties:
+  - {fileID: 11400000, guid: 234bfafc0c93e4748b2ac00650eab69b, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 513b528b0570f7142bbf620b545c4201, type: 2}
   ownerName: 
   explosionEmpty: {fileID: 744846910769249194}
 --- !u!135 &-5603358602977577478

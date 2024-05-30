@@ -5,6 +5,6 @@ public class SO_AttackProperty :ScriptableObject
 {
     [SerializeField] int attack, knockback;
 
-    public int GetAttavk() => attack;
+    public int GetAttack() => attack;
     public int GetKnockback() => knockback;
 }

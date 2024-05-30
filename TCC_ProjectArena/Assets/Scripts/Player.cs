@@ -227,28 +227,24 @@ public class Player : NetworkBehaviour
         switch(stateName)
         {
             case "swordL1": 
-                attackDamage = swordAttack[0].GetAttavk();
+                attackDamage = swordAttack[0].GetAttack();
                 attackPushback = swordAttack[0].GetKnockback();
                  break;
-            case "boxerL1":
-                attackDamage = boxerAttack[0].GetAttavk();
-                attackPushback = boxerAttack[0].GetKnockback();
-                break;
-            case "robotL1":
-                attackDamage = robotAttack[0].GetAttavk();
-                attackPushback = robotAttack[0].GetKnockback();
-                 break;
             case "swordH1":
-                attackDamage = swordAttack[1].GetAttavk();
+                attackDamage = swordAttack[1].GetAttack();
                 attackPushback = swordAttack[1].GetKnockback();
                 break;
+            case "boxerL1":
+                attackDamage = boxerAttack[0].GetAttack();
+                attackPushback = boxerAttack[0].GetKnockback();
+                break;
             case "boxerH1":
-                attackDamage = boxerAttack[1].GetAttavk();
+                attackDamage = boxerAttack[1].GetAttack();
                 attackPushback = boxerAttack[1].GetKnockback();
                 break;
+            case "robotL1":
+                 break;
             case "robotH1":
-                attackDamage = robotAttack[1].GetAttavk();
-                attackPushback = robotAttack[1].GetKnockback();
                 break;
         }
     }

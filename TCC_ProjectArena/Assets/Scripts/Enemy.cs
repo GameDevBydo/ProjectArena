@@ -160,6 +160,20 @@ public class Enemy : NetworkBehaviour
                         regainSpeed = true;
                     }
                 }
+                else if(collider.CompareTag("PlayerProjectile"))
+                {
+                    if(!hitN.Value)
+                    {
+                        Projectile hitProjectile = collider.GetComponentInParent<Projectile>();
+                        speed = 0;
+                        hitN.Value = true;
+                        StartCoroutine(StopInvulnerability());
+                        TakeDamage(hitProjectile.damage);
+                        knockback.SetKnockback(-transform.forward, hitProjectile.pushback);
+                        if(hitProjectile.pType != Projectile.projectileType.BOMB) Destroy(collider.gameObject);
+                        regainSpeed = true;
+                    }
+                }
             }
         }
     }

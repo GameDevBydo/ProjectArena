@@ -349,7 +349,7 @@ public class Controller : NetworkBehaviour
     {
         slotsFilled = 0;
         // WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
-        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 8f);
+        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 9.5f);
         Debug.Log("Slots abertos.");
         enemiesInWave = new Enemy[(waveNumber - 1) * 5 + 10];
         for (int i = 0; i < enemiesInWave.Length; i++)
