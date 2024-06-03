@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: cca52b2f18539f64d8c29e5d19a4dc63,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3184,7 +3185,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 2
 --- !u!108 &714074232
 Light:
   m_ObjectHideFlags: 0
@@ -3209,7 +3210,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -8508,7 +8509,7 @@ PrefabInstance:
     - target: {fileID: 3091954506106461391, guid: d720c31d862fb4447824f8e9f467dadf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.24
+      value: 29.2
       objectReference: {fileID: 0}
     - target: {fileID: 3091954506106461391, guid: d720c31d862fb4447824f8e9f467dadf,
         type: 3}
