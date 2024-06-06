@@ -348,9 +348,15 @@ public class Controller : NetworkBehaviour
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
         slotsFilled = 0;
-        // WriteOnHeader("PEDIDOS ABERTOS!", 8f);// referenciar o UI CONTROLLER
         UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 9.5f);
-        Debug.Log("Slots abertos.");
+        FillWave();
+        StartCoroutine(UIController.instance.UpdateWaveFillTimer(10));
+        Invoke(nameof(CloseSlotsInWave), 10f);
+        Invoke(nameof(StartCurrentWave), 13);
+    }
+
+    public void FillWave()
+    {
         enemiesInWave = new Enemy[(waveNumber - 1) * 5 + 10];
         for (int i = 0; i < enemiesInWave.Length; i++)
         {
@@ -370,45 +376,7 @@ public class Controller : NetworkBehaviour
             }
         }
         canFillWaveSlots = true;
-
-        /// StartCoroutine(UpdateWaveFillTimer()); // MUDAR PRO UI CONTROLLER
-        StartCoroutine(UIController.instance.UpdateWaveFillTimer(10));
-        Invoke(nameof(CloseSlotsInWave), 10f);
-
     }
-
-    // public TextMeshProUGUI header; //vai pro ui controller
-
-    /* void WriteOnHeader(string message, Color color, float duration = 3.0f) //vai pro ui controller
-     {
-         header.gameObject.SetActive(true);
-         header.text = message;
-         header.color = color;
-         StartCoroutine(CloseHeader(duration));
-     }
-     */
-    /* void WriteOnHeader(string message, float duration = 3.0f) // vai pro ui controller
-     {
-         WriteOnHeader(message, Color.white, duration);
-     }
-     IEnumerator CloseHeader(float timer) // vai pro ui controller
-     {
-         yield return new WaitForSeconds(timer);
-         header.gameObject.SetActive(false);
-     }
-
-
-     public Image waveFillTimer; // vai pro ui controller
-     IEnumerator UpdateWaveFillTimer() // vai pro ui controller
-     {
-         float timer = 10f;
-         while(timer>0)
-         {
-             timer-=0.1f;
-             waveFillTimer.fillAmount = timer/10f;
-             yield return new WaitForSeconds(0.1f);
-         }
-    }*/
 
     int slotsFilled = 0; // Slots preenchidos por viewers.
     public void FillSlotInWave(string user, string enemyType)
@@ -422,7 +390,11 @@ public class Controller : NetworkBehaviour
             {
                 enemiesInWave[slotsFilled] = SpawnEnemy(user, enemyRequested);
                 slotsFilled++;
-                if (slotsFilled > enemiesInWave.Length - 1) CloseSlotsInWave();
+                if (slotsFilled > enemiesInWave.Length - 1)
+                {
+                    CloseSlotsInWave();
+                    Invoke(nameof(StartCurrentWave), 5);
+                }
             }
             else
             {
@@ -459,8 +431,7 @@ public class Controller : NetworkBehaviour
                         enemiesInWave[i] = SpawnEnemy("AutoFill", enemiesInWave[i].enemyTypeID);
                     }
                 }
-                Invoke(nameof(StartCurrentWave), 5);
-                // WriteOnHeader("PEDIDOS FECHADOS!"); // referenciar ui controller
+                
                 UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
             }
         }
@@ -469,7 +440,6 @@ public class Controller : NetworkBehaviour
     int enemiesAlive = 0;
     void StartCurrentWave() // Ativa os inimigos 1 a 1, e contabiliza quantos tem.
     {
-        // WriteOnHeader("ONDA COMEÇOU!", Color.red, 5); // referenciar ui controller
         UIController.instance.WriteOnHeader("ONDA COMEÇOU!", Color.red, 5);
         enemiesAlive = 0;
         foreach (Enemy e in enemiesInWave)
@@ -489,14 +459,14 @@ public class Controller : NetworkBehaviour
 
     void WaveCleared() // Finaliza a wave e inicia a abertura de slots da próxima. 
     {
-        // WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
-        UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); // referenciar ui controller
+        UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 
         waveNumber++;
-        Invoke(nameof(OpenSlotsInWaveRpc), 10);
+        //if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);          RETIRADO PRA MOSTRAR PRO LIPÃO, TIRA ESSE COMENTÁRIO DEPOIS
+        //else 
+        Invoke(nameof(OpenVoting), 5);
     }
 
     #endregion
-
 
     public GameObject[] enemyPrefabList;
     public Enemy SpawnEnemy(string user, int enemyId)
@@ -509,20 +479,48 @@ public class Controller : NetworkBehaviour
         eNetworkObject.Spawn();
         e.GetComponent<Enemy>().SetEnemyNameRpc(user);
         // if (user != "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
-        if (user != "AutoFill") UIController.instance.PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
+        if (user != "AutoFill") UIController.instance.PrintSpawnAlertRpc(user, enemyPrefabList[enemyId].name);
         return e.GetComponent<Enemy>();
     }
 
-    public List<string> votingName, votingValue;
+    #region Voting
+    public List<string> votingName;
     bool canVote;
     int votingWinner = 0;
+
+
+    public SO_VotingEffect[] effectsInfo;
+    SO_VotingEffect effect1;
+    SO_VotingEffect effect2;
+    [HideInInspector]
+    public float votingValue1, votingValue2;
+    int vote1 = 0, vote2 = 0;
+
     public void OpenVoting()
     {
+        FillWave();
+        CloseSlotsInWave();
+        UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
+        UIController.instance.votingArea.SetActive(true); // AQUI TÁ SÓ PRO HOST POR ENQUANTO, TEM QUE FAZER RPC DISSO AQUI PELAMOR DE DEUS
+        votingValue1 = Random.Range(1, 101);
+        votingValue2 = Random.Range(1, 101);
+        effect1 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
+        do
+        {
+            effect1 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
+            effect2 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
+        } 
+        while(effect1.effectName==effect2.effectName);
+        UIController.instance.FillOption1Info(effect1, votingValue1);
+        UIController.instance.FillOption2Info(effect2, votingValue2);
         votingName = new List<string>();
-        votingValue = new List<string>();
+        vote1 = 0;
+        vote2 = 0;
+        UIController.instance.UpdateVotingSlider(1,2);
+        
         canVote = true;
+        Invoke("CloseVoting", 15f);
     }
-
     public void ChatterVote(string name, string vote)
     {
         if(canVote)
@@ -530,7 +528,9 @@ public class Controller : NetworkBehaviour
             if(!votingName.Contains(name))
             {
                 votingName.Add(name);
-                votingValue.Add(vote);
+                if(vote =="1") vote1++;
+                else if(vote =="2") vote2++;
+                UIController.instance.UpdateVotingSlider(vote1, vote1+vote2);
             }
         }
     }
@@ -539,29 +539,53 @@ public class Controller : NetworkBehaviour
     {
         canVote = false;
         Invoke("CountVotes", 0);
+        Invoke(nameof(StartCurrentWave), 15);
     }
 
     void CountVotes()
     {
+        SO_VotingEffect winnerEffect;
+        float winnerValue = 1;
         votingWinner = 0;
-        int vote1 = 0, vote2 = 0;
-        foreach(string v in votingValue)
-        {
-            if(v == "1")
-            {
-                vote1++;
-            }
-            else if(v == "2")
-            {
-                vote2++;
-            }
-        }
         if(vote1!=vote2)
         {
-            if(vote1>vote2) votingWinner = 1;
-            else if(vote2>vote1) votingWinner = 2;
+            if(vote1>vote2) 
+            {
+                votingWinner = 1;
+                winnerValue = votingValue1;
+            }
+            else if(vote2>vote1)
+            {
+                votingWinner = 2;
+                winnerValue = votingValue2;
+            }
         }
+        else votingWinner = Random.Range(1,2);
+
+        
+        Debug.Log(votingWinner);
+
+        if(votingWinner==1) winnerEffect = effect1;
+        else winnerEffect = effect2;
+        
+        if(winnerEffect.effectTarget == 0)
+        {
+            VotingEffects.CallAnyMethod(winnerEffect.effectMethodName);
+        }
+        else if(votingWinner==3)
+        {
+            foreach(Enemy e in enemiesInWave)
+            {
+                VotingEffects.CallAnyMethod(winnerEffect.effectMethodName, e, winnerValue);
+            }
+        }
+
+        UIController.instance.WriteOnHeader( "Efeito: " + winnerEffect.effectName +" venceu!!!", 10f);
+
+        UIController.instance.votingArea.SetActive(false); // AQUI TÁ SÓ PRO HOST POR ENQUANTO, TEM QUE FAZER RPC DISSO AQUI PELAMOR DE DEUS
     }
+
+    #endregion
 
     public GameObject deathScreen;
     public void OpenDeathScreen()

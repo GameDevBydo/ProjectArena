@@ -215,11 +215,13 @@ MonoBehaviour:
     m_InternalValue: 0
   hitPoints: 0
   waveStart: 0
-  activegGavity: 1
+  activeGavity: 1
   regainSpeed: 1
-  attackProperty: {fileID: 11400000, guid: 1bfd77f75627d6744bd79df90d9d9261, type: 2}
+  damage: 10
   enemyNameText: {fileID: 5484971731705505866}
   lifeBar: {fileID: 8316451032802685652}
+  dmgTakenMod: 1
+  dmgDealtMod: 1
   animator: {fileID: 4603715733841774685}
   canAttack: 1
   attacking: 0

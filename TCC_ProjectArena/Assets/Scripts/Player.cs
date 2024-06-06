@@ -90,7 +90,7 @@ public class Player : NetworkBehaviour
     public float movSpeed, jumpStrength, gravityValue = -9.81f;
     public int extraJumps;
     public ParticleSystem jumpPS;
-    void GroundedMovement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController PULO NÃO TA FUNCIONANDO PQ O FEET TÁ ASSINALADO ERRADO
+    void GroundedMovement() // Gets the speed (after modifiers) and the inputs to move. Uses CharacterController 
     {
         float xDir = Input.GetAxis("Horizontal");
         float zDir = Input.GetAxis("Vertical");
@@ -314,8 +314,8 @@ public class Player : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            RemoveLife(5);
+            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+            RemoveLife(enemy.damage*enemy.dmgDealtMod);
         }
     }
 

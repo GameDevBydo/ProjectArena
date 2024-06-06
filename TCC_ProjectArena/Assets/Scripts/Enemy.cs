@@ -24,8 +24,10 @@ public class Enemy : NetworkBehaviour
     public float hitPoints;
 
     public bool waveStart = false;
-    public bool activegGavity = true;
+    public bool activeGavity = true;
     public bool regainSpeed = true;
+
+    public float damage = 5;
 
     Controller main;
 
@@ -85,7 +87,7 @@ public class Enemy : NetworkBehaviour
             if (waveStart)
             {
                 CheckPlayerDistance();
-                if(activegGavity) Gravity();
+                if(activeGavity) Gravity();
                 if (!inRange) Movement();
                 if(regainSpeed) RegainSpeed();
             }
@@ -190,9 +192,41 @@ public class Enemy : NetworkBehaviour
         lifeBar.fillAmount = hitPointsN.Value / maxHitPoints;
     }
 
+    #region Modifiers
+    [HideInInspector]
+    public float dmgTakenMod = 1.0f, dmgDealtMod = 1.0f;
+
+    public void SetDamageTakenModifier(float mod)
+    {
+        dmgTakenMod = mod;
+    }
+
+    public void SetDamageDealtModifier(float mod)
+    {
+        dmgDealtMod = mod;
+    }
+
+    public void ResetDamageTakenModifier()
+    {
+        dmgTakenMod = 1.0f;
+    }
+
+    public void ResetDamageDealtModifier()
+    {
+        dmgDealtMod = 1.0f;
+    }
+
+    public void ResetDamageModifiers()
+    {
+        ResetDamageTakenModifier();
+        ResetDamageDealtModifier();
+    }
+
+    #endregion
+
     void TakeDamage(float damage)
     {
-        hitPointsN.Value -= damage;
+        hitPointsN.Value -= Mathf.Floor(damage*dmgTakenMod);
         if (hitPointsN.Value <= 0) Death();
     }
 

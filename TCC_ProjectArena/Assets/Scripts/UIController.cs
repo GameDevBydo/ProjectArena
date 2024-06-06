@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
 using TMPro;
 
@@ -23,22 +24,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    //public GameObject player2LifeBar, player3LifeBar;
-
-    //public void ActivatePlayer2LifeBar()
-    //{
-    //    player2LifeBar.SetActive(true);
-    //}
-//
-    //public void ActivatePlayer3LifeBar()
-    //{
-    //    player3LifeBar.SetActive(true);
-    //}
-
     public TextMeshProUGUI notifText;
-
-
-
     
     void Awake()
     {
@@ -89,7 +75,9 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(timer);
         alertsText.gameObject.SetActive(false);
     }
-    public void PrintSpawnAlert(string user, string enemyName)
+
+    [Rpc(SendTo.Everyone)]
+    public void PrintSpawnAlertRpc(string user, string enemyName)
     {
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
@@ -231,7 +219,33 @@ public class UIController : MonoBehaviour
     {
         Player.instance.playerChar.Value = (Player.characterID)charID;
     }
+    #endregion
 
+
+    #region Voting Area
+    public GameObject votingArea;
+    public Slider votingSlider;
+    public TextMeshProUGUI option1Name, option1Info, option2Name, option2Info;
+    public Image option1Image, option2Image;
+
+    public void FillOption1Info(SO_VotingEffect effectInfo, float value)
+    {
+        option1Name.text = effectInfo.effectName;
+        option1Image.sprite = effectInfo.effectSprite;
+        option1Info.text = effectInfo.effectDescription + "\n" + value + "%";
+    }
+    public void FillOption2Info(SO_VotingEffect effectInfo, float value)
+    {
+        option2Name.text = effectInfo.effectName;
+        option2Image.sprite = effectInfo.effectSprite;
+        option2Info.text = effectInfo.effectDescription + "\n" + value  + "%";
+    }
+
+    public void UpdateVotingSlider(float mainVotes, float allVotes)
+    {
+        votingSlider.value = mainVotes/allVotes;
+    }
+    
     #endregion
 
 }
