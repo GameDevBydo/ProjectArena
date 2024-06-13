@@ -454,6 +454,7 @@ public class Controller : NetworkBehaviour
     {
         enemiesAlive--;
         Debug.Log("Inimigos vivos: " + enemiesAlive);
+        if (enemiesAlive <= Mathf.RoundToInt(enemiesInWave.Length/3)) AudioControlador.instance.FadeInChant();
         if (enemiesAlive <= 0) WaveCleared();
     }
 
@@ -461,6 +462,7 @@ public class Controller : NetworkBehaviour
     {
         UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 
         waveNumber++;
+        AudioControlador.instance.PlayCheer();
         //if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);          RETIRADO PRA MOSTRAR PRO LIPÃO, TIRA ESSE COMENTÁRIO DEPOIS
         //else 
         Invoke(nameof(OpenVoting), 5);
@@ -474,10 +476,10 @@ public class Controller : NetworkBehaviour
         Vector2 randomPos = Random.insideUnitCircle.normalized * 48;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
-        e.name = user + "'s " + e.name;
+        if (user != "AutoFill") e.name = e.name + " de " + user;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
-        e.GetComponent<Enemy>().SetEnemyNameRpc(user);
+        e.GetComponent<Enemy>().SetEnemyNameRpc(e.name);
         // if (user != "AutoFill") PrintSpawnAlert(user, enemyPrefabList[enemyId].name);
         if (user != "AutoFill") UIController.instance.PrintSpawnAlertRpc(user, enemyPrefabList[enemyId].name);
         return e.GetComponent<Enemy>();

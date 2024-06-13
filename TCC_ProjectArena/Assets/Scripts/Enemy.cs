@@ -97,8 +97,10 @@ public class Enemy : NetworkBehaviour
                 {
                     case 0:
                     case 1:
-                    case 2: 
-                        LightAttack();
+                        LightAttack("hitEnemy");
+                    break;
+                    case 2:
+                        LightAttack("hitEnemyRat");
                     break;
                     case 3:
                         ExplosionAttack();
@@ -253,11 +255,11 @@ public class Enemy : NetworkBehaviour
     [Header("Combat")]
     public Animator animator;
     public bool canAttack = true, attacking = false;
-    public void LightAttack()
+    public void LightAttack(string attackName)
     {
         if (canAttack)
         {
-            CallAnimation("hitEnemy");
+            CallAnimation(attackName);
         }
     }
     public void ExplosionAttack()
