@@ -7,6 +7,12 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     [HideInInspector]
     public static UIController instance;
 

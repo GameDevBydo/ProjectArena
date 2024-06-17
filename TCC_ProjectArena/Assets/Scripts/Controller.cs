@@ -463,8 +463,8 @@ public class Controller : NetworkBehaviour
         UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 
         waveNumber++;
         AudioControlador.instance.PlayCheer();
-        //if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);          RETIRADO PRA MOSTRAR PRO LIPÃO, TIRA ESSE COMENTÁRIO DEPOIS
-        //else 
+        if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);
+        else 
         Invoke(nameof(OpenVoting), 5);
     }
 

@@ -118,13 +118,7 @@ public class Player : NetworkBehaviour
             if (isGrounded)
             {
                 playerVelocity.y = jumpStrength;
-                jumpPS.Play();
-            }
-            else if (extraJumps > 0)
-            {
-                playerVelocity.y = jumpStrength;
-                jumpPS.Play();
-                extraJumps--;
+                //jumpPS.Play();
             }
         }
 
