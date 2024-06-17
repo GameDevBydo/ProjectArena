@@ -252,7 +252,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
+  m_CameraType: 1
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -1156,6 +1156,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031600619395424312, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031600619395424312, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031600619395424312, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -478
       objectReference: {fileID: 0}
     - target: {fileID: 5350062728285652559, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
