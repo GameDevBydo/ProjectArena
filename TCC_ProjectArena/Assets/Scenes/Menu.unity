@@ -807,6 +807,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -117
       objectReference: {fileID: 0}
+    - target: {fileID: 2134394817119708091, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: Jogar Online
+      objectReference: {fileID: 0}
     - target: {fileID: 2226482212774096967, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -838,6 +843,11 @@ PrefabInstance:
       value: -211
       objectReference: {fileID: 0}
     - target: {fileID: 2329728983694874119, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2451966932762669848, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -912,10 +922,15 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3001135271859829818, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: "Sa\xEDda"
+      objectReference: {fileID: 0}
     - target: {fileID: 3130033588235725307, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3354967850156274045, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
@@ -951,6 +966,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -376
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622197634307207387, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: Jogar Offline
       objectReference: {fileID: 0}
     - target: {fileID: 3660129429901361597, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
@@ -1251,6 +1271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205747844110645052, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: "Op\xE7\xF5es"
       objectReference: {fileID: 0}
     - target: {fileID: 6258839164712894995, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}

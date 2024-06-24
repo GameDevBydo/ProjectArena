@@ -311,6 +311,10 @@ public class Player : NetworkBehaviour
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
             RemoveLife(enemy.damage*enemy.dmgDealtMod);
         }
+        else if(other.gameObject.CompareTag("Explosion"))
+        {
+            RemoveLife(20);
+        }
     }
 
 
