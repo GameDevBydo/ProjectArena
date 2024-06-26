@@ -74,7 +74,8 @@ public class Player : NetworkBehaviour
         {
             if (main.runStartedN.Value && life.Value>0.0f)
             {
-                /*if (!attacking) */GroundedMovement();
+                /*if(playerChar.Value != characterID.Greatsword) */GroundedMovement();
+                /*else if(!attacking) GroundedMovement();*/
                 VerticalMovement();
                 CamMovement();
                 if (Input.GetKeyDown(KeyCode.Mouse0)) LightAttack();
@@ -197,9 +198,9 @@ public class Player : NetworkBehaviour
         {
             string attackName = playerChar.Value switch
             {
-                characterID.Greatsword => "swordL1",
-                characterID.Boxer => "boxerL1",
-                characterID.RustRobot => "robotL1",
+                characterID.Greatsword => "SoldierL1",
+                characterID.Boxer => "BoxerL1",
+                characterID.RustRobot => "RobotL1",
                 _ => null
             };
 
@@ -214,9 +215,9 @@ public class Player : NetworkBehaviour
         {
             string attackName = playerChar.Value switch
             {
-                characterID.Greatsword => "swordH1",
-                characterID.Boxer => "boxerH1",
-                characterID.RustRobot => "robotH1",
+                characterID.Greatsword => "SoldierH1",
+                characterID.Boxer => "BoxerH1",
+                characterID.RustRobot => "RobotH1",
                 _ => null
             };
             CallAnimation(attackName);
@@ -227,25 +228,28 @@ public class Player : NetworkBehaviour
     {
         switch(stateName)
         {
-            case "swordL1": 
+            case "SoldierL1": 
                 attackDamage = swordAttack[0].GetAttack();
                 attackPushback = swordAttack[0].GetKnockback();
                  break;
-            case "swordH1":
+            case "SoldierH1":
                 attackDamage = swordAttack[1].GetAttack();
                 attackPushback = swordAttack[1].GetKnockback();
                 break;
-            case "boxerL1":
+            case "BoxerL1":
                 attackDamage = boxerAttack[0].GetAttack();
                 attackPushback = boxerAttack[0].GetKnockback();
                 break;
-            case "boxerH1":
+            case "BoxerH1":
                 attackDamage = boxerAttack[1].GetAttack();
                 attackPushback = boxerAttack[1].GetKnockback();
                 break;
-            case "robotL1":
+            case "RobotL1":
                  break;
-            case "robotH1":
+            case "RobotH1":
+                break;
+            default:
+                Debug.Log("Sem informações sobre os valores desta animação.");
                 break;
         }
     }
@@ -259,6 +263,7 @@ public class Player : NetworkBehaviour
 
     public void StopAttacking()
     {
+        Debug.Log("Parou o ataque.");
         attacking = false;
         canAttack = true;
     }
