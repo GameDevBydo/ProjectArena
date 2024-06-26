@@ -40,7 +40,13 @@ public class Player : NetworkBehaviour
         {
             Debug.Log("Não existe personagem com esse valor.");
         }
-        if(IsOwner)UIController.instance.ChangeClassIcons((int)newValue);
+        if(IsOwner)
+        {
+            UIController.instance.ChangeClassIcons((int)newValue);
+            currentAnimator = animators[(int)newValue];
+            maxlife = 120 - (int)newValue*20;
+            movSpeed = (int)newValue == 1 ? 14 : 10;
+        }
     }
 
     void Start()
@@ -171,7 +177,8 @@ public class Player : NetworkBehaviour
 
     #region Combat
     [Header("Combat")]
-    public Animator animator;
+    public Animator currentAnimator;
+    public Animator[] animators;
 
     public GameObject sword, swordObj;
     public bool canAttack = true, attacking = false;
@@ -247,7 +254,7 @@ public class Player : NetworkBehaviour
     {
         canAttack = false;
         attacking = true;
-        animator.Play(stateName);
+        currentAnimator.Play(stateName);
     }
 
     public void StopAttacking()
@@ -321,7 +328,7 @@ public class Player : NetworkBehaviour
     //IEnumerator SwordGuyAttackRoutine()
     //{
     //    //canAttack = false; 
-    //    //animator.Play(attackName);
+    //    //currentAnimator.Play(attackName);
     //    //attacking = true;
     //    //yield return new WaitForSeconds(swordAnim.clip.length);
     //    //canAttack = true;

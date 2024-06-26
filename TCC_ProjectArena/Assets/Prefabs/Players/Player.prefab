@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2804575534
+  GlobalObjectIdHash: 4204593045
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -360,7 +360,11 @@ MonoBehaviour:
   - {fileID: 834360905279899570}
   - {fileID: 1499456400990417998}
   - {fileID: 899484062670775575}
-  animator: {fileID: 7322261762677545452}
+  currentAnimator: {fileID: 0}
+  animators:
+  - {fileID: 3680549272476562666}
+  - {fileID: 1458073465689928833}
+  - {fileID: 815368641975056485}
   sword: {fileID: 427204379123777601}
   swordObj: {fileID: 0}
   canAttack: 1
@@ -600,6 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7746712305423214264}
+  - component: {fileID: 3680549272476562666}
   m_Layer: 7
   m_Name: SwordGuy
   m_TagString: Untagged
@@ -625,6 +630,27 @@ Transform:
   - {fileID: 8420116331549481209}
   m_Father: {fileID: 2386244372060874010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3680549272476562666
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834360905279899570}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &899484062670775575
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2091276174875956109
 Transform:
   m_ObjectHideFlags: 0
@@ -654,8 +680,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9107763405008020755}
-  - {fileID: 1421897558869592996}
   - {fileID: 4195157768023589720}
   m_Father: {fileID: 2386244372060874010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -668,6 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208797243746553076}
+  - component: {fileID: 1458073465689928833}
   m_Layer: 7
   m_Name: Boxer
   m_TagString: Untagged
@@ -694,6 +719,27 @@ Transform:
   - {fileID: 2267512194078056625}
   m_Father: {fileID: 2386244372060874010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1458073465689928833
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499456400990417998}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2189541420428773370
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,13 +796,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271012635235827320}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.49999964, y: -0, z: -0, w: 0.8660257}
-  m_LocalPosition: {x: 0, y: 1.97, z: 0.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.37705126, y: -0, z: -0, w: 0.9261924}
+  m_LocalPosition: {x: 0, y: 0.985, z: 0.496}
+  m_LocalScale: {x: 0.45454547, y: 0.47156736, z: 0.5097452}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2091276174875956109}
-  m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
+  m_Father: {fileID: 4195157768023589720}
+  m_LocalEulerAnglesHint: {x: -44.302, y: 0, z: 0}
 --- !u!1 &2312626535657180410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,11 +1103,11 @@ Transform:
   m_GameObject: {fileID: 3722042521024652685}
   serializedVersion: 2
   m_LocalRotation: {x: -0.10733954, y: -0.010674635, z: -0.015387965, w: 0.99404603}
-  m_LocalPosition: {x: 0.552, y: 0.42, z: 0.977}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.05, y: 0.251, z: 0.589}
+  m_LocalScale: {x: 0.454598, y: 0.52711546, z: 0.4575633}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2091276174875956109}
+  m_Father: {fileID: 4195157768023589720}
   m_LocalEulerAnglesHint: {x: -12.341, y: -1.051, z: -1.66}
 --- !u!1 &4228585617054286549
 GameObject:
@@ -11765,12 +11811,24 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9bacc21724c11954b80ce8cdf6ae05b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 220404871b0d4444f911a92383a199f5,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1421897558869592996}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 220404871b0d4444f911a92383a199f5,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 9107763405008020755}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 220404871b0d4444f911a92383a199f5,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 815368641975056485}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 220404871b0d4444f911a92383a199f5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1779625038441527937}
   m_SourcePrefab: {fileID: 100100000, guid: 220404871b0d4444f911a92383a199f5, type: 3}
 --- !u!1 &3563439600283425250 stripped
 GameObject:
@@ -11799,6 +11857,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1779625038441527937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563439600283425250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fbeadf7944d714f910e3afe0734bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2884410474875206482}
 --- !u!4 &4195157768023589720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 220404871b0d4444f911a92383a199f5,
