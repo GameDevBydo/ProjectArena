@@ -24,7 +24,6 @@ public class Projectile : MonoBehaviour
         float power = 5;
 
         power = pType == projectileType.BOMB ? 5 : 15; // ESSA LINHA TA ESTRANHA CONFERIR DEPOIS **********
-        Debug.Log(power);
         GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
         if(pType == projectileType.BOMB) Invoke("Explode", 2);
         else Destroy(gameObject, 2);

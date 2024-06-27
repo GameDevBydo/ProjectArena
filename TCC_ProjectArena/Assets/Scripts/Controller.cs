@@ -90,6 +90,8 @@ public class Controller : NetworkBehaviour
      }
 
  */
+    [HideInInspector] public GameObject cerca;
+
     #region Waves
     [HideInInspector] public int waveNumber = 1; // Número da wave atual (começa em 1, pois ia dar muita treta chamar a 1ª de 0).
     [HideInInspector] public Enemy[] enemiesInWave; //Inimigos presentes na wave atual para serem spawnados.
@@ -106,8 +108,8 @@ public class Controller : NetworkBehaviour
             OpenSlotsInWaveRpc();
         }
         UIController.instance.ChangeUIArea(2);
+        GameObject.FindWithTag("LobbyCamera").GetComponent<Camera>().depth = -3;
         if (deathScreen.activeSelf== false) Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     public void StartServer()
@@ -168,6 +170,11 @@ public class Controller : NetworkBehaviour
     private Lobby hostLobby;
     private Lobby joinedLobby;
     private float temporizadorAtivacaoLobby;
+
+    public int ConnectedClients()
+    {
+        return NetworkManager.ConnectedClients.Count;
+    }
 
     private async void ManterLobbyAtivo()
     {
@@ -448,6 +455,7 @@ public class Controller : NetworkBehaviour
             enemiesAlive++;
         }
         Debug.Log("Inimigos vivos: " + enemiesAlive);
+        cerca.GetComponent<MovableObject>().MoveY(30);
     }
 
     public void EnemyKilled() // A ser puxado pelo Enemy, para quando ele morrer. Também checa se a wave foi limpa.
@@ -464,8 +472,8 @@ public class Controller : NetworkBehaviour
         waveNumber++;
         AudioControlador.instance.PlayCheer();
         if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);
-        else 
-        Invoke(nameof(OpenVoting), 5);
+        else Invoke(nameof(OpenVoting), 5);
+        cerca.GetComponent<MovableObject>().MoveY(-30);
     }
 
     #endregion
@@ -476,7 +484,7 @@ public class Controller : NetworkBehaviour
         Vector2 randomPos = Random.insideUnitCircle.normalized * 48;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
-        if (user != "AutoFill") e.name = e.name + " de " + user;
+        if (user != "AutoFill") e.name = e.name[..^8] + " de " + user;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
         e.GetComponent<Enemy>().SetEnemyNameRpc(e.name);
@@ -504,8 +512,8 @@ public class Controller : NetworkBehaviour
         CloseSlotsInWave();
         UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
         UIController.instance.votingArea.SetActive(true); // AQUI TÁ SÓ PRO HOST POR ENQUANTO, TEM QUE FAZER RPC DISSO AQUI PELAMOR DE DEUS
-        votingValue1 = Random.Range(1, 101);
-        votingValue2 = Random.Range(1, 101);
+        votingValue1 = Random.Range(1, 5);
+        votingValue2 = Random.Range(1, 5);
         effect1 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
         do
         {

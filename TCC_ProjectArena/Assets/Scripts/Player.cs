@@ -12,7 +12,8 @@ public class Player : NetworkBehaviour
 
     public static Player instance;
 
-    private CharacterController controller;
+    [SerializeField]private CharacterController controller;
+    public int playerNumber;
 
     Controller main;
 
@@ -51,7 +52,7 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        //controller = gameObject.GetComponent<CharacterController>();
         main = Controller.instance;
         if (!main.online) instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -65,6 +66,20 @@ public class Player : NetworkBehaviour
             instance = this;
         }
         else LoadNewModel(playerChar.Value, playerChar.Value);
+        Debug.Log(Controller.instance.ConnectedClients());
+        switch(Controller.instance.ConnectedClients())
+        {
+            case 1:
+                break;
+            case 2:
+                SetPosition(new Vector3(2,0,-0.5f));
+                break;
+            case 3:
+                SetPosition(new Vector3(-1.5f,0,-0.8f));
+                break;
+            default:
+                break;
+        }
     }
 
     void Update()
@@ -151,7 +166,7 @@ public class Player : NetworkBehaviour
 
     public void SetPosition(Vector3 pos)
     {
-        Debug.Log("Setou a posição");
+        Debug.Log("Setou a posição " + pos);
         controller.enabled = false;
         transform.position = pos;
         controller.enabled = true;

@@ -7,12 +7,12 @@ public class VotingEffects : MonoBehaviour
     #region Damage Dealt
     public static void IncreaseDamageDealt(Enemy e, float mod)
     {
-        float value = 1+(mod/100.0f);
+        float value = 1+(mod/4);
         SetDamageDealtModifier(e, value);
     }
     public static void DecreaseDamageDealt(Enemy e, float mod)
     {
-        float value = mod/100.0f;
+        float value = mod/4;
         SetDamageDealtModifier(e, value);
     }
 
@@ -26,12 +26,12 @@ public class VotingEffects : MonoBehaviour
     #region Damage Taken
     public static void IncreaseDamageTaken(Enemy e, float mod)
     {
-        float value = 1+(mod/100.0f);
+        float value = 1+(mod/4);
         SetDamageTakenModifier(e, value);
     }
     public static void DecreaseDamageTaken(Enemy e, float mod)
     {
-        float value = mod/100.0f;
+        float value = mod/4;
         SetDamageTakenModifier(e, value);
     }
 
