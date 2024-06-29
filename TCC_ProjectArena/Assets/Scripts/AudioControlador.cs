@@ -18,9 +18,9 @@ public class AudioControlador : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K)) FadeInChant();
-        if(Input.GetKeyDown(KeyCode.L)) FadeOutChant();
-        if(Input.GetKeyDown(KeyCode.J)) PlayCheer();
+        //if(Input.GetKeyDown(KeyCode.K)) FadeInChant();
+        //if(Input.GetKeyDown(KeyCode.L)) FadeOutChant();
+        //if(Input.GetKeyDown(KeyCode.J)) PlayCheer();
     }
 
     public void AlterarVolumeMaster(float valor)
