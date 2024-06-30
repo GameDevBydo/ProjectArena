@@ -139,8 +139,8 @@ public class UIController : MonoBehaviour
 
     #region User Names and Icons
 
-    public Sprite[] classSprites, classUltIconSprites;
-    public Image classIcon, classUltIcon, classUltLoad;
+    public Sprite[] classSprites, classUltIconSprites, classLightIconSprites, classHeavyIconSprites;
+    public Image classIcon, classUltIcon, classUltLoad, classLight, classHeavy;
     public TextMeshProUGUI playerNick;
     
 
@@ -148,6 +148,8 @@ public class UIController : MonoBehaviour
     {
         classIcon.sprite = classSprites[id];
         classUltIcon.sprite = classUltIconSprites[id];
+        classLight.sprite = classLightIconSprites[id];
+        classHeavy.sprite = classHeavyIconSprites[id];;
     }
 
     public void SetPlayerName(string nick)

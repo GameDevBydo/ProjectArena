@@ -34,6 +34,7 @@ public class Controller : NetworkBehaviour
     {
         if (instance == null)
         {
+            Application.targetFrameRate = 60;
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -355,11 +356,11 @@ public class Controller : NetworkBehaviour
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
         slotsFilled = 0;
-        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 9.5f);
+        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 14.5f);
         FillWave();
-        StartCoroutine(UIController.instance.UpdateWaveFillTimer(10));
-        Invoke(nameof(CloseSlotsInWave), 10f);
-        Invoke(nameof(StartCurrentWave), 13);
+        StartCoroutine(UIController.instance.UpdateWaveFillTimer(15f));
+        Invoke(nameof(CloseSlotsInWave), 15f);
+        Invoke(nameof(StartCurrentWave), 13f);
     }
 
     public void FillWave()
@@ -521,8 +522,8 @@ public class Controller : NetworkBehaviour
             effect2 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
         } 
         while(effect1.effectName==effect2.effectName);
-        UIController.instance.FillOption1Info(effect1, votingValue1);
-        UIController.instance.FillOption2Info(effect2, votingValue2);
+        UIController.instance.FillOption1Info(effect1, votingValue1*25);
+        UIController.instance.FillOption2Info(effect2, votingValue2*25);
         votingName = new List<string>();
         vote1 = 0;
         vote2 = 0;
@@ -601,7 +602,7 @@ public class Controller : NetworkBehaviour
     public void OpenDeathScreen()
     {
         deathScreen.SetActive(true);
-
+        Cursor.lockState = CursorLockMode.None;
     }
 
 
