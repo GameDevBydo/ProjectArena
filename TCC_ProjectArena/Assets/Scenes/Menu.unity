@@ -582,6 +582,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2234267da0fa8a34ea3a34110127681a,
         type: 3}
+    - target: {fileID: 634910820496836848, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: "Bernardo \"Bydo\" Miranda - Dire\xE7\xE3o, Gerente de Projeto, Programador,
+        Game Designer, Auxiliar de Anima\xE7\xE3o.\n\nGabriel Victor Ribeiro - Modelador
+        de cen\xE1rio (Arquibancadas e \xE1rea externa, grades internas, pneus, barris,
+        texturas de areia), Modelador, Texturizador e Rigador de inimigos, Level
+        Designer.\n\nJo\xE3o Herval Maia - Modelador e Texturizador de cen\xE1rio
+        (objetos de obst\xE1culo e \xE1rea interna), Level Designer.\n\nLucas Henrique
+        Silva Cruz - Concept Artist, Modelador e Texturizador de personagens (Soldado,
+        Rob\xF4 e Boxer), Auxiliar de Ger\xEAncia (produ\xE7\xE3o e atualiza\xE7\xE3o
+        de documentos).\n\nRafael Henrique Pereira Oliveira - Programador, Level
+        Designer, Playtester.\n\nRodrigo Taranto Cordeiro - Animador, Game Designer,
+        Playtester.\n\n\nAgradecimentos especiais \xE0: Lip\xE3o, Roque, Mol, Diego,
+        \xC1rnilsen, todos os que testaram o jogo, Andr\xE9 por conceder o uso das
+        m\xFAsicas, e voc\xEA por jogar o jogo.       ^.^!!"
+      objectReference: {fileID: 0}
     - target: {fileID: 907384796538104643, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -652,6 +669,24 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1616236167158910048, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_text
+      value: "\"Arena Ferro Velho\" \xE9 um jogo arena survival. Voc\xEA e um grupo
+        de at\xE9 mais 2 amigos, enfrentaram hordas de inimigos na esperan\xE7a de
+        conseguir ir cada vez mais longe. Al\xE9m disso, o cont\xE9udo das hordas
+        e efeitos gerados ao longo dela, ser\xE3o definidos por mensagens no chat
+        de um canal da Twitch.\n\nTemos:\n- 3 Personagens selecion\xE1veis com golpes
+        variados e caracter\xEDsticas \xFAnicas!\n- Movimenta\xE7\xE3o em WASD, giro
+        de c\xE2mera em mouse, e ataques nos bot\xF5es direito e esquerdo do mouse.\n-
+        Intera\xE7\xE3o com chat, com um tutorial base de conex\xE3o e uso em adendo
+        na pasta enviada.\n- Modelos de cen\xE1rio e personagens diversos feitos
+        com a dire\xE7\xE3o de um ambiente de bugigangas, trecos e tro\xE7os, experimentos
+        e misturas.\n- Trilha sonora especial dedicada. \n- Fun\xE7\xE3o de jogo
+        cooperativo em rede de at\xE9 3 pessoas por grupo. Sem a necessidade de VPN.
+        Tamb\xE9m assistir o v\xEDdeo na pasta para melhor compreens\xE3o do funcionamento.\n-
+        Conferir GDR para mais informa\xE7\xF5es e assets produzidos mas n\xE3o implementados!"
+      objectReference: {fileID: 0}
     - target: {fileID: 4315474616765943927, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_Name
@@ -678,10 +713,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6485098442146971054, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7329703897141348957, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377939409378700362, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7934732432175276208, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
