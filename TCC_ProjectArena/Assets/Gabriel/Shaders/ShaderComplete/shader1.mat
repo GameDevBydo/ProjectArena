@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MaterialEnemyZtestFrag
-  m_Shader: {fileID: 4800000, guid: 6a129a5dfbb8ba4498e4d2122efad842, type: 3}
+  m_Name: shader1
+  m_Shader: {fileID: 4800000, guid: 56810c291fea9894883520aa074dee6b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,10 +29,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.005
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _NormalColor: {r: 0.8962264, g: 0.40161088, b: 0.40161088, a: 1}
+    - _NormalColor: {r: 1, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ZTestColor: {r: 0.22281907, g: 0.21306516, b: 0.7169812, a: 1}
+    - _ZTestColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
