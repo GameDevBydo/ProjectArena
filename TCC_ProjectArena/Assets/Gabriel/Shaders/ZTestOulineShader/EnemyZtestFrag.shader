@@ -1,4 +1,4 @@
-Shader "Custom/URP_ZTestShader"
+Shader "Custom/URP_ZTestShaderLEqual"
 {
     Properties
     {
@@ -8,53 +8,59 @@ Shader "Custom/URP_ZTestShader"
         _OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
         _OutlineWidth("Outline width", Range(0.0, 1.0)) = 0.005
     }
- 
+
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Overlay" }
- 
+        Tags { "RenderType"="Opaque" }
+
+        // Normal pass
         Pass
         {
             Name "NormalPass"
             Tags { "LightMode"="UniversalForward" }
             ZWrite On
             ZTest LEqual
- 
+
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
- 
+
             struct Attributes
             {
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
             };
- 
+
             struct Varyings
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
- 
+
             Texture2D _Texture;
-            SamplerState _Texture_sampler;
- 
+            SamplerState sampler_Texture;
+            float4 _NormalColor;
+
             Varyings vert(Attributes v)
             {
                 Varyings o;
                 o.positionHCS = TransformObjectToHClip(v.positionOS);
-                o.uv = v.uv;
+                o.uv = v.uv; // No transformation needed for UVs here
                 return o;
             }
- 
+
             half4 frag(Varyings i) : SV_Target
             {
-                return _Texture.Sample(_Texture_sampler, i.uv);
+                // Sample the texture
+                half4 texColor = _Texture.Sample(sampler_Texture, i.uv);
+
+                // Combine the texture color with the normal color
+                return texColor * _NormalColor;
             }
             ENDHLSL
         }
     }
- 
+
     FallBack "Hidden/InternalErrorShader"
 }

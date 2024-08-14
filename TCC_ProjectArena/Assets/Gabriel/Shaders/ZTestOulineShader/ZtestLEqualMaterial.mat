@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShaderTest
-  m_Shader: {fileID: 4800000, guid: c26d87dd8d0383f4995bebdf08c57421, type: 3}
+  m_Name: ZtestLEqualMaterial
+  m_Shader: {fileID: 4800000, guid: 785e1b88066d9ef4192d6e9da6f3e387, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,10 +29,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.005
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _NormalColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ZTestColor: {r: 1, g: 0, b: 0, a: 1}
+    - _ZTestColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
