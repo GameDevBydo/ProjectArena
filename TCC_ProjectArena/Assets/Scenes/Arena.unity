@@ -3530,6 +3530,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoboVentilador (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8166375266451699863, guid: ee90375b8afd67b47b602652eba8c591,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166375266451699863, guid: ee90375b8afd67b47b602652eba8c591,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1f25692cf9e827468521bc6c214d97a, type: 2}
+    - target: {fileID: 8166375266451699863, guid: ee90375b8afd67b47b602652eba8c591,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b82eb9a1f8f0ab41937d926f52c704e, type: 2}
     - target: {fileID: 8378111021947827630, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3581,7 +3596,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4104306910867391204, guid: ee90375b8afd67b47b602652eba8c591, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee90375b8afd67b47b602652eba8c591, type: 3}
