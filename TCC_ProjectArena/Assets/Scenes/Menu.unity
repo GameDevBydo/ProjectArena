@@ -428,7 +428,7 @@ MonoBehaviour:
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: fcbc6fd0b43bd3f4c91cdb0528a3e69d, type: 2}
-    TickRate: 30
+    TickRate: 50
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 1
     ConnectionData: 
@@ -598,6 +598,31 @@ PrefabInstance:
         Playtester.\n\n\nAgradecimentos especiais \xE0: Lip\xE3o, Roque, Mol, Diego,
         \xC1rnilsen, todos os que testaram o jogo, Andr\xE9 por conceder o uso das
         m\xFAsicas, e voc\xEA por jogar o jogo.       ^.^!!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemySpawnPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemySpawnPoints.Array.data[0].x
+      value: -85
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemySpawnPoints.Array.data[1].x
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemySpawnPoints.Array.data[2].y
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemySpawnPoints.Array.data[3].y
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 907384796538104643, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}

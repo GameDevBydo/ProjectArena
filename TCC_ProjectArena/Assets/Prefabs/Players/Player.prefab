@@ -283,7 +283,10 @@ GameObject:
   - component: {fileID: 594259804172785370}
   - component: {fileID: 8333358957219806732}
   - component: {fileID: 7322261762677545452}
+  - component: {fileID: 8556401316656760427}
   - component: {fileID: 1589044221839880199}
+  - component: {fileID: 1118599568659083642}
+  - component: {fileID: 6651544955638272027}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -363,10 +366,10 @@ MonoBehaviour:
   - {fileID: 1499456400990417998}
   - {fileID: 899484062670775575}
   currentAnimator: {fileID: 0}
-  animators:
-  - {fileID: 3680549272476562666}
-  - {fileID: 1458073465689928833}
-  - {fileID: 815368641975056485}
+  networkAnimators:
+  - {fileID: 1589044221839880199}
+  - {fileID: 1118599568659083642}
+  - {fileID: 6651544955638272027}
   sword: {fileID: 427204379123777601}
   swordObj: {fileID: 0}
   canAttack: 1
@@ -583,7 +586,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1589044221839880199
+--- !u!114 &8556401316656760427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -597,6 +600,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 7322261762677545452}
+--- !u!114 &1589044221839880199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f68a9fbca9e77643bcfc9282c109328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 3680549272476562666}
+--- !u!114 &1118599568659083642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f68a9fbca9e77643bcfc9282c109328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 1458073465689928833}
+--- !u!114 &6651544955638272027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821210261037535891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f68a9fbca9e77643bcfc9282c109328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 815368641975056485}
 --- !u!1 &834360905279899570
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,14 +652,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7746712305423214264}
   - component: {fileID: 3680549272476562666}
-  - component: {fileID: 3139406909068994069}
+  - component: {fileID: 8360938484212449708}
   m_Layer: 7
   m_Name: SwordGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7746712305423214264
 Transform:
   m_ObjectHideFlags: 0
@@ -653,7 +698,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3139406909068994069
+--- !u!114 &8360938484212449708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -681,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2091276174875956109
 Transform:
   m_ObjectHideFlags: 0
@@ -708,14 +753,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1208797243746553076}
   - component: {fileID: 1458073465689928833}
-  - component: {fileID: 8394427496403701192}
+  - component: {fileID: 2477182489773830403}
   m_Layer: 7
   m_Name: Boxer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1208797243746553076
 Transform:
   m_ObjectHideFlags: 0
@@ -756,7 +801,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8394427496403701192
+--- !u!114 &2477182489773830403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11759,7 +11804,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 220404871b0d4444f911a92383a199f5,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1779625038441527937}
+      addedObject: {fileID: 3595085669272525251}
   m_SourcePrefab: {fileID: 100100000, guid: 220404871b0d4444f911a92383a199f5, type: 3}
 --- !u!1 &3563439600283425250 stripped
 GameObject:
@@ -11788,7 +11833,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1779625038441527937
+--- !u!114 &3595085669272525251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

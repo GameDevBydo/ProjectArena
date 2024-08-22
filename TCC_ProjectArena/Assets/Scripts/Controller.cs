@@ -172,9 +172,24 @@ public class Controller : NetworkBehaviour
     private Lobby joinedLobby;
     private float temporizadorAtivacaoLobby;
 
-    public int ConnectedClients()
+    public void ConnectedClients(Player player)
     {
-        return NetworkManager.ConnectedClients.Count;
+        if(IsHost)
+        {
+            switch(NetworkManager.ConnectedClients.Count)
+            {
+                case 2:
+                    player.SetPosition(new Vector3(2,0,-0.5f));
+                    break;
+                case 3:
+                    player.SetPosition(new Vector3(-1.5f,0,-0.8f));
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        Debug.Log("Não tem permissão pra isso");
     }
 
     private async void ManterLobbyAtivo()
@@ -383,6 +398,7 @@ public class Controller : NetworkBehaviour
                 Debug.Log("Onda não definida, usando inimigos da ultima onda.");
             }
         }
+
         canFillWaveSlots = true;
     }
 
@@ -480,9 +496,11 @@ public class Controller : NetworkBehaviour
     #endregion
 
     public GameObject[] enemyPrefabList;
+    public Vector2[] enemySpawnPoints;
     public Enemy SpawnEnemy(string user, int enemyId)
     {
-        Vector2 randomPos = Random.insideUnitCircle.normalized * 48;
+        int randomSpawnerId = Random.Range(0, 3);
+        Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle.normalized * 15;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         if (user != "AutoFill") e.name = e.name[..^8] + " de " + user;

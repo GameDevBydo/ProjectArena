@@ -7,6 +7,7 @@ using System;
 using UnityEngine.Rendering.Universal;
 
 
+
 public class Player : NetworkBehaviour
 {
 
@@ -22,6 +23,7 @@ public class Player : NetworkBehaviour
     public string playerName;
     void Awake()
     {
+        for (int i = 0;i<3;i++) characterModels[i].SetActive(false);
         playerName = Controller.instance.playerTempName;
         playerChar.OnValueChanged += LoadNewModel;
         life.OnValueChanged = OnLifeChanged;
@@ -44,7 +46,6 @@ public class Player : NetworkBehaviour
         if(IsOwner)
         {
             UIController.instance.ChangeClassIcons((int)newValue);
-            currentAnimator = animators[(int)newValue];
             maxlife = 120 - (int)newValue*20;
             movSpeed = (int)newValue == 1 ? 14 : 10;
         }
@@ -66,20 +67,8 @@ public class Player : NetworkBehaviour
             instance = this;
         }
         else LoadNewModel(playerChar.Value, playerChar.Value);
-        Debug.Log(Controller.instance.ConnectedClients());
-        switch(Controller.instance.ConnectedClients())
-        {
-            case 1:
-                break;
-            case 2:
-                SetPosition(new Vector3(2,0,-0.5f));
-                break;
-            case 3:
-                SetPosition(new Vector3(-1.5f,0,-0.8f));
-                break;
-            default:
-                break;
-        }
+
+        Controller.instance.ConnectedClients(this);
     }
 
     void Update()
@@ -194,7 +183,7 @@ public class Player : NetworkBehaviour
     #region Combat
     [Header("Combat")]
     public Animator currentAnimator;
-    public Animator[] animators;
+    public OwnerNetworkAnimator[] networkAnimators;
 
     public GameObject sword, swordObj;
     public bool canAttack = true, attacking = false;
@@ -273,7 +262,7 @@ public class Player : NetworkBehaviour
     {
         canAttack = false;
         attacking = true;
-        currentAnimator.Play(stateName);
+        networkAnimators[(int)playerChar.Value].Animator.Play(stateName);
     }
 
     public void StopAttacking()
@@ -309,7 +298,7 @@ public class Player : NetworkBehaviour
 
 
     [Header("Life")]
-    [SerializeField] NetworkVariable<float> life = new();
+    [SerializeField] NetworkVariable<float> life = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] float maxlife;
 
     public void PlayerDead()
@@ -318,10 +307,10 @@ public class Player : NetworkBehaviour
     }
     public void RemoveLife(float val)
     {
-        life.Value = Math.Clamp(life.Value-val, 0, maxlife);
-        if (life.Value <= 0) 
+        if(IsOwner)
         {
-            if(IsOwner)
+            life.Value = Math.Clamp(life.Value-val, 0, maxlife);
+            if (life.Value <= 0) 
             {
                 PlayerDead();
             }

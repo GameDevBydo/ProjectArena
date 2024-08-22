@@ -132,14 +132,18 @@ public class Enemy : NetworkBehaviour
         controller.Move(transform.forward * speed * Time.deltaTime);
     }
     float gravity = 9.81f;
+    Vector3 gravityVector;
     private bool isGrounded;
     void Gravity()
     {
         isGrounded = controller.isGrounded;
-        if (!isGrounded)
+        if(isGrounded)
         {
-            // Aplica a gravidade
-            Vector3 gravityVector = Vector3.down * gravity;
+            gravityVector = Vector3.zero;
+        }
+        else
+        {
+            gravityVector += Vector3.down * gravity * Time.deltaTime;
             controller.Move(gravityVector * Time.deltaTime);
         }
 
