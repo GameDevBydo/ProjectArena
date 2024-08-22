@@ -298,7 +298,6 @@ public class Enemy : NetworkBehaviour
         if(speed<maxSpeed) 
         {
             speed = Mathf.Clamp(speed+Time.deltaTime*2, 0, maxSpeed);
-            Debug.Log(speed);
         }
         else regainSpeed = false;
     }

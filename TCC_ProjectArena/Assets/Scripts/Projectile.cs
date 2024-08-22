@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     public enum projectileType
     {
@@ -26,19 +27,18 @@ public class Projectile : MonoBehaviour
         power = pType == projectileType.BOMB ? 5 : 15; // ESSA LINHA TA ESTRANHA CONFERIR DEPOIS **********
         GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
         if(pType == projectileType.BOMB) Invoke("Explode", 2);
-        else Destroy(gameObject, 2);
+        else Destroy_ServerRpc(2);
+    }
+
+    [Rpc(SendTo.Server)]
+    void Destroy_ServerRpc(float time)
+    {
+        Destroy(gameObject, time);
     }
 
     void OnTriggerEnter(Collider col)
     {
-        //if(col.tag == "Enemy")
-        //{
-        //    if(pType != projectileType.BOMB)Destroy(gameObject);
-        //}
-        //if(col.tag == "Ground")
-        //{
-        //    //transform.GetComponent<Collider>().enabled = false;
-        //}
+        
     }
 
     public GameObject explosionEmpty;
@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         explosionEmpty.SetActive(true);
-        Destroy(gameObject, 1.3f);
+        Destroy_ServerRpc(1.3f);
     }
 
 }

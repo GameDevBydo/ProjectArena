@@ -155,7 +155,6 @@ public class Player : NetworkBehaviour
 
     public void SetPosition(Vector3 pos)
     {
-        Debug.Log("Setou a posição " + pos);
         controller.enabled = false;
         transform.position = pos;
         controller.enabled = true;
@@ -275,14 +274,17 @@ public class Player : NetworkBehaviour
     public Transform[] projectileSpawn;
     public Transform bombSpawn;
     public GameObject projectile, bomb;
-    public void SpawnRegularProjectile(int spawnID)
+
+    [Rpc(SendTo.Server)]
+    public void SpawnRegularProjectile_ServerRpc(int spawnID)
     {
         GameObject e = Instantiate(projectile, projectileSpawn[spawnID].position, projectileSpawn[spawnID].rotation).gameObject;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();
     }
 
-    public void SpawnBombProjectile()
+    [Rpc(SendTo.Server)]
+    public void SpawnBombProjectile_ServerRpc()
     {
         GameObject e = Instantiate(bomb, bombSpawn.position, bombSpawn.rotation).gameObject;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();

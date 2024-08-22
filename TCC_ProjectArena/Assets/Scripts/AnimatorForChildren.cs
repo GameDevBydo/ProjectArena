@@ -13,11 +13,11 @@ public class AnimatorForChildren : MonoBehaviour
 
     public void _SpawnProjectile()
     {
-        player.SpawnRegularProjectile(0);
+        if(player.IsOwner) player.SpawnRegularProjectile_ServerRpc(0);
     }
 
     public void _SpawnBomb()
     {
-        player.SpawnBombProjectile();
+        if(player.IsOwner) player.SpawnBombProjectile_ServerRpc();
     }
 }
