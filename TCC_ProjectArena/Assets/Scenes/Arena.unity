@@ -23034,7 +23034,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b259f06c70ccb944a88a5575a2c7e91a, type: 2}
+  - {fileID: 2100000, guid: edbc528c45132b24d804a7519497a1d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23055,7 +23055,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -23078,7 +23078,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -51532,7 +51532,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 1de50a7833688e64bb93033995d2e189, type: 2}
+      objectReference: {fileID: 2100000, guid: 2fb11bfe57370824d9769679c47945fa, type: 2}
     - target: {fileID: 8166375266451699863, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -51541,7 +51541,7 @@ PrefabInstance:
     - target: {fileID: 8378111021947827630, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.6
+      value: -1.67
       objectReference: {fileID: 0}
     - target: {fileID: 8378111021947827630, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
@@ -51551,7 +51551,7 @@ PrefabInstance:
     - target: {fileID: 8378111021947827630, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.6
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 8378111021947827630, guid: ee90375b8afd67b47b602652eba8c591,
         type: 3}
