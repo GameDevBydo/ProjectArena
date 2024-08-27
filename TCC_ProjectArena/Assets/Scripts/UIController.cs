@@ -7,6 +7,24 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    public void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            StartGame();
+        }
+    }
+     [SerializeField]  Animator animCamera;
+    [SerializeField] TMP_Text  txtStartGame;
+    bool startibg = false;
+
+    public void StartGame()
+    {
+        if (!startibg && animCamera) animCamera.Play("Cam1");
+        if(txtStartGame)txtStartGame.gameObject.SetActive(false);
+        startibg = true;
+      
+    }
 
     public void ExitGame()
     {
