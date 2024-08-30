@@ -6405,6 +6405,7 @@ GameObject:
   - component: {fileID: 266313654}
   - component: {fileID: 266313656}
   - component: {fileID: 266313655}
+  - component: {fileID: 266313657}
   m_Layer: 0
   m_Name: TelhaGrande (5)
   m_TagString: Untagged
@@ -6477,6 +6478,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266313653}
   m_Mesh: {fileID: 8319187235964647023, guid: 467b0ddf7c949834f9f74d0c266aecf2, type: 3}
+--- !u!65 &266313657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266313653}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422349, y: 0.00076337013, z: 0.008727219}
+  m_Center: {x: -0.0021776352, y: 0.00011831338, z: -0.0000000018644528}
 --- !u!1001 &281074981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6591,6 +6613,7 @@ GameObject:
   - component: {fileID: 285035936}
   - component: {fileID: 285035938}
   - component: {fileID: 285035937}
+  - component: {fileID: 285035939}
   m_Layer: 0
   m_Name: TelhaGrande (2)
   m_TagString: Untagged
@@ -6663,6 +6686,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285035935}
   m_Mesh: {fileID: 8319187235964647023, guid: 467b0ddf7c949834f9f74d0c266aecf2, type: 3}
+--- !u!65 &285035939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285035935}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422352, y: 0.0007633695, z: 0.00872722}
+  m_Center: {x: -0.0021776482, y: 0.00011831167, z: -0.000000004656613}
 --- !u!1 &287703360
 GameObject:
   m_ObjectHideFlags: 0
@@ -7008,6 +7052,7 @@ GameObject:
   - component: {fileID: 418399642}
   - component: {fileID: 418399644}
   - component: {fileID: 418399643}
+  - component: {fileID: 418399645}
   m_Layer: 0
   m_Name: TelhaGrande (3)
   m_TagString: Untagged
@@ -7080,6 +7125,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418399641}
   m_Mesh: {fileID: 8319187235964647023, guid: 467b0ddf7c949834f9f74d0c266aecf2, type: 3}
+--- !u!65 &418399645
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418399641}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422352, y: 0.0007633695, z: 0.00872722}
+  m_Center: {x: -0.0021776482, y: 0.00011831167, z: -0.0000000018626451}
 --- !u!1 &439555505
 GameObject:
   m_ObjectHideFlags: 0
@@ -18042,6 +18108,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 373244703}
     m_Modifications:
+    - target: {fileID: 1222055118278422635, guid: 7e7607cc56b7d564dbacf8f566037d9a,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3488178175076405668, guid: 7e7607cc56b7d564dbacf8f566037d9a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18262,6 +18333,7 @@ GameObject:
   - component: {fileID: 2029887720}
   - component: {fileID: 2029887722}
   - component: {fileID: 2029887721}
+  - component: {fileID: 2029887723}
   m_Layer: 0
   m_Name: TelhaGrande (4)
   m_TagString: Untagged
@@ -18334,6 +18406,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029887719}
   m_Mesh: {fileID: 8319187235964647023, guid: 467b0ddf7c949834f9f74d0c266aecf2, type: 3}
+--- !u!65 &2029887723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029887719}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422349, y: 0.00076337013, z: 0.008727219}
+  m_Center: {x: -0.0021776366, y: 0.00011831524, z: 9.2951485e-10}
 --- !u!1 &2058269856
 GameObject:
   m_ObjectHideFlags: 0
