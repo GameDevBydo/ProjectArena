@@ -203,8 +203,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.462609, y: 1.3882488, z: 0.09149788}
-  m_Center: {x: -0.64736176, y: 0.48830456, z: -0.1471034}
+  m_Size: {x: 2.462609, y: 1.3882488, z: 1.0627697}
+  m_Center: {x: -0.64736176, y: 0.48830456, z: -0.63273966}
 --- !u!1 &4552110838022531348
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +479,7 @@ PrefabInstance:
     - target: {fileID: 47666368901321339, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.23
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 676109019820887700, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
@@ -499,7 +499,7 @@ PrefabInstance:
     - target: {fileID: 2176178512846660910, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.23
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 3623360928839643390, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
@@ -569,7 +569,7 @@ PrefabInstance:
     - target: {fileID: 7273363994078865896, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.61
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 9149877575558071785, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
@@ -584,9 +584,13 @@ PrefabInstance:
     - target: {fileID: 9149877575558071785, guid: 055af58e617de1b4f9aa85a2bd861977,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.61
+      value: 2.7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2739419245673308045, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
+    - {fileID: 6365805260448122911, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
+    - {fileID: 4327559445768156044, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
+    - {fileID: 5101994213576965962, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7827501558642813585, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
     - {fileID: 1324895991428755265, guid: 055af58e617de1b4f9aa85a2bd861977, type: 3}
