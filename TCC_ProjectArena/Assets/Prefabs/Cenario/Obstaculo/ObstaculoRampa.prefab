@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8082692001546854245}
   - component: {fileID: 7478728423465664883}
   - component: {fileID: 2856692159386389892}
+  - component: {fileID: 1616603155319271282}
   m_Layer: 0
   m_Name: TelhaGrande (1)
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1616603155319271282
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421642567242164635}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422349, y: 0.0007633701, z: 0.008727221}
+  m_Center: {x: -0.0021776347, y: 0.00011831458, z: 7.772475e-11}
 --- !u!1 &1113514056958345883
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2412029880135110138}
+  - component: {fileID: 6790230697875939767}
   m_Layer: 0
   m_Name: Muro3 (1)
   m_TagString: Untagged
@@ -161,6 +184,27 @@ Transform:
   - {fileID: 2316906694212913764}
   m_Father: {fileID: 3155186231412097628}
   m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+--- !u!65 &6790230697875939767
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4392091997577593732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.462609, y: 1.3882488, z: 0.09149788}
+  m_Center: {x: -0.64736176, y: 0.48830456, z: -0.1471034}
 --- !u!1 &4552110838022531348
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +216,7 @@ GameObject:
   - component: {fileID: 3391902102325224420}
   - component: {fileID: 7839294375629832567}
   - component: {fileID: 8767207418285018528}
+  - component: {fileID: 2307793568464858162}
   m_Layer: 0
   m_Name: TelhaGrande
   m_TagString: Untagged
@@ -244,6 +289,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2307793568464858162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552110838022531348}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011422349, y: 0.00076337095, z: 0.008727224}
+  m_Center: {x: -0.0021776343, y: 0.000118313284, z: 7.8136575e-10}
 --- !u!1001 &328257924395438662
 PrefabInstance:
   m_ObjectHideFlags: 0
