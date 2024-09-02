@@ -21,6 +21,8 @@ public class Enemy : NetworkBehaviour
     public float maxHitPoints;
 
     public NetworkVariable<float> hitPointsN = new();
+    public NetworkVariable<int> rustStacksN = new();
+    public int rustStacks;
     public float hitPoints;
 
     public bool waveStart = false;
@@ -35,6 +37,7 @@ public class Enemy : NetworkBehaviour
     {
         main = Controller.instance;
         hitPointsN.OnValueChanged += OnLifeChanged;
+        rustStacksN.OnValueChanged += OnStacksChanged;
     }
 
     private void OnLifeChanged(float previousValue, float newValue)
@@ -42,9 +45,18 @@ public class Enemy : NetworkBehaviour
         UpdateLifeBar();
     }
 
+    private void OnStacksChanged(int previousValue, int newValue)
+    {
+        UpdateStacksIcon();
+    }
+
     public override void OnNetworkSpawn()
     {
-        if (IsOwner) hitPointsN.Value = maxHitPoints;
+        if (IsOwner)
+        {
+            hitPointsN.Value = maxHitPoints;
+            rustStacksN.Value = 0;
+        }
     }
 
 
@@ -177,6 +189,7 @@ public class Enemy : NetworkBehaviour
                         hitN.Value = true;
                         StartCoroutine(StopInvulnerability());
                         TakeDamage(hitProjectile.damage);
+                        TakeRust();
                         knockback.SetKnockback(-transform.forward, hitProjectile.pushback);
                         if(hitProjectile.pType != Projectile.projectileType.BOMB) Destroy(collider.gameObject);
                         regainSpeed = true;
@@ -196,6 +209,13 @@ public class Enemy : NetworkBehaviour
     void UpdateLifeBar()
     {
         lifeBar.fillAmount = hitPointsN.Value / maxHitPoints;
+    }
+
+    public GameObject stacksIcon;
+    public TextMeshProUGUI stacksNumber;
+    void UpdateStacksIcon()
+    {
+        stacksNumber.text = rustStacksN.Value.ToString();
     }
 
     #region Modifiers
@@ -229,11 +249,30 @@ public class Enemy : NetworkBehaviour
     }
 
     #endregion
-
+    
+    public GameObject damageTextPopUp;
     void TakeDamage(float damage)
     {
         hitPointsN.Value -= Mathf.Floor(damage*dmgTakenMod);
+
+        GameObject dmgTxt = Instantiate(damageTextPopUp, transform.position+ Vector3.up*2, Quaternion.identity).gameObject;
+        dmgTxt.GetComponent<PopUpText>().damageValue = Mathf.Floor(damage*dmgTakenMod);
+        NetworkObject dmgTextNetwork = dmgTxt.GetComponent<NetworkObject>();
+        dmgTextNetwork.Spawn();
+
         if (hitPointsN.Value <= 0) Death();
+    }
+
+    void TakeRust()
+    {
+        stacksIcon.SetActive(true);
+        rustStacksN.Value++;
+        if(rustStacksN.Value==4)
+        {
+            TakeDamage(100*dmgTakenMod);
+            rustStacksN.Value = 0;
+            stacksIcon.SetActive(false);
+        }
     }
 
     void Death()
@@ -278,7 +317,7 @@ public class Enemy : NetworkBehaviour
     public void a_SpawnExplosion()
     {
         Instantiate(explosion, transform.position, explosion.transform.rotation);
-        TakeDamage(999);
+        TakeDamage(this.maxHitPoints);
     }
     public void CallAnimation(string stateName)
     {
