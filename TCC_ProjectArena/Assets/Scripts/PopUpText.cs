@@ -16,7 +16,7 @@ public class PopUpText : NetworkBehaviour
         {
             textObject.text = damageValue.ToString();
             transform.localPosition += new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
-            textObject.fontSize = 0.5f+ damageValue/500;
+            textObject.fontSize = Mathf.Clamp(0.5f+ damageValue/100, 0.5f, 1.5f);
             Invoke(nameof(Despawn), 3);
         }
     }
