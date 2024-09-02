@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7805904075844743634}
   - component: {fileID: 5051746746780259022}
   - component: {fileID: 7793731623347906728}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7752295117167501273}
   - component: {fileID: 4409018693353747283}
   - component: {fileID: 6879348968121945984}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ratinho
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2627316238
+  GlobalObjectIdHash: 1105633159
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5865997739633452819}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 5351626292435701263}
   - component: {fileID: 5089982731225594592}
   - component: {fileID: 1397299010438964574}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 8979696046317208034}
   - component: {fileID: 5467936564447402129}
   - component: {fileID: 5484971731705505866}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 2342208342706895144}
   - component: {fileID: 1446847647833054870}
   - component: {fileID: 3785942575559735414}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 3975781710904036001}
   - component: {fileID: 6526490023305682965}
   - component: {fileID: 4375935585852316687}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 8761691898822345442}
   - component: {fileID: 2068059815548781377}
   - component: {fileID: 4582800972760320631}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,7 +873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2275470840447746299}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Debuffs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 3320284463095286983}
   - component: {fileID: 75658006800218977}
   - component: {fileID: 7317942796719217521}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: StatcksNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 6286488017909907948}
   - component: {fileID: 4763597603846942336}
   - component: {fileID: 1267523063381822525}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1124,7 @@ GameObject:
   - component: {fileID: 2802967219218681295}
   - component: {fileID: 6991409216665236398}
   - component: {fileID: 7049925790089793959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1226,7 +1226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657799233919960992}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: EnemyInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,6 +1262,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2976443418347609090}
     m_Modifications:
+    - target: {fileID: 1361628265068085972, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531631202509898899, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2727408921293737393, guid: c3e67310a7496084b8844daf73520817,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1327,10 +1337,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3201348814264100905, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3355853911553578763, guid: c3e67310a7496084b8844daf73520817,
         type: 3}
       propertyPath: m_Name
       value: RoboRato
+      objectReference: {fileID: 0}
+    - target: {fileID: 3355853911553578763, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724476432958956097, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947976148877659660, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4499758091528093770, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4896421559260453073, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355306678215972310, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507924311380781507, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852569998284901202, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408914051743128757, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374511017518125267, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514915345304039644, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188517922774863468, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191596101783327132, guid: c3e67310a7496084b8844daf73520817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

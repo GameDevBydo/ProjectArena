@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2538894499548013050}
   - component: {fileID: 5326122105822408222}
   - component: {fileID: 8041696437373532981}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: StatcksNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 1119533886617835124}
   - component: {fileID: 907038247033898032}
   - component: {fileID: 2664717476659230064}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 6178169333952576197}
   - component: {fileID: 7752295117167501273}
   - component: {fileID: 4409018693353747283}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: E. E.
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 107045281
+  GlobalObjectIdHash: 2715751661
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -486,7 +486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734999779047528017}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 3729516859852066360}
   - component: {fileID: 4357330322533905928}
   - component: {fileID: 2875669138044782291}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1154849558970975158}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: EnemyInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 6748547174503408554}
   - component: {fileID: 2857439402750190295}
   - component: {fileID: 4060319016441914032}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 7004412845447586406}
   - component: {fileID: 7128944626976865171}
   - component: {fileID: 6264713602465117822}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 6118611077943958439}
   - component: {fileID: 5503803219445946539}
   - component: {fileID: 4154820880080573602}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -883,7 +883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5859726370316604800}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7593195618621924708}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Debuffs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 1412679624810432132}
   - component: {fileID: 105096423292434901}
   - component: {fileID: 2637124281689749182}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 5642010377598529031}
   - component: {fileID: 8185229511419937033}
   - component: {fileID: 3805296011325490119}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1232,10 +1232,75 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8631217679340567049, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8046198938569837308, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7013171173980087620, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5682848674698100543, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4970784518090755363, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4714279640157782486, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4554994915188925842, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3454760705106115955, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a3f75768bc162984c9a053f55bcbb3d8,
         type: 3}
       propertyPath: m_Name
       value: InimigoBomba (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163515137725304967, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114687863632554030, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574011718848045650, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171522348934599256, guid: a3f75768bc162984c9a053f55bcbb3d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
