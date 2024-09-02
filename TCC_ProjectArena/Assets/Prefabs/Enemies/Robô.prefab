@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4603715733841774685}
   - component: {fileID: -7346983349326242971}
   - component: {fileID: -1943217943169666226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "Rob\xF4"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1176680779
+  GlobalObjectIdHash: 817536255
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1584203523534366782}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Debuffs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205602435601964382}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 1174533754357776649}
   - component: {fileID: 5828936377102525198}
   - component: {fileID: 718176658105141795}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 5243703021948555575}
   - component: {fileID: 189081882256417252}
   - component: {fileID: 4214638462914687563}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 2302646058067465604}
   - component: {fileID: 5579875691816588733}
   - component: {fileID: 8033828895072153614}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: StatcksNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 5420080720424972351}
   - component: {fileID: 9094589583439896524}
   - component: {fileID: 1031812825208105969}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 6793153632826117063}
   - component: {fileID: 7661291838479526376}
   - component: {fileID: 1624524241797584469}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBarOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 1876007282339762184}
   - component: {fileID: 898270289950192712}
   - component: {fileID: 1532457995053897949}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 390814611058375152}
   - component: {fileID: 1918662023281623301}
   - component: {fileID: 3688398172665550900}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 3543790771372640230}
   - component: {fileID: 717602027525113132}
   - component: {fileID: 3838404125856196366}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,7 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4259382113250400372}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: EnemyInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 3846208899891542243}
   - component: {fileID: 7385946245429747670}
   - component: {fileID: 7384341835253441482}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: LifeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1240,6 +1240,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2976443418347609090}
     m_Modifications:
+    - target: {fileID: 204057721672912799, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 904677205303019382, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1038020914977343640, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1290,10 +1300,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1800975856988259262, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822949996099641323, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830994794377879668, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161809620248600960, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443888729802183994, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3959183839297662473, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
         type: 3}
       propertyPath: m_Name
       value: RoboRoda
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959183839297662473, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067133895425014902, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151398340595822359, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757133432590957329, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7276667367728469323, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
         type: 3}
@@ -1309,6 +1364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047997158211817457, guid: 0cfec77cb87a7954e965a5fc42eb7f69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
