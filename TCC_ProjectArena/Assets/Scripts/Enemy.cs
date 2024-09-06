@@ -256,7 +256,7 @@ public class Enemy : NetworkBehaviour
         hitPointsN.Value -= Mathf.Floor(damage*dmgTakenMod);
 
         GameObject dmgTxt = Instantiate(damageTextPopUp, transform.position+ Vector3.up*2, Quaternion.identity).gameObject;
-        dmgTxt.GetComponent<PopUpText>().damageValue = Mathf.Floor(damage*dmgTakenMod);
+        dmgTxt.GetComponent<PopUpText>().damageValue.Value = Mathf.Floor(damage*dmgTakenMod);
         NetworkObject dmgTextNetwork = dmgTxt.GetComponent<NetworkObject>();
         dmgTextNetwork.Spawn();
 

@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIController : MonoBehaviour
+public class UIController : NetworkBehaviour
 {
     public void Update()
     {
@@ -109,6 +109,7 @@ public class UIController : MonoBehaviour
     [Rpc(SendTo.Everyone)]
     public void PrintSpawnAlertRpc(string user, string enemyName)
     {
+        Debug.Log("CADE OS BICHOOOO SENDO SPAWNADOOOOO");
         alertsText.gameObject.SetActive(true);
         alertsText.text += "\n" + user + " selecionou " + enemyName + " para a batalha.";
         StartCoroutine(HideAlerts());

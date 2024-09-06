@@ -18,7 +18,7 @@ public class Player : NetworkBehaviour
 
     Controller main;
 
-    [SerializeField] private Camera playerOwnCamera;
+    [SerializeField] public Camera playerOwnCamera;
 
     public string playerName;
     void Awake()

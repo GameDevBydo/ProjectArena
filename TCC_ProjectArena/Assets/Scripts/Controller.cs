@@ -370,12 +370,14 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void OpenSlotsInWaveRpc() //Abre a fila para ser preenchida pelo chat. Automaticamente se preenche inteiramente com os inimigos recomendados da wave, ou da wave anterior.
     {
+        Debug.Log("FUICHAMADO MESMO AQUI NO INICIO");
         slotsFilled = 0;
         UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 14.5f);
         FillWave();
         StartCoroutine(UIController.instance.UpdateWaveFillTimer(15f));
-        Invoke(nameof(CloseSlotsInWave), 15f);
-        Invoke(nameof(StartCurrentWave), 13f);
+        Invoke(nameof(CloseSlotsInWave), 13f);
+        Invoke(nameof(StartCurrentWave), 15f);
+        Debug.Log("Chamei aqui YEY");
     }
 
     public void FillWave()
@@ -456,9 +458,9 @@ public class Controller : NetworkBehaviour
                     }
                 }
                 
-                UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
             }
         }
+        UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
     }
 
     int enemiesAlive = 0;
@@ -480,17 +482,22 @@ public class Controller : NetworkBehaviour
         enemiesAlive--;
         Debug.Log("Inimigos vivos: " + enemiesAlive);
         if (enemiesAlive <= Mathf.RoundToInt(enemiesInWave.Length/3)) AudioControlador.instance.FadeInChant();
-        if (enemiesAlive <= 0) WaveCleared();
+        if (enemiesAlive <= 0) WaveClearedRpc();
     }
 
-    void WaveCleared() // Finaliza a wave e inicia a abertura de slots da próxima. 
+    [Rpc(SendTo.Everyone)]
+    void WaveClearedRpc() // Finaliza a wave e inicia a abertura de slots da próxima. 
     {
+        if(IsHost)
+        {
+            waveNumber++;
+            if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);
+            else Invoke(nameof(OpenVoting), 5);
+            cerca.GetComponent<MovableObject>().MoveY(-30);
+        }
+
         UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 
-        waveNumber++;
         AudioControlador.instance.PlayCheer();
-        if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);
-        else Invoke(nameof(OpenVoting), 5);
-        cerca.GetComponent<MovableObject>().MoveY(-30);
     }
 
     #endregion
@@ -500,7 +507,7 @@ public class Controller : NetworkBehaviour
     public Enemy SpawnEnemy(string user, int enemyId)
     {
         int randomSpawnerId = Random.Range(0, 3);
-        Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle.normalized * 15;
+        Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle * 15;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         if (user != "AutoFill") e.name = e.name[..^8] + " de " + user;
@@ -519,8 +526,7 @@ public class Controller : NetworkBehaviour
 
 
     public SO_VotingEffect[] effectsInfo;
-    SO_VotingEffect effect1;
-    SO_VotingEffect effect2;
+    int effect1, effect2;
     [HideInInspector]
     public float votingValue1, votingValue2;
     int vote1 = 0, vote2 = 0;
@@ -529,25 +535,32 @@ public class Controller : NetworkBehaviour
     {
         FillWave();
         CloseSlotsInWave();
-        UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
-        UIController.instance.votingArea.SetActive(true); // AQUI TÁ SÓ PRO HOST POR ENQUANTO, TEM QUE FAZER RPC DISSO AQUI PELAMOR DE DEUS
         votingValue1 = Random.Range(1, 5);
         votingValue2 = Random.Range(1, 5);
-        effect1 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
+        effect1 = Random.Range(0,effectsInfo.Length-1);
         do
         {
-            effect1 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
-            effect2 = effectsInfo[Random.Range(0,effectsInfo.Length-1)];
+            effect1 = Random.Range(0,effectsInfo.Length-1);
+            effect2 = Random.Range(0,effectsInfo.Length-1);
         } 
-        while(effect1.effectName==effect2.effectName);
-        UIController.instance.FillOption1Info(effect1, votingValue1*25);
-        UIController.instance.FillOption2Info(effect2, votingValue2*25);
+        while(effect1==effect2);
+
         votingName = new List<string>();
         vote1 = 0;
         vote2 = 0;
-        UIController.instance.UpdateVotingSlider(1,2);
-        
         canVote = true;
+            
+        ShowVotingRpc(effect1, effect2, votingValue1, votingValue2);
+    }
+
+    [Rpc(SendTo.Everyone)]
+    public void ShowVotingRpc(int effect1, int effect2, float votingValue1, float votingValue2)
+    {
+        UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
+        UIController.instance.votingArea.SetActive(true);
+        UIController.instance.FillOption1Info(effectsInfo[effect1], votingValue1*25);
+        UIController.instance.FillOption2Info(effectsInfo[effect2], votingValue2*25);
+        UIController.instance.UpdateVotingSlider(1,2);
         Invoke("CloseVoting", 15f);
     }
     public void ChatterVote(string name, string vote)
@@ -594,8 +607,8 @@ public class Controller : NetworkBehaviour
         
         Debug.Log(votingWinner);
 
-        if(votingWinner==1) winnerEffect = effect1;
-        else winnerEffect = effect2;
+        if(votingWinner==1) winnerEffect = effectsInfo[effect1];
+        else winnerEffect = effectsInfo[effect2];
         
         if(winnerEffect.effectTarget == 0)
         {
@@ -609,9 +622,14 @@ public class Controller : NetworkBehaviour
             }
         }
 
-        UIController.instance.WriteOnHeader( "Efeito: " + winnerEffect.effectName +" venceu!!!", 10f);
+        VoteResultsRpc(winnerEffect.effectName);
+    }
 
-        UIController.instance.votingArea.SetActive(false); // AQUI TÁ SÓ PRO HOST POR ENQUANTO, TEM QUE FAZER RPC DISSO AQUI PELAMOR DE DEUS
+    [Rpc(SendTo.Everyone)]
+    public void VoteResultsRpc(string effectName)
+    {
+        UIController.instance.WriteOnHeader( "Efeito: " + effectName +" venceu!!!", 10f);
+        UIController.instance.votingArea.SetActive(false);
     }
 
     #endregion
