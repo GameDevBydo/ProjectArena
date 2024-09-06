@@ -15,14 +15,20 @@ public class UIController : MonoBehaviour
         }
     }
      [SerializeField]  Animator animCamera;
+    [SerializeField] Animator animDor;
     [SerializeField] TMP_Text  txtStartGame;
     bool startibg = false;
 
     public void StartGame()
     {
-        if (!startibg && animCamera) animCamera.Play("Cam1");
-        if(txtStartGame)txtStartGame.gameObject.SetActive(false);
-        startibg = true;
+        if (!startibg)
+        {
+            if (animCamera) animCamera.Play("Cam1");
+            if (animDor)animDor.Play("portao");
+            if (txtStartGame) txtStartGame.gameObject.SetActive(false);
+            startibg = true;
+        }
+            
       
     }
 
