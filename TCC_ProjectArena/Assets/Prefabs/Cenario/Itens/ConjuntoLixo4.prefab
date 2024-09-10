@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3896318021239220908}
   - component: {fileID: 8244527088930450916}
   m_Layer: 0
-  m_Name: ConjuntoLixo3 1
+  m_Name: ConjuntoLixo4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,6 +824,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3896318021239220908}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 31a7d54cb24f76449a06dd5f6ba7c2b3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.043
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31a7d54cb24f76449a06dd5f6ba7c2b3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.043
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31a7d54cb24f76449a06dd5f6ba7c2b3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.043
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31a7d54cb24f76449a06dd5f6ba7c2b3,
         type: 3}
       propertyPath: m_LocalPosition.x
