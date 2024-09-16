@@ -112,14 +112,15 @@ PrefabInstance:
     - target: {fileID: 7529101096361035958, guid: 068c580fef2f676458cd6f1b675ce9bd,
         type: 3}
       propertyPath: m_Name
-      value: BarrilMetalico (5) Variant
+      value: BarrilMetalicoNew
       objectReference: {fileID: 0}
     - target: {fileID: 8321598771996993891, guid: 068c580fef2f676458cd6f1b675ce9bd,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e823ce51220363740a433c5f4aed1eb6, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2557506158809841955, guid: 068c580fef2f676458cd6f1b675ce9bd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
