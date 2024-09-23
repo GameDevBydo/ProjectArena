@@ -23,12 +23,15 @@ public class Controller : NetworkBehaviour
 
     public NetworkVariable<bool> runStartedN = new();
     public HudPlayer hudPlayer;
+    [SerializeField] Animator animator;
 
     [HideInInspector]
     public bool online = false;
 
     [HideInInspector]
     public string playerTempName;
+    
+    
 
     void Awake()
     {

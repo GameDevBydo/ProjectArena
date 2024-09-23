@@ -210,9 +210,14 @@ public class UIController : NetworkBehaviour
     #region Connections and Lobby
 
     [Header("Lobby")]
+   public GameObject panelLobby;
     public Toggle lobbyCreateIsPrivateToggle;
     public TMP_InputField lobbyCreateNameInput, lobbyJoinCodeInput;
     public TextMeshProUGUI lobbyCodeText;
+    public void ActivePanelLobby(bool active)
+    {
+        panelLobby.SetActive(active);
+    }
 
     public void CreateLobbyButton()
     {
