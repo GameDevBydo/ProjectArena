@@ -181,11 +181,14 @@ public class Controller : NetworkBehaviour
         {
             switch(NetworkManager.ConnectedClients.Count)
             {
+                case 1:
+                    player.SetPosition(new Vector3(-2.77f, 2.68f, 2.88155f));
+                    break;
                 case 2:
-                    player.SetPosition(new Vector3(2,0,-0.5f));
+                    player.SetPosition(new Vector3(1.93f, 2.68f, 2.88155f));
                     break;
                 case 3:
-                    player.SetPosition(new Vector3(-1.5f,0,-0.8f));
+                    player.SetPosition(new Vector3(-7.95f, 2.68f, 2.88155f));
                     break;
                 default:
                     break;
