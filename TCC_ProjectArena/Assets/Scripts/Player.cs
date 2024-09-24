@@ -68,6 +68,7 @@ public class Player : NetworkBehaviour
         }
         else LoadNewModel(playerChar.Value, playerChar.Value);
 
+        if(IsHost) SetPosition(new Vector3(-3.01f, 2.78f, 2.88155f));
         Controller.instance.ConnectedClients(this);
     }
 
