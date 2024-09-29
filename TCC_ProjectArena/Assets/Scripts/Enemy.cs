@@ -192,6 +192,7 @@ public class Enemy : NetworkBehaviour
                         TakeRust();
                         knockback.SetKnockback(-transform.forward, hitProjectile.pushback);
                         if(hitProjectile.pType != Projectile.projectileType.BOMB) Destroy(collider.gameObject);
+                        else TakeRust();
                         regainSpeed = true;
                     }
                 }
