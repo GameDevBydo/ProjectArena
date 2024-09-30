@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
-using System;
 using Unity.VisualScripting;
 
 public class Enemy : NetworkBehaviour
@@ -31,6 +30,9 @@ public class Enemy : NetworkBehaviour
 
     public float damage = 5;
 
+    public Transform[] hitFXSpawns;
+    public ParticleSystem hitFX;
+
     Controller main;
 
     void Awake()
@@ -43,6 +45,8 @@ public class Enemy : NetworkBehaviour
     private void OnLifeChanged(float previousValue, float newValue)
     {
         UpdateLifeBar();
+        int spawnID = Random.Range(0, hitFXSpawns.Length);
+        Instantiate(hitFX, hitFXSpawns[spawnID].position, hitFXSpawns[spawnID].rotation);
     }
 
     private void OnStacksChanged(int previousValue, int newValue)
