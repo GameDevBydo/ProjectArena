@@ -7488,13 +7488,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039913797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43693158, y: 0.55273694, z: -0.36224452, w: 0.6102063}
+  m_LocalRotation: {x: 0.22917077, y: 0.7670636, z: -0.5192409, w: 0.29913726}
   m_LocalPosition: {x: -0.63, y: 4.07, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 69.017, y: 88.857, z: 6.563}
+  m_LocalEulerAnglesHint: {x: 69.017, y: 141.906, z: 6.563}
 --- !u!114 &1039913800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19706,7 +19706,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8056718885330383686, guid: e8c79f84bd249d346a7f13f1d312decb, type: 3}
+  - {fileID: 2100000, guid: a89ae85801e70964e8683b1aae89aca9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22664,9 +22664,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
+      propertyPath: enemyPrefabList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
       propertyPath: enemySpawnPoints.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemyPrefabList.Array.data[4]
+      value: 
+      objectReference: {fileID: 421303986768206655, guid: a45c942ce8f24024abefd472f26e5a80,
+        type: 3}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemyPrefabList.Array.data[5]
+      value: 
+      objectReference: {fileID: 421303986768206655, guid: 5d6af4a08cf0cc4478db16d6be4db7ea,
+        type: 3}
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: enemySpawnPoints.Array.data[0].x

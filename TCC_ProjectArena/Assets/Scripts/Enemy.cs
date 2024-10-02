@@ -327,6 +327,20 @@ public class Enemy : NetworkBehaviour
         Instantiate(explosion, transform.position, explosion.transform.rotation);
         TakeDamage(this.maxHitPoints);
     }
+
+    public Transform projectileSpawnL, projectileSpawnR;
+    bool leftSpawn = true;
+    public void SpawnProjectile()
+    {
+        EnemyProjectile eProj = Instantiate(explosion, 
+        leftSpawn ? projectileSpawnL.position : projectileSpawnR.position,
+        leftSpawn ? projectileSpawnL.rotation : projectileSpawnR.rotation).GetComponent<EnemyProjectile>();
+        
+        eProj.rb.AddForce(eProj.transform.forward*10, ForceMode.Impulse);
+        eProj.damage = damage;
+
+        leftSpawn = !leftSpawn;
+    }
     public void CallAnimation(string stateName)
     {
         canAttack = false;

@@ -5,6 +5,7 @@ using TMPro;
 using Unity.Netcode;
 using System;
 using UnityEngine.Rendering.Universal;
+using Unity.VisualScripting;
 
 
 
@@ -325,14 +326,22 @@ public class Player : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        switch(other.tag)
         {
-            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
-            RemoveLife(enemy.damage*enemy.dmgDealtMod);
-        }
-        else if(other.gameObject.CompareTag("Explosion"))
-        {
-            RemoveLife(20);
+            case "Enemy":
+                Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+                RemoveLife(enemy.damage*enemy.dmgDealtMod);
+                break;
+            case "Explosion":
+                RemoveLife(20);
+                break;
+            case "EnemyProjectile":
+                EnemyProjectile enemyP = other.gameObject.GetComponent<EnemyProjectile>();
+                RemoveLife(enemyP.damage);
+                break; 
+            default:
+                Debug.Log("Dano sem tag");
+                break;
         }
     }
 
