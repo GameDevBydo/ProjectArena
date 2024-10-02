@@ -102,10 +102,10 @@ public class Enemy : NetworkBehaviour
             Rotation();
             if (waveStart)
             {
-                CheckPlayerDistance();
                 if(activeGavity) Gravity();
                 if (!inRange) Movement();
                 if(regainSpeed) RegainSpeed();
+                CheckPlayerDistance();
             }
             if (readyAttack)
             {
@@ -120,6 +120,9 @@ public class Enemy : NetworkBehaviour
                     break;
                     case 3:
                         ExplosionAttack();
+                    break;
+                    case 4:
+                        LightAttack("RV_ATK");
                     break;
                     default:
                         Debug.Log("Sem animação de combate.");
