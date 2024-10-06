@@ -120,6 +120,7 @@ public class Enemy : NetworkBehaviour
                         break;
                     case 3:
                         ExplosionAttack();
+                        Debug.Log("chamou a funcao");
                         break;
                     case 4:
                         LightAttack("RV_ATK");
@@ -322,6 +323,7 @@ public class Enemy : NetworkBehaviour
     {
         if (canAttack)
         {
+            Debug.Log("chamo a animação");
             CallAnimation("explodeSelf");
         }
     }
@@ -330,6 +332,7 @@ public class Enemy : NetworkBehaviour
     public void a_SpawnExplosion()
     {
         Instantiate(explosion, transform.position, explosion.transform.rotation);
+        Debug.Log("explodiu");
         TakeDamage(this.maxHitPoints);
     }
 

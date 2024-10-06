@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3229348620
+  GlobalObjectIdHash: 709164054
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -128,6 +128,7 @@ MonoBehaviour:
   animator: {fileID: 8717064608579955612}
   canAttack: 1
   attacking: 0
+  attackRange: 1.5
   explosion: {fileID: 0}
   projectileSpawnL: {fileID: 0}
   projectileSpawnR: {fileID: 0}
@@ -461,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.82}
+  m_AnchoredPosition: {x: 0, y: 2.75}
   m_SizeDelta: {x: 10, y: 11.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5243703021948555575
