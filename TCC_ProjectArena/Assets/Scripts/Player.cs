@@ -337,7 +337,8 @@ public class Player : NetworkBehaviour
                 break;
             case "EnemyProjectile":
                 EnemyProjectile enemyP = other.gameObject.GetComponent<EnemyProjectile>();
-                RemoveLife(enemyP.damage);
+                Debug.Log("AI AI AI TIRO TIRO");
+                RemoveLife(5);
                 break; 
             default:
                 Debug.Log("Dano sem tag");

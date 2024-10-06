@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 public class Enemy : NetworkBehaviour
 {
 
-    public int enemyTypeID; // Bot = 0, Bigbot = 1, Rat = 2, KamiCart = 3
+    public int enemyTypeID; // Bot = 0, Bigbot = 1, Rat = 2, KamiCart = 3, ventilador = 4, atirador = 5
     Transform player;
     NetworkVariable<bool> hitN = new();
     CharacterController controller;
@@ -114,16 +114,19 @@ public class Enemy : NetworkBehaviour
                     case 0:
                     case 1:
                         LightAttack("hitEnemy");
-                    break;
+                        break;
                     case 2:
                         LightAttack("hitEnemyRat");
-                    break;
+                        break;
                     case 3:
                         ExplosionAttack();
-                    break;
+                        break;
                     case 4:
                         LightAttack("RV_ATK");
-                    break;
+                        break;
+                    case 5:
+                        LightAttack("Atirador_BaseShot");
+                        break;
                     default:
                         Debug.Log("Sem animação de combate.");
                     break;
@@ -293,7 +296,7 @@ public class Enemy : NetworkBehaviour
     bool inRange = false, readyAttack = false;
     void CheckPlayerDistance()
     {
-        inRange = Vector3.Distance(player.position, transform.position) <= 1.5f;
+        inRange = Vector3.Distance(player.position, transform.position) <= attackRange;
         if (inRange)
         {
             readyAttack = true;
@@ -306,6 +309,8 @@ public class Enemy : NetworkBehaviour
     [Header("Combat")]
     public Animator animator;
     public bool canAttack = true, attacking = false;
+
+    public float attackRange = 1.5f;
     public void LightAttack(string attackName)
     {
         if (canAttack)
@@ -336,7 +341,7 @@ public class Enemy : NetworkBehaviour
         leftSpawn ? projectileSpawnL.position : projectileSpawnR.position,
         leftSpawn ? projectileSpawnL.rotation : projectileSpawnR.rotation).GetComponent<EnemyProjectile>();
         
-        eProj.rb.AddForce(eProj.transform.forward*10, ForceMode.Impulse);
+        eProj.rb.AddForce(eProj.transform.forward*15, ForceMode.Impulse);
         eProj.damage = damage;
 
         leftSpawn = !leftSpawn;

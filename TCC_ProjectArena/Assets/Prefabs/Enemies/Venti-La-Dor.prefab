@@ -59,13 +59,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 5
+  m_Height: 4
   m_Radius: 0.7
   m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &529687416344110215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 709164054
+  GlobalObjectIdHash: 3229348620
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypeID: 4
-  speed: 3
-  maxSpeed: 5
+  speed: 2
+  maxSpeed: 4
   maxHitPoints: 100
   hitPointsN:
     m_InternalValue: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   waveStart: 0
   activeGavity: 1
   regainSpeed: 1
-  damage: 10
+  damage: 8
   hitFXSpawns:
   - {fileID: 7130913095449825019}
   - {fileID: 3002225806313936939}
@@ -306,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4057103237090907254
 Transform:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1599,7 +1599,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
@@ -1664,17 +1664,17 @@ PrefabInstance:
     - target: {fileID: -7347412080180975360, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: -89.520706
       objectReference: {fileID: 0}
     - target: {fileID: -7347412080180975360, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.99995
+      value: -117.03211
       objectReference: {fileID: 0}
     - target: {fileID: -7347412080180975360, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 26.15453
       objectReference: {fileID: 0}
     - target: {fileID: -6550668420551829939, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
@@ -1794,32 +1794,32 @@ PrefabInstance:
     - target: {fileID: 5851658370743388641, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: -89.52111
       objectReference: {fileID: 0}
     - target: {fileID: 5851658370743388641, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 89.99995
+      value: 62.908676
       objectReference: {fileID: 0}
     - target: {fileID: 5851658370743388641, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 26.21349
       objectReference: {fileID: 0}
     - target: {fileID: 6014456146715599323, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.04838165
+      value: 9.999889
       objectReference: {fileID: 0}
     - target: {fileID: 6014456146715599323, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.7256
+      value: 0.2829189
       objectReference: {fileID: 0}
     - target: {fileID: 6014456146715599323, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -9.999858
+      value: 0.049128182
       objectReference: {fileID: 0}
     - target: {fileID: 6438339683935981752, guid: e769b29150013304091035b59d8ac84a,
         type: 3}
