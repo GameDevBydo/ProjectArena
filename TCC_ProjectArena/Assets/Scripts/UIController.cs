@@ -17,6 +17,7 @@ public class UIController : NetworkBehaviour
      [SerializeField]  Animator animCamera;
     [SerializeField] Animator animDor;
     [SerializeField] TMP_Text  txtStartGame;
+     public GameObject panel;
     bool startibg = false;
 
     public void StartGame()
@@ -147,6 +148,7 @@ public class UIController : NetworkBehaviour
         header.gameObject.SetActive(true);
         header.text = message;
         header.color = color;
+        panel.gameObject.SetActive(true);
         StartCoroutine(CloseHeader(duration));
     }
 
@@ -158,6 +160,7 @@ public class UIController : NetworkBehaviour
     {
         yield return new WaitForSeconds(timer);
         header.gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
     }
 
 
