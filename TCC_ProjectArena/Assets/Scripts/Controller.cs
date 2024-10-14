@@ -560,8 +560,7 @@ public class Controller : NetworkBehaviour
     public void ShowVotingRpc(int effect1, int effect2, float votingValue1, float votingValue2)
     {
         UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
-        UIController.instance.votingArea.SetActive(true);
-        UIController.instance.panel.SetActive(true);
+        UIController.instance.votingArea.SetActive(true);;
         UIController.instance.FillOption1Info(effectsInfo[effect1], votingValue1*25);
         UIController.instance.FillOption2Info(effectsInfo[effect2], votingValue2*25);
         UIController.instance.UpdateVotingSlider(1,2);
@@ -634,7 +633,6 @@ public class Controller : NetworkBehaviour
     {
         UIController.instance.WriteOnHeader( "Efeito: " + effectName +" venceu!!!", 10f);
         UIController.instance.votingArea.SetActive(false);
-        UIController.instance.panel.SetActive(false);
     }
 
     #endregion

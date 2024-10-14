@@ -17,7 +17,6 @@ public class UIController : NetworkBehaviour
      [SerializeField]  Animator animCamera;
     [SerializeField] Animator animDor;
     [SerializeField] TMP_Text  txtStartGame;
-     public GameObject panel;
     bool startibg = false;
 
     public void StartGame()
@@ -140,15 +139,15 @@ public class UIController : NetworkBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-    
-     public TextMeshProUGUI header;
+    public GameObject header;
+
+    public TextMeshProUGUI txtHeader;
 
    public void WriteOnHeader(string message, Color color, float duration = 3.0f)
     {
         header.gameObject.SetActive(true);
-        header.text = message;
-        header.color = color;
-        panel.gameObject.SetActive(true);
+        txtHeader.text = message;
+        txtHeader.color = color;
         StartCoroutine(CloseHeader(duration));
     }
 
@@ -160,7 +159,7 @@ public class UIController : NetworkBehaviour
     {
         yield return new WaitForSeconds(timer);
         header.gameObject.SetActive(false);
-        panel.gameObject.SetActive(false);
+       
     }
 
 
@@ -265,7 +264,7 @@ public class UIController : NetworkBehaviour
 
     #region Voting Area
     public GameObject votingArea;
-    public Slider votingSlider;
+    public  Image votingBar;
     public TextMeshProUGUI option1Name, option1Info, option2Name, option2Info;
     public Image option1Image, option2Image;
 
@@ -284,7 +283,7 @@ public class UIController : NetworkBehaviour
 
     public void UpdateVotingSlider(float mainVotes, float allVotes)
     {
-        votingSlider.value = mainVotes/allVotes;
+        votingBar.fillAmount = mainVotes/allVotes;
     }
     
     #endregion
