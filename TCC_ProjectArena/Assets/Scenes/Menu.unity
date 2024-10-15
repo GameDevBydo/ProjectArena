@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5506953, g: 0.33661073, b: 0.2725946, a: 1}
+  m_IndirectSpecularColor: {r: 0.5506118, g: 0.33644354, b: 0.2725422, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22918,7 +22918,7 @@ PrefabInstance:
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
       propertyPath: enemyPrefabList.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}
@@ -22936,6 +22936,12 @@ PrefabInstance:
       propertyPath: enemyPrefabList.Array.data[5]
       value: 
       objectReference: {fileID: 421303986768206655, guid: a45c942ce8f24024abefd472f26e5a80,
+        type: 3}
+    - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
+        type: 3}
+      propertyPath: enemyPrefabList.Array.data[6]
+      value: 
+      objectReference: {fileID: 421303986768206655, guid: 7e0e64b448988774282e8f1fccca1c49,
         type: 3}
     - target: {fileID: 898413013838520733, guid: 2ef4f346109f4f541a8c1352c0b0de3d,
         type: 3}

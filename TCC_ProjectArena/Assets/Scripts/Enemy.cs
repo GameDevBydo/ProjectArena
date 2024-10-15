@@ -128,6 +128,9 @@ public class Enemy : NetworkBehaviour
                     case 5:
                         LightAttack("Atirador_BaseShot");
                         break;
+                    case 6:
+                        LightAttack("TankGarrafa");
+                        break;
                     default:
                         Debug.Log("Sem animação de combate.");
                     break;
@@ -348,6 +351,14 @@ public class Enemy : NetworkBehaviour
         eProj.damage = damage;
 
         leftSpawn = !leftSpawn;
+    }
+
+    public void SpawnTankProjectile()
+    {
+        EnemyProjectile eProj = Instantiate(explosion, projectileSpawnL.position, projectileSpawnL.rotation).GetComponent<EnemyProjectile>();
+        
+        eProj.rb.AddForce(eProj.transform.forward*10, ForceMode.Impulse);
+        eProj.damage = damage;
     }
     public void CallAnimation(string stateName)
     {
