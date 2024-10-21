@@ -166,14 +166,15 @@ public class UIController : NetworkBehaviour
 
     #region User Names and Icons
 
-    public Sprite[] classSprites, classUltIconSprites, classLightIconSprites, classHeavyIconSprites;
-    public Image classIcon, classUltIcon, classUltLoad, classLight, classHeavy;
+    public Sprite[] classSprites, barLifeSprites, classUltIconSprites, classLightIconSprites, classHeavyIconSprites;
+    public Image classIcon, barLifeIcon, classUltIcon, classUltLoad, classLight, classHeavy;
     public TextMeshProUGUI playerNick;
     
 
     public void ChangeClassIcons(int id)
     {
         classIcon.sprite = classSprites[id];
+        barLifeIcon.sprite = barLifeSprites[id];
         classUltIcon.sprite = classUltIconSprites[id];
         classLight.sprite = classLightIconSprites[id];
         classHeavy.sprite = classHeavyIconSprites[id];;

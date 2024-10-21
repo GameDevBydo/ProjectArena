@@ -7672,8 +7672,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4594360384354452227}
   - {fileID: 3610031275335655168}
+  - {fileID: 4594360384354452227}
   - {fileID: 8854981967999167344}
   m_Father: {fileID: 6255243344396078428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11521,7 +11521,8 @@ MonoBehaviour:
   notifText: {fileID: 0}
   alertsText: {fileID: 731967158498253649}
   waveFillTimer: {fileID: 5118200235214059793}
-  header: {fileID: 7240069983869542389}
+  header: {fileID: 0}
+  txtHeader: {fileID: 0}
   classSprites:
   - {fileID: 21300000, guid: 61c79d0c8668ed042a2f60b1abf3926a, type: 3}
   - {fileID: 21300000, guid: b643d427206856c4d97d0e858192fac3, type: 3}
