@@ -20231,7 +20231,7 @@ PrefabInstance:
     - target: {fileID: 3160638171782222588, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.57
+      value: 3.66
       objectReference: {fileID: 0}
     - target: {fileID: 3160638171782222588, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
@@ -20280,34 +20280,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861860604930640308, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4711208715938537054, guid: 3075b1faa25194c4d857617ad3bae510,
-        type: 3}
-    - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
-      value: 3
+      propertyPath: m_SortMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].time
-      value: 0.9999998
+      propertyPath: lengthInSec
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].value
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minScalar
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095456880120747451, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outWeight
-      value: 0.33333334
+      propertyPath: InitialModule.gravityModifier.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8110010688122753060, guid: 1ff1b4ca6971f724f81f08622bd3bfda,
         type: 3}
