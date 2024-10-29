@@ -167,17 +167,27 @@ public class UIController : NetworkBehaviour
     #region User Names and Icons
 
     public Sprite[] classSprites, barLifeSprites, classUltIconSprites, classLightIconSprites, classHeavyIconSprites;
+    public GameObject[] classBarLife;
     public Image classIcon, barLifeIcon, classUltIcon, classUltLoad, classLight, classHeavy;
-    public TextMeshProUGUI playerNick;
+    public TextMeshProUGUI[] playerNick;
     
 
     public void ChangeClassIcons(int id)
     {
+        ActiveClassBarLife(id);
         classIcon.sprite = classSprites[id];
         barLifeIcon.sprite = barLifeSprites[id];
         classUltIcon.sprite = classUltIconSprites[id];
         classLight.sprite = classLightIconSprites[id];
         classHeavy.sprite = classHeavyIconSprites[id];;
+    }
+    public void ActiveClassBarLife(int id)
+    {
+        for (int i = 0; i < classBarLife.Length; i++)
+        {
+            classBarLife[i].gameObject.SetActive(false);
+        }
+        classBarLife[id].gameObject.SetActive(true);
     }
 
     public void SetPlayerName(string nick)
@@ -188,7 +198,11 @@ public class UIController : NetworkBehaviour
 
     public void ChangeNameText()
     {
-        playerNick.text = Controller.instance.playerTempName;
+        for(int i = 0;i < playerNick.Length; i++)
+        {
+            playerNick[i].text = Controller.instance.playerTempName;
+        }
+            
     }
 
     Color loadColor = new Vector4(0.6f, 0.6f, 0.6f, 0.5f);
