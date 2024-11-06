@@ -510,7 +510,7 @@ public class Controller : NetworkBehaviour
     public Enemy SpawnEnemy(string user, int enemyId)
     {
         int randomSpawnerId = Random.Range(0, 3);
-        Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle * 15;
+        Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle * 10;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
         if (user != "AutoFill") e.name = e.name[..^8] + " de " + user;
