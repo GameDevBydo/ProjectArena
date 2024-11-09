@@ -208,9 +208,10 @@ public class Player : NetworkBehaviour
                 characterID.RustRobot => "RobotL1",
                 _ => null
             };
-
+            CallAnimation("IDLE");
             CallAnimation(attackName);
             CallAttack(attackName);
+            Invoke(nameof(StopAttacking), 3f);
         }
     }
 
@@ -225,8 +226,10 @@ public class Player : NetworkBehaviour
                 characterID.RustRobot => "RobotH1",
                 _ => null
             };
+            CallAnimation("IDLE");
             CallAnimation(attackName);
             CallAttack(attackName);
+            Invoke(nameof(StopAttacking), 3f);
         }
     }
     public void CallAttack(string stateName)
