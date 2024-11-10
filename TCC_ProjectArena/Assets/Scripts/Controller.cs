@@ -656,4 +656,11 @@ public class Controller : NetworkBehaviour
         SceneManager.LoadScene(id);
     }
 
+    public GameObject CameraLook;
+    public void SetCamera()
+    {
+        CameraLook = GameObject.Find("CameraBot");
+        CameraLook.GetComponentInChildren<LookRotation>().SetTarget(GameObject.Find("Player(Clone)"));
+
+    }
 }
