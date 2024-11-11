@@ -111,6 +111,9 @@ public class Player : NetworkBehaviour
         Vector3 move = transform.right * xDir + transform.forward * zDir;
 
         controller.Move(move * Time.deltaTime * movSpeed);
+
+        if(xDir ==0 && zDir ==0) networkAnimators[(int)playerChar.Value].Animator.SetBool("Running", false);
+        else networkAnimators[(int)playerChar.Value].Animator.SetBool("Running", true);
     }
 
     void VerticalMovement()

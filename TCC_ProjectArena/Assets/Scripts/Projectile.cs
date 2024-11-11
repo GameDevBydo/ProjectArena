@@ -24,9 +24,9 @@ public class Projectile : NetworkBehaviour
         pushback = projectileProperties[(int)pType].GetKnockback();
         float power = 5;
 
-        power = pType == projectileType.BOMB ? 5 : 15; // ESSA LINHA TA ESTRANHA CONFERIR DEPOIS **********
+        power = pType == projectileType.BOMB ? 8 : 15; // ESSA LINHA TA ESTRANHA CONFERIR DEPOIS **********
         GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
-        if(pType == projectileType.BOMB) Invoke("Explode", 2);
+        if(pType == projectileType.BOMB) Invoke("Explode", 1f);
         else Destroy_ServerRpc(2);
     }
 

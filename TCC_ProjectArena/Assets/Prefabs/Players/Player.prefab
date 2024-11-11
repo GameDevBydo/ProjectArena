@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2804575534
+  GlobalObjectIdHash: 4204593045
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -10907,13 +10907,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5893815091351058928}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.74089795, y: -0.059057925, z: 0.06572227, w: 0.66578}
-  m_LocalPosition: {x: 0.000000023413007, y: 0.00056999543, z: -0.0000000051328635}
+  m_LocalRotation: {x: -0.7388419, y: 0.0757286, z: 0.01564514, w: 0.6694275}
+  m_LocalPosition: {x: -0.00009996367, y: 0.003010266, z: -0.00026010472}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 874334356385658266}
-  m_LocalEulerAnglesHint: {x: -101.822, y: 59.223, z: -58.679993}
+  m_LocalEulerAnglesHint: {x: -97.444, y: -37.166016, z: 44.591003}
 --- !u!1 &6310818232065032623
 GameObject:
   m_ObjectHideFlags: 0
@@ -13691,7 +13691,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.009141126, y: 0.026257386, z: 0.010298333}
   m_Center: {x: -0.00008536682, y: 0.012628682, z: 0.0015780212}
@@ -14247,8 +14247,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.005911611, y: 0.01223476, z: 0.0059770592}
-  m_Center: {x: -0.0007461741, y: 0.0046173786, z: 0.000031767024}
+  m_Size: {x: 0.013870859, y: 0.016785668, z: 0.01536921}
+  m_Center: {x: -0.00060804246, y: 0.006892806, z: 0.0002501736}
 --- !u!4 &8452825086940186656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1695132676f381e4b80d7d8743c6dd30,
