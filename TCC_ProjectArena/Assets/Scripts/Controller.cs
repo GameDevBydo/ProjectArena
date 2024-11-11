@@ -660,7 +660,7 @@ public class Controller : NetworkBehaviour
     public void SetCamera()
     {
         CameraLook = GameObject.Find("CameraBot");
-        CameraLook.GetComponentInChildren<LookRotation>().SetTarget(GameObject.Find("Player(Clone)"));
+        CameraLook.GetComponentInChildren<LookRotation>().SetTarget(GameObject.Find("HeadForCamera"));
 
     }
 }

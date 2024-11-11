@@ -6916,36 +6916,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3164014878573705660, guid: bb0b66281cbf6804db58e13740d86d1b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4529956ad8782c248b8677ee6b0adb4e, type: 2}
-    - target: {fileID: 3468008816214643782, guid: bb0b66281cbf6804db58e13740d86d1b,
-        type: 3}
-      propertyPath: Speed
-      value: 0.04
-      objectReference: {fileID: 0}
     - target: {fileID: 3468008816214643782, guid: bb0b66281cbf6804db58e13740d86d1b,
         type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 230170823}
-    - target: {fileID: 8144557931431747638, guid: bb0b66281cbf6804db58e13740d86d1b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8144557931431747638, guid: bb0b66281cbf6804db58e13740d86d1b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8144557931431747638, guid: bb0b66281cbf6804db58e13740d86d1b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 8144557931431747638, guid: bb0b66281cbf6804db58e13740d86d1b,
         type: 3}
       propertyPath: m_LocalPosition.x
