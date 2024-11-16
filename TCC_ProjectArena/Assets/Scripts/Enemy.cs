@@ -68,6 +68,7 @@ public class Enemy : NetworkBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         knockback = gameObject.GetComponent<Knockback>();
+        hurtFxSource = gameObject.GetComponent<AudioSource>();
     }
 
     NetworkVariable<float> locateTimer = new(0);
@@ -266,6 +267,7 @@ public class Enemy : NetworkBehaviour
     #endregion
     
     public GameObject damageTextPopUp;
+    public AudioSource hurtFxSource;
     void TakeDamage(float damage)
     {
         hitPointsN.Value -= Mathf.Floor(damage*dmgTakenMod);
@@ -274,6 +276,9 @@ public class Enemy : NetworkBehaviour
         dmgTxt.GetComponent<PopUpText>().damageValue.Value = Mathf.Floor(damage*dmgTakenMod);
         NetworkObject dmgTextNetwork = dmgTxt.GetComponent<NetworkObject>();
         dmgTextNetwork.Spawn();
+        hurtFxSource.Stop();
+        hurtFxSource.pitch = Random.Range(0.7f,1.3f);
+        hurtFxSource.Play();
 
         if (hitPointsN.Value <= 0) Death();
     }
@@ -290,10 +295,15 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+    public GameObject deathFX;
     void Death()
     {
         main.EnemyKilled();
-        if (main.online) NetworkObject.Despawn();
+        if (main.online)
+        {   
+            NetworkObject.Despawn();
+            Instantiate(deathFX, transform.position+Vector3.up, deathFX.transform.rotation);
+        }
         else Destroy(this.gameObject);
     }
 

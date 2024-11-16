@@ -47,6 +47,7 @@ public class Player : NetworkBehaviour
         if(IsOwner)
         {
             UIController.instance.ChangeClassIcons((int)newValue);
+            hurtFxSource = GetComponent<AudioSource>();
             maxlife = 120 - (int)newValue*20;
             movSpeed = (int)newValue == 1 ? 14 : 10;
         }
@@ -58,6 +59,7 @@ public class Player : NetworkBehaviour
         main = Controller.instance;
         if (!main.online) instance = this;
         DontDestroyOnLoad(this.gameObject);
+
     }
 
     public override void OnNetworkSpawn()
@@ -310,6 +312,7 @@ public class Player : NetworkBehaviour
     [Header("Life")]
     [SerializeField] NetworkVariable<float> life = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] float maxlife;
+    AudioSource hurtFxSource;
 
     public void PlayerDead()
     {
@@ -320,6 +323,12 @@ public class Player : NetworkBehaviour
         if(IsOwner)
         {
             life.Value = Math.Clamp(life.Value-val, 0, maxlife);
+            if(val >0)
+            {
+                hurtFxSource.Stop();
+                hurtFxSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                hurtFxSource.Play();
+            }
             if (life.Value <= 0) 
             {
                 PlayerDead();
