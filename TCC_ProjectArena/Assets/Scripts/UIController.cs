@@ -175,8 +175,6 @@ public class UIController : NetworkBehaviour
     public void ChangeClassIcons(int id)
     {
         ActiveClassBarLife(id);
-        //classIcon.sprite = classSprites[id];
-       // barLifeIcon.sprite = barLifeSprites[id];
         classUltIcon.sprite = classUltIconSprites[id];
         classLight.sprite = classLightIconSprites[id];
         classHeavy.sprite = classHeavyIconSprites[id];
