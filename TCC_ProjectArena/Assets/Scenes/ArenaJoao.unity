@@ -10622,7 +10622,7 @@ PrefabInstance:
     - target: {fileID: 3927465309089920370, guid: f0e1996b68e161244b0864c5a135d95b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.06
+      value: 7.09
       objectReference: {fileID: 0}
     - target: {fileID: 3927465309089920370, guid: f0e1996b68e161244b0864c5a135d95b,
         type: 3}
@@ -10678,6 +10678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FocalLength
       value: 45.37593
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840816595407429870, guid: f0e1996b68e161244b0864c5a135d95b,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 991
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7104229591202875617, guid: f0e1996b68e161244b0864c5a135d95b, type: 3}
