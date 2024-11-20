@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEngine.AI;
 
 public class Enemy : NetworkBehaviour
 {
@@ -32,6 +33,8 @@ public class Enemy : NetworkBehaviour
 
     public Transform[] hitFXSpawns;
     public ParticleSystem hitFX;
+
+    NavMeshAgent agent;
 
     Controller main;
 
@@ -69,6 +72,9 @@ public class Enemy : NetworkBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         knockback = gameObject.GetComponent<Knockback>();
         hurtFxSource = gameObject.GetComponent<AudioSource>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
+
+        agent.speed = speed;
     }
 
     NetworkVariable<float> locateTimer = new(0);
@@ -156,7 +162,8 @@ public class Enemy : NetworkBehaviour
 
     void Movement()
     {
-        controller.Move(transform.forward * speed * Time.deltaTime);
+        //controller.Move(transform.forward * speed * Time.deltaTime);
+        agent.SetDestination(player.position);
     }
     float gravity = 9.81f;
     Vector3 gravityVector;
@@ -388,6 +395,7 @@ public class Enemy : NetworkBehaviour
         if(speed<maxSpeed) 
         {
             speed = Mathf.Clamp(speed+Time.deltaTime*2, 0, maxSpeed);
+            agent.speed = speed;
         }
         else regainSpeed = false;
     }
