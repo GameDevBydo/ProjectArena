@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2951071938
+  GlobalObjectIdHash: 305185187
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
   enemyTypeID: 1
   speed: 3
   maxSpeed: 3
-  maxHitPoints: 200
+  maxHitPoints: 150
   hitPointsN:
     m_InternalValue: 0
   rustStacksN:
@@ -116,7 +116,9 @@ MonoBehaviour:
   activeGavity: 1
   regainSpeed: 1
   damage: 20
-  hitFXSpawns: []
+  hitFXSpawns:
+  - {fileID: 739586793873898771}
+  - {fileID: 8802101893206901495}
   hitFX: {fileID: 8478532764656933707, guid: 202a1fa7d41266a49a1a25f7d2f21e99, type: 3}
   enemyNameText: {fileID: 3093537289088437947}
   lifeBar: {fileID: 8003277625721005375}

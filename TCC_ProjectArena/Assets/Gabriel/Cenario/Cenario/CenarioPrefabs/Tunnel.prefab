@@ -283,6 +283,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8122920204807720803, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0734
+      objectReference: {fileID: 0}
+    - target: {fileID: -8122920204807720803, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.065
+      objectReference: {fileID: 0}
     - target: {fileID: -5532013879456195588, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -303,10 +313,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.96
       objectReference: {fileID: 0}
+    - target: {fileID: -3026970711333833032, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
         type: 3}
       propertyPath: m_Name
       value: Tunnel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872256738280885585, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872256738280885585, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300660232003238504, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6773801717264484949, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
         type: 3}
@@ -317,6 +347,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323755197824950337, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675996533091738409, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 20870bf3e1f93ad4c901a9b81fffa9c4,
         type: 3}

@@ -101,12 +101,13 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+    public bool canRotate = true;
     void Update()
     {
         if (IsOwner)
         {
             LocateNearestPlayer();
-            Rotation();
+            if(canRotate) Rotation();
             if (waveStart)
             {
                 if(activeGavity) Gravity();
@@ -137,6 +138,7 @@ public class Enemy : NetworkBehaviour
                         break;
                     case 6:
                         LightAttack("TankGarrafa");
+                        canRotate = false;
                         break;
                     default:
                         Debug.Log("Sem animação de combate.");
@@ -213,8 +215,11 @@ public class Enemy : NetworkBehaviour
                         TakeDamage(hitProjectile.damage);
                         TakeRust();
                         knockback.SetKnockback(-transform.forward, hitProjectile.pushback);
-                        if(hitProjectile.pType != Projectile.projectileType.BOMB) Destroy(collider.gameObject);
-                        else TakeRust();
+                        if(hitProjectile.pType != Projectile.projectileType.BOMB)
+                        {
+                            Destroy(collider.gameObject);
+                            TakeRust();
+                        }
                         regainSpeed = true;
                     }
                 }
@@ -374,8 +379,10 @@ public class Enemy : NetworkBehaviour
     {
         EnemyProjectile eProj = Instantiate(explosion, projectileSpawnL.position, projectileSpawnL.rotation).GetComponent<EnemyProjectile>();
         
-        eProj.rb.AddForce(eProj.transform.forward*10, ForceMode.Impulse);
+        eProj.rb.AddForce(eProj.transform.forward*20, ForceMode.Impulse);
         eProj.damage = damage;
+
+        canRotate = true;
     }
     public void CallAnimation(string stateName)
     {

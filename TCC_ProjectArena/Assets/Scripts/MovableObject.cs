@@ -16,7 +16,7 @@ public class MovableObject : MonoBehaviour
         endPointX = startPoint.x;
         endPointY = startPoint.y;
         endPointZ = startPoint.z;
-        Controller.instance.cerca = this.gameObject;
+        Controller.instance.cerca.Add(this.gameObject);
     }
     public void MoveX(float disX)
     {

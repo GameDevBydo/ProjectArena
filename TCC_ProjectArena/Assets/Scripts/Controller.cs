@@ -94,7 +94,7 @@ public class Controller : NetworkBehaviour
      }
 
  */
-    [HideInInspector] public GameObject cerca;
+    public List<GameObject> cerca = new List<GameObject>();
 
     #region Waves
     [HideInInspector] public int waveNumber = 1; // Número da wave atual (começa em 1, pois ia dar muita treta chamar a 1ª de 0).
@@ -114,6 +114,7 @@ public class Controller : NetworkBehaviour
         UIController.instance.ChangeUIArea(2);
         GameObject.FindWithTag("LobbyCamera").GetComponent<Camera>().depth = -3;
         if (deathScreen.activeSelf== false) Cursor.lockState = CursorLockMode.Locked;
+        GameObject.FindWithTag("Player").GetComponent<Player>().RemoveLife(0);
     }
 
     public void StartServer()
@@ -477,7 +478,11 @@ public class Controller : NetworkBehaviour
             enemiesAlive++;
         }
         Debug.Log("Inimigos vivos: " + enemiesAlive);
-        cerca.GetComponent<MovableObject>().MoveY(30);
+        foreach(GameObject c in cerca)
+        {
+            c.GetComponent<MovableObject>().MoveY(0.015f);
+            c.GetComponent<MovableObject>().MoveZ(-0.00773f);
+        }
     }
 
     public void EnemyKilled() // A ser puxado pelo Enemy, para quando ele morrer. Também checa se a wave foi limpa.
@@ -496,7 +501,11 @@ public class Controller : NetworkBehaviour
             waveNumber++;
             if(waveNumber%2==1)Invoke(nameof(OpenSlotsInWaveRpc), 5);
             else Invoke(nameof(OpenVoting), 5);
-            cerca.GetComponent<MovableObject>().MoveY(-30);
+            foreach(GameObject c in cerca)
+            {
+                c.GetComponent<MovableObject>().MoveY(-0.015f);
+                c.GetComponent<MovableObject>().MoveZ(0.00773f);
+            }
         }
 
         UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 

@@ -48,8 +48,22 @@ public class Player : NetworkBehaviour
         {
             UIController.instance.ChangeClassIcons((int)newValue);
             hurtFxSource = GetComponent<AudioSource>();
-            maxlife = 120 - (int)newValue*20;
-            movSpeed = (int)newValue == 1 ? 14 : 10;
+            switch((int)newValue)
+            {
+                case 0:
+                    maxlife = 200;
+                    movSpeed = 7;
+                    break;
+                case 1:
+                    maxlife = 150;
+                    movSpeed = 15;
+                    break;
+                case 2:
+                    maxlife = 100;
+                    movSpeed = 10;
+                    break;
+            }
+            //life.Value = maxlife;
         }
     }
 
