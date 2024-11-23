@@ -17,7 +17,7 @@ public class LookRotation : MonoBehaviour
     }
     void Update()
     {
-        rot = new Vector3(Player.transform.position.x, Player.transform.position.y, 0);
+         rot = new Vector3(Player.transform.position.x, Player.transform.position.y, 0);
         transform.LookAt(Player.transform);
         //transform.rotation.SetEulerRotation(transform.rotation.x, transform.rotation.y, 0); //x,y,0 
         MoveRobot();

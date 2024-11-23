@@ -13,28 +13,39 @@ public class UIController : NetworkBehaviour
         {
             StartGame();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            activeInPanel = !activeInPanel;
+            ActiveMenuGame(activeInPanel);
+        }
     }
-     [SerializeField]  Animator animCamera;
+    [SerializeField] Animator animCamera;
     [SerializeField] Animator animDor;
-    [SerializeField] TMP_Text  txtStartGame;
-    bool startibg = false;
+    [SerializeField] TMP_Text txtStartGame;
+    public bool startibg = false;
 
     public void StartGame()
     {
-        if (!startibg)
+
+        if (startibg== false)
         {
             if (animCamera) animCamera.Play("Cam1");
-            if (animDor)animDor.Play("portao");
+            if (animDor) animDor.Play("portao");
             if (txtStartGame) txtStartGame.gameObject.SetActive(false);
             startibg = true;
         }
-            
-      
-    }
 
+
+    }
+    [SerializeField] GameObject panelConfigInGame;
     public void ExitGame()
     {
         Application.Quit();
+    }
+    bool activeInPanel = false;
+    public void ActiveMenuGame(bool active)
+    {
+        panelConfigInGame.SetActive(active);
     }
 
     [HideInInspector]
@@ -44,26 +55,26 @@ public class UIController : NetworkBehaviour
 
     public void ChangeUIArea(int id)
     {
-        if(uiAreas.Length >= id)
+        if (uiAreas.Length >= id)
         {
-            for(int i = 0; i < uiAreas.Length; i++)
+            for (int i = 0; i < uiAreas.Length; i++)
             {
-                if(i==id) uiAreas[i].SetActive(true);
+                if (i == id) uiAreas[i].SetActive(true);
                 else uiAreas[i].SetActive(false);
             }
         }
     }
 
     public TextMeshProUGUI notifText;
-    
+
     void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null) instance = this;
     }
 
     #region Chat
     public void PrintSpawnNotification(string user, string enemyName)
-    {   
+    {
         PrintNotification(user + " selecionou " + enemyName + " para a batalha.");
     }
 
@@ -129,13 +140,13 @@ public class UIController : NetworkBehaviour
     }
 
     public Image waveFillTimer;
-   public IEnumerator UpdateWaveFillTimer(float duration)
+    public IEnumerator UpdateWaveFillTimer(float duration)
     {
         float timer = duration;
-        while(timer>0)
+        while (timer > 0)
         {
-            timer-=0.1f;
-            waveFillTimer.fillAmount = timer/duration;
+            timer -= 0.1f;
+            waveFillTimer.fillAmount = timer / duration;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -143,7 +154,7 @@ public class UIController : NetworkBehaviour
 
     public TextMeshProUGUI txtHeader;
 
-   public void WriteOnHeader(string message, Color color, float duration = 3.0f)
+    public void WriteOnHeader(string message, Color color, float duration = 3.0f)
     {
         header.gameObject.SetActive(true);
         txtHeader.text = message;
@@ -151,15 +162,15 @@ public class UIController : NetworkBehaviour
         StartCoroutine(CloseHeader(duration));
     }
 
-   public void WriteOnHeader(string message, float duration = 3.0f)
+    public void WriteOnHeader(string message, float duration = 3.0f)
     {
         WriteOnHeader(message, Color.white, duration);
     }
-    IEnumerator CloseHeader(float timer) 
+    IEnumerator CloseHeader(float timer)
     {
         yield return new WaitForSeconds(timer);
         header.gameObject.SetActive(false);
-       
+
     }
 
 
@@ -170,7 +181,7 @@ public class UIController : NetworkBehaviour
     public GameObject[] classBarLife;
     public Image classIcon, barLifeIcon, classUltIcon, classUltLoad, classLight, classHeavy;
     public TextMeshProUGUI[] playerNick;
-    
+
 
     public void ChangeClassIcons(int id)
     {
@@ -196,19 +207,19 @@ public class UIController : NetworkBehaviour
 
     public void ChangeNameText()
     {
-        for(int i = 0;i < playerNick.Length; i++)
+        for (int i = 0; i < playerNick.Length; i++)
         {
             playerNick[i].text = Controller.instance.playerTempName;
         }
-            
+
     }
 
     Color loadColor = new Vector4(0.6f, 0.6f, 0.6f, 0.5f);
 
     public void ChangeUltLoad(int value)
     {
-        classUltLoad.fillAmount = value/100.0f;
-        if(value == 100)
+        classUltLoad.fillAmount = value / 100.0f;
+        if (value == 100)
         {
             classUltIcon.gameObject.SetActive(true);
             classUltLoad.color = Color.white;
@@ -225,7 +236,7 @@ public class UIController : NetworkBehaviour
     #region Connections and Lobby
 
     [Header("Lobby")]
-   public GameObject panelLobby;
+    public GameObject panelLobby;
     public Toggle lobbyCreateIsPrivateToggle;
     public TMP_InputField lobbyCreateNameInput, lobbyJoinCodeInput;
     public TextMeshProUGUI lobbyCodeText;
@@ -255,7 +266,7 @@ public class UIController : NetworkBehaviour
 
     public void SetLobbyCode(string lobbyCode)
     {
-        lobbyCodeText.text = "Código do lobby: \n"+lobbyCode;
+        lobbyCodeText.text = "Código do lobby: \n" + lobbyCode;
     }
 
     public void InputLobbyCode(string s)
@@ -277,7 +288,7 @@ public class UIController : NetworkBehaviour
 
     #region Voting Area
     public GameObject votingArea;
-    public  Image votingBar;
+    public Image votingBar;
     public TextMeshProUGUI option1Name, option1Info, option2Name, option2Info;
     public Image option1Image, option2Image;
 
@@ -291,14 +302,14 @@ public class UIController : NetworkBehaviour
     {
         option2Name.text = effectInfo.effectName;
         option2Image.sprite = effectInfo.effectSprite;
-        option2Info.text = effectInfo.effectDescription + "\n" + value  + "%";
+        option2Info.text = effectInfo.effectDescription + "\n" + value + "%";
     }
 
     public void UpdateVotingSlider(float mainVotes, float allVotes)
     {
-        votingBar.fillAmount = mainVotes/allVotes;
+        votingBar.fillAmount = mainVotes / allVotes;
     }
-    
+
     #endregion
 
 }
