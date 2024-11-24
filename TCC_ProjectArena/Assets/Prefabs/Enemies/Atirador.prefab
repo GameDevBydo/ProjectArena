@@ -389,6 +389,7 @@ MonoBehaviour:
   - {fileID: 1290719060003212033}
   - {fileID: 4345543301065092816}
   hitFX: {fileID: 8478532764656933707, guid: 202a1fa7d41266a49a1a25f7d2f21e99, type: 3}
+  canRotate: 1
   enemyNameText: {fileID: 3805296011325490119}
   lifeBar: {fileID: 8889905818855874638}
   stacksIcon: {fileID: 7457449971722225861}
@@ -1281,8 +1282,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.73, y: 0.47}
-  m_SizeDelta: {x: 10, y: 2.03}
+  m_AnchoredPosition: {x: -0.44, y: 0.98}
+  m_SizeDelta: {x: 20, y: 2.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8185229511419937033
 CanvasRenderer:
@@ -1346,7 +1347,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

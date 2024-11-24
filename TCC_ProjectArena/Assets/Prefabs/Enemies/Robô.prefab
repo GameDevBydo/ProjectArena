@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 817536255
+  GlobalObjectIdHash: 1176680779
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -120,6 +120,7 @@ MonoBehaviour:
   - {fileID: 3482368736768759994}
   - {fileID: 8390675870188529505}
   hitFX: {fileID: 8478532764656933707, guid: 202a1fa7d41266a49a1a25f7d2f21e99, type: 3}
+  canRotate: 1
   enemyNameText: {fileID: 3688398172665550900}
   lifeBar: {fileID: 2641378133662066361}
   stacksIcon: {fileID: 699283977490977789}
@@ -1114,8 +1115,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.755, y: 0.01}
-  m_SizeDelta: {x: 10, y: 2.03}
+  m_AnchoredPosition: {x: -0.276, y: 1.085}
+  m_SizeDelta: {x: 20, y: 2.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1918662023281623301
 CanvasRenderer:
@@ -1179,7 +1180,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

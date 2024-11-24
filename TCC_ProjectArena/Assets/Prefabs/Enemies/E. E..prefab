@@ -419,6 +419,7 @@ MonoBehaviour:
   hitFXSpawns:
   - {fileID: 3394471117014050316}
   hitFX: {fileID: 8478532764656933707, guid: 202a1fa7d41266a49a1a25f7d2f21e99, type: 3}
+  canRotate: 1
   enemyNameText: {fileID: 3805296011325490119}
   lifeBar: {fileID: 2207793615735549353}
   stacksIcon: {fileID: 7457449971722225861}
@@ -1211,7 +1212,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8423504398426049704}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.028}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1219,8 +1220,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.876, y: 0.534}
-  m_SizeDelta: {x: 10, y: 2.03}
+  m_AnchoredPosition: {x: 0.69, y: 0.97}
+  m_SizeDelta: {x: 20, y: 2.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8185229511419937033
 CanvasRenderer:
@@ -1284,7 +1285,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
