@@ -296,13 +296,13 @@ public class UIController : NetworkBehaviour
     {
         option1Name.text = effectInfo.effectName;
         option1Image.sprite = effectInfo.effectSprite;
-        option1Info.text = effectInfo.effectDescription + "\n" + value + "%";
+        option1Info.text = effectInfo.effectDescription + value + "%";
     }
     public void FillOption2Info(SO_VotingEffect effectInfo, float value)
     {
         option2Name.text = effectInfo.effectName;
         option2Image.sprite = effectInfo.effectSprite;
-        option2Info.text = effectInfo.effectDescription + "\n" + value + "%";
+        option2Info.text = effectInfo.effectDescription + value + "%";
     }
 
     public void UpdateVotingSlider(float mainVotes, float allVotes)

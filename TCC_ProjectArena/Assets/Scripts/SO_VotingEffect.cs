@@ -11,10 +11,10 @@ public class SO_VotingEffect : ScriptableObject
     public string effectMethodName;
     public enum EffectTarget
     {
-        NONE,
-        RANDOMALLY,
-        ALLALLIES,
-        ALLENEMIES
+        BUFFSHIELD,
+        NERFSHIELD,
+        BUFFSWORD,
+        NERFSWORD
     }
     public EffectTarget effectTarget;
 }

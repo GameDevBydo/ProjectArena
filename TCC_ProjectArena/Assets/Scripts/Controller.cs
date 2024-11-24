@@ -386,7 +386,7 @@ public class Controller : NetworkBehaviour
 
     public void FillWave()
     {
-        enemiesInWave = new Enemy[(waveNumber - 1) * 5 + 10];
+        enemiesInWave = new Enemy[(waveNumber - 1) * 2 + 10];
         for (int i = 0; i < enemiesInWave.Length; i++)
         {
             if (wavesInfos.waveBaseEnemy.Length >= waveNumber - 1)
@@ -438,10 +438,13 @@ public class Controller : NetworkBehaviour
         enemyType = enemyType.ToLower();
         var enemyId = enemyType switch
         {
-            "bot" => 0,
-            "bigbot" => 1,
-            "rat" => 2,
-            "cart" => 3,
+            "pneu" => 0,
+            "roboserra" => 1,
+            "ratinho" => 2,
+            "carrokabum" => 3,
+            "ventilador" => 4,
+            "bangbang" => 5,
+            "tanque" => 6,
             _ => -1,
         };
         return enemyId;
@@ -518,7 +521,7 @@ public class Controller : NetworkBehaviour
     public Vector2[] enemySpawnPoints;
     public Enemy SpawnEnemy(string user, int enemyId)
     {
-        int randomSpawnerId = Random.Range(0, 3);
+        int randomSpawnerId = Random.Range(0, 4);
         Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle * 10;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
@@ -547,6 +550,7 @@ public class Controller : NetworkBehaviour
     {
         FillWave();
         CloseSlotsInWave();
+        StartCoroutine(UIController.instance.UpdateWaveFillTimer(15f));
         votingValue1 = Random.Range(1, 5);
         votingValue2 = Random.Range(1, 5);
         effect1 = Random.Range(0,effectsInfo.Length-1);
@@ -621,19 +625,23 @@ public class Controller : NetworkBehaviour
 
         if(votingWinner==1) winnerEffect = effectsInfo[effect1];
         else winnerEffect = effectsInfo[effect2];
-        
-        if(winnerEffect.effectTarget == 0)
-        {
-            VotingEffects.CallAnyMethod(winnerEffect.effectMethodName);
-        }
-        else if(votingWinner==3)
-        {
-            foreach(Enemy e in enemiesInWave)
-            {
-                VotingEffects.CallAnyMethod(winnerEffect.effectMethodName, e, winnerValue);
-            }
-        }
 
+        switch((int)winnerEffect.effectTarget)
+        {
+            case 0:
+                foreach(Enemy e in enemiesInWave) VotingEffects.DecreaseDamageTaken(e, winnerValue);
+                break;
+            case 1:
+                foreach(Enemy e in enemiesInWave) VotingEffects.IncreaseDamageTaken(e, winnerValue);
+                break;
+            case 2:
+                foreach(Enemy e in enemiesInWave) VotingEffects.IncreaseDamageDealt(e, winnerValue);
+                break;
+            case 3:
+                foreach(Enemy e in enemiesInWave) VotingEffects.DecreaseDamageDealt(e, winnerValue);
+                break;
+        }
+        
         VoteResultsRpc(winnerEffect.effectName);
     }
 
