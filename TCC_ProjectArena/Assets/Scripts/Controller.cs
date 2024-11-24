@@ -525,6 +525,7 @@ public class Controller : NetworkBehaviour
         Vector2 randomPos = enemySpawnPoints[randomSpawnerId] + Random.insideUnitCircle * 10;
         Vector3 spawnPos = new Vector3(randomPos.x, 0, randomPos.y);
         GameObject e = Instantiate(enemyPrefabList[enemyId], spawnPos, Quaternion.identity).gameObject;
+        e.name = e.name.Substring(0, e.name.Length-7);
         if (user != "AutoFill") e.name = e.name + " de " + user;
         NetworkObject eNetworkObject = e.GetComponent<NetworkObject>();
         eNetworkObject.Spawn();

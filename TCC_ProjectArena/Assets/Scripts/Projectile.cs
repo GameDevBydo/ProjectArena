@@ -48,7 +48,7 @@ public class Projectile : NetworkBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         explosionEmpty.SetActive(true);
-        Destroy_ServerRpc(1.3f);
+        Destroy_ServerRpc(0.45f);
     }
 
 }

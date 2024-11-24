@@ -46,6 +46,8 @@ public class UIController : NetworkBehaviour
     public void ActiveMenuGame(bool active)
     {
         panelConfigInGame.SetActive(active);
+        if(active) Cursor.lockState = CursorLockMode.None;
+        else Cursor.lockState = CursorLockMode.Locked;
     }
 
     [HideInInspector]

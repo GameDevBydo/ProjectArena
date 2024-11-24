@@ -184,6 +184,7 @@ public class Enemy : NetworkBehaviour
         }
 
     }
+    
 
     void OnTriggerEnter(Collider collider)
     {
@@ -220,6 +221,7 @@ public class Enemy : NetworkBehaviour
                             Destroy(collider.gameObject);
                             TakeRust();
                         }
+                        else 
                         regainSpeed = true;
                     }
                 }
@@ -229,7 +231,7 @@ public class Enemy : NetworkBehaviour
 
     IEnumerator StopInvulnerability()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         hitN.Value = false;
     }
 
