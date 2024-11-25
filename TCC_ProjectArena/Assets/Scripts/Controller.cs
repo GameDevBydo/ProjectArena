@@ -376,20 +376,20 @@ public class Controller : NetworkBehaviour
     {
         Debug.Log("FUICHAMADO MESMO AQUI NO INICIO");
         slotsFilled = 0;
-        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 14.5f);
+        UIController.instance.WriteOnHeader("PEDIDOS ABERTOS!", 15f);
         FillWave();
         StartCoroutine(UIController.instance.UpdateWaveFillTimer(15f));
-        Invoke(nameof(CloseSlotsInWave), 13f);
+        Invoke(nameof(CloseSlotsInWave), 14.9f);
         Invoke(nameof(StartCurrentWave), 15f);
         Debug.Log("Chamei aqui YEY");
     }
 
     public void FillWave()
     {
-        enemiesInWave = new Enemy[(waveNumber - 1) * 2 + 10];
+        enemiesInWave = new Enemy[(waveNumber - 1) * 3 + 5];
         for (int i = 0; i < enemiesInWave.Length; i++)
         {
-            if (wavesInfos.waveBaseEnemy.Length >= waveNumber - 1)
+            /*if (wavesInfos.waveBaseEnemy.Length >= waveNumber - 1)
             {
                 if (wavesInfos.waveBaseEnemy[waveNumber - 1] != null) enemiesInWave[i] = wavesInfos.waveBaseEnemy[waveNumber - 1];
                 else
@@ -402,7 +402,9 @@ public class Controller : NetworkBehaviour
             {
                 enemiesInWave[i] = wavesInfos.waveBaseEnemy[^1];
                 Debug.Log("Onda não definida, usando inimigos da ultima onda.");
-            }
+            }*/
+            enemiesInWave[i] = enemyPrefabList[Random.Range(0,enemyPrefabList.Length)].GetComponent<Enemy>();
+            Debug.Log(enemiesInWave[i].enemyTypeID);
         }
 
         canFillWaveSlots = true;
@@ -467,14 +469,15 @@ public class Controller : NetworkBehaviour
                 
             }
         }
-        UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
+        //UIController.instance.WriteOnHeader("PEDIDOS FECHADOS!");
     }
 
     int enemiesAlive = 0;
     void StartCurrentWave() // Ativa os inimigos 1 a 1, e contabiliza quantos tem.
     {
         UIController.instance.WriteOnHeader("ONDA COMEÇOU!", Color.red, 5);
-        enemiesAlive = 0;
+        //enemiesAlive = 0;
+        Debug.Log("Inimigos no inicio da wave: " + enemiesAlive);
         foreach (Enemy e in enemiesInWave)
         {
             e.waveStart = true;
@@ -510,9 +513,9 @@ public class Controller : NetworkBehaviour
                 c.GetComponent<MovableObject>().MoveZ(0.00773f);
             }
         }
-
-        UIController.instance.WriteOnHeader("ONDA " + waveNumber + " CONCLUÍDA!", Color.green, 5); 
+        UIController.instance.WriteOnHeader("ONDA " + (waveNumber-1) + " CONCLUÍDA!", Color.green, 5); 
         AudioControlador.instance.PlayCheer();
+
     }
 
     #endregion
@@ -574,11 +577,11 @@ public class Controller : NetworkBehaviour
     public void ShowVotingRpc(int effect1, int effect2, float votingValue1, float votingValue2)
     {
         UIController.instance.WriteOnHeader("VOTAÇÃO ABERTA!", 7.5f);
-        UIController.instance.votingArea.SetActive(true);;
+        UIController.instance.votingArea.SetActive(true);
         UIController.instance.FillOption1Info(effectsInfo[effect1], votingValue1*25);
         UIController.instance.FillOption2Info(effectsInfo[effect2], votingValue2*25);
         UIController.instance.UpdateVotingSlider(1,2);
-        Invoke("CloseVoting", 15f);
+        Invoke(nameof(CloseVoting), 15f);
     }
     public void ChatterVote(string name, string vote)
     {
@@ -597,7 +600,7 @@ public class Controller : NetworkBehaviour
     void CloseVoting()
     {
         canVote = false;
-        Invoke("CountVotes", 0);
+        Invoke(nameof(CountVotes), 0);
         Invoke(nameof(StartCurrentWave), 15);
     }
 
@@ -649,7 +652,7 @@ public class Controller : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void VoteResultsRpc(string effectName)
     {
-        UIController.instance.WriteOnHeader( "Efeito: " + effectName +" venceu!!!", 10f);
+        UIController.instance.WriteOnHeader( "Efeito escolhido: \n" + effectName, 10f);
         UIController.instance.votingArea.SetActive(false);
     }
 

@@ -8925,6 +8925,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5156329318440182333, guid: f0e1996b68e161244b0864c5a135d95b,
+        type: 3}
+      propertyPath: m_RendererIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156329318440182333, guid: f0e1996b68e161244b0864c5a135d95b,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6690112867685082686, guid: f0e1996b68e161244b0864c5a135d95b,
         type: 3}
       propertyPath: m_Name
@@ -8948,7 +8958,7 @@ PrefabInstance:
     - target: {fileID: 6840816595407429870, guid: f0e1996b68e161244b0864c5a135d95b,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 991
+      value: 3039
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7104229591202875617, guid: f0e1996b68e161244b0864c5a135d95b, type: 3}

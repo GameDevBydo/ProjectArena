@@ -11,6 +11,8 @@ public class Knockback : MonoBehaviour
     private Vector3 knockbackDirection;
     private float knockbackTimer;
 
+    float knockbackResult;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -19,7 +21,7 @@ public class Knockback : MonoBehaviour
     {
         knockbackDirection = direction.normalized;
         knockbackDirection.y = jumpSize;
-        knockbackStrength = knockbackPower;
+        knockbackResult = knockbackStrength*knockbackPower;
         knockbackTimer = knockbackDuration;
     }
     void Update()
@@ -27,7 +29,7 @@ public class Knockback : MonoBehaviour
         if (knockbackTimer > 0)
         {
             knockbackTimer -= Time.deltaTime;    
-            characterController.Move(knockbackDirection * knockbackStrength * Time.deltaTime);
+            characterController.Move(knockbackDirection * knockbackResult * Time.deltaTime);
         }
     }
 }

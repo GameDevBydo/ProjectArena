@@ -2991,8 +2991,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 217291494040231185}
-  - {fileID: 786824065060476313}
   - {fileID: 6529014420575785405}
+  - {fileID: 786824065060476313}
   - {fileID: 5564144964243596618}
   m_Father: {fileID: 2273538811724528210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.302}
@@ -4035,7 +4035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6255243344396078428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9102,7 +9102,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: option 2 effect text lorem ipsum oh my gah hiii
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1735f58fca97245438125ebd2759d276, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9110,7 +9110,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.88732076, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9166,7 +9166,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3253368505079476585
@@ -10284,7 +10284,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: option 2 name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1735f58fca97245438125ebd2759d276, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10292,7 +10292,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.88732076, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10348,7 +10348,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3660129429901361597
@@ -11111,8 +11111,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6426570790665479379}
-  - {fileID: 1516010991065366726}
   - {fileID: 3221513269615456425}
+  - {fileID: 1516010991065366726}
   - {fileID: 4106778273299629657}
   m_Father: {fileID: 2273538811724528210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.233}
@@ -11832,7 +11832,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   online: 0
   playerTempName: 
-  cerca: {fileID: 0}
+  cerca:
+  - {fileID: 0}
   waveNumber: 1
   enemiesInWave: []
   wavesInfos: {fileID: 11400000, guid: 32d55977ffb4d924c960ce7eb8abad2c, type: 2}
@@ -11854,6 +11855,7 @@ MonoBehaviour:
   votingValue1: 0
   votingValue2: 0
   deathScreen: {fileID: 2451966932762669848}
+  CameraLook: {fileID: 0}
 --- !u!114 &84416143053263105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11869,6 +11871,8 @@ MonoBehaviour:
   animCamera: {fileID: 0}
   animDor: {fileID: 0}
   txtStartGame: {fileID: 0}
+  startibg: 0
+  panelConfigInGame: {fileID: 0}
   uiAreas:
   - {fileID: 7247716721430342253}
   - {fileID: 3660129429901361597}
@@ -11891,14 +11895,14 @@ MonoBehaviour:
   classLightIconSprites: []
   classHeavyIconSprites: []
   classBarLife: []
-  barLife: []
   classIcon: {fileID: 0}
   barLifeIcon: {fileID: 0}
   classUltIcon: {fileID: 4678387791460311717}
   classUltLoad: {fileID: 6404592608169106176}
   classLight: {fileID: 0}
   classHeavy: {fileID: 0}
-  playerNick: {fileID: 0}
+  playerNick:
+  - {fileID: 0}
   panelLobby: {fileID: 0}
   lobbyCreateIsPrivateToggle: {fileID: 0}
   lobbyCreateNameInput: {fileID: 0}
@@ -18088,7 +18092,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: option 1 effect text lorem ipsum oh my gah hiii
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1735f58fca97245438125ebd2759d276, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -18096,7 +18100,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.88732076, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18152,7 +18156,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7503775922819649756
@@ -19700,7 +19704,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: option 1 name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1735f58fca97245438125ebd2759d276, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -19708,7 +19712,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.88732076, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -19764,7 +19768,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8356315733298429398

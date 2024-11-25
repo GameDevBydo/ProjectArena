@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -6841011685246035785}
   - component: {fileID: 459028191377653349}
   m_Layer: 3
-  m_Name: SerraDor
+  m_Name: Roboserra
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2951071938
+  GlobalObjectIdHash: 305185187
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -126,7 +126,7 @@ MonoBehaviour:
   stacksIcon: {fileID: 1795206111717590796}
   stacksNumber: {fileID: 4668681848242258818}
   dmgTakenMod: 1
-  dmgDealtMod: 1
+  dmgDealtMod: 0.75
   damageTextPopUp: {fileID: 6272039280717376566, guid: 8029f725043703f4c96c90d9c781e9f3,
     type: 3}
   hurtFxSource: {fileID: 0}
@@ -216,9 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef5599810a67ab4f8d92d2c7a5e3cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackStrength: 10
-  knockbackDuration: 0.5
-  jumpSize: 0.5
+  knockbackStrength: 0.3
+  knockbackDuration: 0.3
+  jumpSize: 0.2
 --- !u!82 &-6841011685246035785
 AudioSource:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

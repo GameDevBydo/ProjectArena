@@ -101,7 +101,7 @@ public class UIController : NetworkBehaviour
 
     public TextMeshProUGUI alertsText;
 
-    void WriteAlert(string message, Color color, float duration = 3.0f)
+    void WriteAlert(string message, Color color, float duration = 5.0f)
     {
         alertsText.gameObject.SetActive(true);
         alertsText.text = message;
@@ -109,7 +109,7 @@ public class UIController : NetworkBehaviour
         StartCoroutine(CloseAlert(duration));
     }
 
-    void WriteAlert(string message, float duration = 3.0f)
+    void WriteAlert(string message, float duration = 5.0f)
     {
         WriteAlert(message, Color.white, duration);
     }
