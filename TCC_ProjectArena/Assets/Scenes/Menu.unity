@@ -39646,10 +39646,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 760656087036540181, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.32
+      value: 19.41
       objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
@@ -39700,6 +39705,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360684493607775451, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
