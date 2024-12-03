@@ -403,7 +403,9 @@ public class Controller : NetworkBehaviour
                 enemiesInWave[i] = wavesInfos.waveBaseEnemy[^1];
                 Debug.Log("Onda não definida, usando inimigos da ultima onda.");
             }*/
-            enemiesInWave[i] = enemyPrefabList[Random.Range(0,enemyPrefabList.Length)].GetComponent<Enemy>();
+
+            if( waveNumber>3) enemiesInWave[i] = enemyPrefabList[Random.Range(0,enemyPrefabList.Length)].GetComponent<Enemy>();
+            else enemiesInWave[i] = enemyPrefabList[Random.Range(0,enemyPrefabList.Length-1)].GetComponent<Enemy>();
             Debug.Log(enemiesInWave[i].enemyTypeID);
         }
 
@@ -420,12 +422,10 @@ public class Controller : NetworkBehaviour
             int enemyRequested = CheckEnemyRequest(enemyType);
             if (enemyRequested >= 0)
             {
-                enemiesInWave[slotsFilled] = SpawnEnemy(user, enemyRequested);
-                slotsFilled++;
                 if (slotsFilled > enemiesInWave.Length - 1)
                 {
-                    CloseSlotsInWave();
-                    Invoke(nameof(StartCurrentWave), 5);
+                    enemiesInWave[slotsFilled] = SpawnEnemy(user, enemyRequested);
+                    slotsFilled++;
                 }
             }
             else

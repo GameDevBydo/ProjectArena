@@ -327,6 +327,7 @@ public class Player : NetworkBehaviour
     [SerializeField] NetworkVariable<float> life = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] float maxlife;
     AudioSource hurtFxSource;
+    [SerializeField] ParticleSystem hurtPS;
 
     public void PlayerDead()
     {
@@ -342,6 +343,8 @@ public class Player : NetworkBehaviour
                 hurtFxSource.Stop();
                 hurtFxSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 hurtFxSource.Play();
+                hurtPS.Stop();
+                hurtPS.Play();
             }
             if (life.Value <= 0) 
             {
