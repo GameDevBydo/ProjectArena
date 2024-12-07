@@ -5496,7 +5496,7 @@ ParticleSystem:
     gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 1
+    size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -5943,22 +5943,22 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.09422809
-          value: 0.97709656
-          inSlope: -1.62438
-          outSlope: -1.62438
+          time: 0.09869564
+          value: 1
+          inSlope: -0.2747916
+          outSlope: -0.2747916
           tangentMode: 0
           weightedMode: 0
           inWeight: 1
-          outWeight: 0.2524483
+          outWeight: 0.24161553
         - serializedVersion: 3
-          time: 0.5656402
+          time: 0.49868464
           value: 0
-          inSlope: 1.2193635
-          outSlope: 1.2193635
+          inSlope: 1.3028634
+          outSlope: 1.3028634
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.3056171
+          inWeight: 0.287388
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6573,8 +6573,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.08517741
-          value: 0.5322956
+          time: 0.20572291
+          value: 0.42418778
           inSlope: -1.1626496
           outSlope: -1.1626496
           tangentMode: 0
@@ -6606,8 +6606,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.083294034
-          value: 1
+          time: 0.19712786
+          value: 0.94594455
           inSlope: -2.3301103
           outSlope: -2.3301103
           tangentMode: 0
