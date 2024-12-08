@@ -12189,6 +12189,11 @@ PrefabInstance:
       propertyPath: startDelay.scalar
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 760656087036540181, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -12273,6 +12278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360684493607775451, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14748,6 +14758,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2386244372060874010}
     m_Modifications:
+    - target: {fileID: 760656087036540181, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14756,12 +14786,12 @@ PrefabInstance:
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.213
+      value: 1.67
       objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.607
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
@@ -14803,6 +14833,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 7360684493607775451, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -14842,6 +14877,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startDelay.scalar
       value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 760656087036540181, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1562598343742385140, guid: 87a0beb7ee66de641907503096ef56b3,
         type: 3}
@@ -14917,6 +14957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startDelay.scalar
       value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360684493607775451, guid: 87a0beb7ee66de641907503096ef56b3,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
