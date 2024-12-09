@@ -663,6 +663,7 @@ public class Controller : NetworkBehaviour
     {
         deathScreen.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        GetComponent<AudioControlador>().MuteMainMixer();
     }
 
 

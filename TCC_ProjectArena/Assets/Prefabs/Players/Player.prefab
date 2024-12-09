@@ -398,6 +398,10 @@ MonoBehaviour:
   life:
     m_InternalValue: 400
   maxlife: 400
+  hurtClips:
+  - {fileID: 8300000, guid: 87fce6227b7380b4890ff1de20b434fe, type: 3}
+  - {fileID: 8300000, guid: f12872c429faa52498bcbe029b59a8a6, type: 3}
+  - {fileID: 8300000, guid: 0f7c91e4ea651324294f6f8490ad406b, type: 3}
   hurtPS: {fileID: 1985802679510384084}
 --- !u!143 &2391203768840219746
 CharacterController:

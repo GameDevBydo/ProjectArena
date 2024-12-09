@@ -36,6 +36,11 @@ public class AudioControlador : MonoBehaviour
         mixer.SetFloat("BGMVol", Mathf.Log10(valor) * 20);
     }
 
+    public void MuteMainMixer()
+    {
+        mixer.SetFloat("MasterVol", -80f);
+    }
+
     #endregion
 
     /*

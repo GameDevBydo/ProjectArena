@@ -327,6 +327,7 @@ public class Player : NetworkBehaviour
     [SerializeField] NetworkVariable<float> life = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] float maxlife;
     AudioSource hurtFxSource;
+    [SerializeField] AudioClip[] hurtClips;
     [SerializeField] ParticleSystem hurtPS;
 
     public void PlayerDead()
@@ -341,6 +342,7 @@ public class Player : NetworkBehaviour
             if(val >0)
             {
                 hurtFxSource.Stop();
+                hurtFxSource.clip = hurtClips[(int)playerChar.Value];
                 hurtFxSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 hurtFxSource.Play();
                 hurtPS.Stop();
@@ -369,8 +371,8 @@ public class Player : NetworkBehaviour
                 break;
             case "EnemyProjectile":
                 EnemyProjectile enemyP = other.gameObject.GetComponent<EnemyProjectile>();
-                Debug.Log("AI AI AI TIRO TIRO");
-                RemoveLife(5);
+                RemoveLife(enemyP.damage);
+                enemyP.SelfDestroy();
                 break; 
             default:
                 Debug.Log("Dano sem tag");
